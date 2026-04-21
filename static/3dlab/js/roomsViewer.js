@@ -435,7 +435,7 @@ function configureViewTabsForRoom(meta) {
   setViewMode(chooseStartView(meta));
 }
 
-async function setViewMode(mode) {
+function setViewMode(mode) {
   activeView = mode;
 
   const {
@@ -456,29 +456,31 @@ async function setViewMode(mode) {
   tabPhotoBtn?.classList.toggle("active", mode === "photo");
   tabVideoBtn?.classList.toggle("active", isVideoMode);
 
+  // Только 3D принимает pointer events от canvas
   setCanvasInteractionEnabled(is3dMode);
 
+  // IMAGE MODE: Схема / Фото
   if (schemeOverlayEl) {
     schemeOverlayEl.style.display = isImageMode ? "flex" : "none";
 
     if (isImageMode) {
       const meta = getCurrentRoomMeta();
-      const list =
-        mode === "scheme"
-          ? (Array.isArray(meta?.schemes) ? meta.schemes : [])
-          : (Array.isArray(meta?.photos) ? meta.photos : []);
 
-      deactivateScheme();
-      await setSchemeImages(list);
-
-      if (activeView === mode) {
-        activateScheme();
+      if (meta) {
+        if (mode === "scheme") {
+          setSchemeImages(Array.isArray(meta.schemes) ? meta.schemes : []);
+        } else {
+          setSchemeImages(Array.isArray(meta.photos) ? meta.photos : []);
+        }
       }
+
+      activateScheme();
     } else {
       deactivateScheme();
     }
   }
 
+  // VIDEO MODE
   if (videoOverlayEl) {
     videoOverlayEl.style.display = isVideoMode ? "block" : "none";
 
@@ -491,6 +493,7 @@ async function setViewMode(mode) {
     }
   }
 
+  // Вне image-mode UI должен вернуться
   if (!isImageMode) {
     setUiHidden(false);
   }
