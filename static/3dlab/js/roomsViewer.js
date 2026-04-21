@@ -54,7 +54,7 @@ export function initRoomsViewer(refs) {
     imgEl: dom.schemeImgEl,
     prevBtnEl: dom.schemePrevBtn,
     nextBtnEl: dom.schemeNextBtn,
-    context: "arch",
+    context: "rooms",
     onUiVisibility: (hidden) => {
       if (activeView !== "scheme" && activeView !== "photo") {
         setUiHidden(false);
