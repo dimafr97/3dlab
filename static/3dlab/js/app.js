@@ -10,31 +10,37 @@ import { initViewer } from "./viewer.js";
 import { initRoomsViewer } from "./roomsViewer.js";
 import { MODELS } from "./models.js";
 import { ROOMS } from "./roomsModels.js";
-
+const SECTION_FLAGS = {
+  arch: true,
+  insets: true,
+  rooms: false
+};
 // ✅ Главное меню (как галерея, но карточки-разделы)
 const MAIN_MENU = [
-  {
+  SECTION_FLAGS.arch && {
     id: "section_arch",
     name: "Архитектурные детали",
     desc: "3D + Построение + Видео",
     preview: "textures/preview/preview1.png",
     thumbLetter: "А"
   },
-  {
+
+  SECTION_FLAGS.insets && {
     id: "section_insets",
     name: "Врезки",
     desc: "3D + Построение + Видео",
     preview: "textures/preview/preview2.png",
     thumbLetter: "В"
   },
-  {
+
+  SECTION_FLAGS.rooms && {
     id: "section_rooms",
     name: "Комнатки",
     desc: "3D",
     preview: "textures/doric/preview.png",
     thumbLetter: "К"
   }
-];
+].filter(Boolean);
 
 // ✅ Временный список "врезок" — для теста дублируем мольберт
 // ВАЖНО: id оставляем "molbert", чтобы viewer.js смог открыть его как обычную модель.
