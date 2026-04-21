@@ -283,21 +283,22 @@ function setupUiHandlers() {
 function setupGlobalTouchBlock() {
   const { viewerWrapperEl } = dom;
 
-  document.addEventListener(
-    "touchmove",
-    (e) => {
-      if (!viewerWrapperEl || !viewerWrapperEl.classList.contains("visible")) return;
-      if (document.body.classList.contains("inset-mode")) return;
+document.addEventListener(
+  "touchmove",
+  (e) => {
+    if (!viewerWrapperEl || !viewerWrapperEl.classList.contains("visible")) return;
+    if (document.body.classList.contains("inset-mode")) return;
+    if (!isRoomsModeActive()) return;
 
-      if (activeView === "video" && !document.body.classList.contains("video-playing")) {
-        const inVideoOverlay = e.target && e.target.closest && e.target.closest("#videoOverlay");
-        if (inVideoOverlay) return;
-      }
+    if (activeView === "video" && !document.body.classList.contains("video-playing")) {
+      const inVideoOverlay = e.target && e.target.closest && e.target.closest("#videoOverlay");
+      if (inVideoOverlay) return;
+    }
 
-      e.preventDefault();
-    },
-    { passive: false }
-  );
+    e.preventDefault();
+  },
+  { passive: false }
+);
 }
 
 function getRoomIndex(id) {
@@ -594,38 +595,41 @@ function setup3dUiAutoHide() {
     return { x: t ? t.clientX : 0, y: t ? t.clientY : 0 };
   };
 
-  const onDown = (e) => {
-    if (document.body.classList.contains("inset-mode")) return;
-    if (!isViewerVisible() || !is3dActive()) return;
-    isDown = true;
-    moved = false;
-    const p = getPoint(e);
-    startX = p.x;
-    startY = p.y;
-  };
+const onDown = (e) => {
+  if (document.body.classList.contains("inset-mode")) return;
+  if (!isRoomsModeActive()) return;
+  if (!isViewerVisible() || !is3dActive()) return;
+  isDown = true;
+  moved = false;
+  const p = getPoint(e);
+  startX = p.x;
+  startY = p.y;
+};
 
-  const onMove = (e) => {
-    if (document.body.classList.contains("inset-mode")) return;
-    if (!isDown) return;
-    if (!isViewerVisible() || !is3dActive()) return;
+const onMove = (e) => {
+  if (document.body.classList.contains("inset-mode")) return;
+  if (!isRoomsModeActive()) return;
+  if (!isDown) return;
+  if (!isViewerVisible() || !is3dActive()) return;
 
-    const p = getPoint(e);
-    const dx = p.x - startX;
-    const dy = p.y - startY;
+  const p = getPoint(e);
+  const dx = p.x - startX;
+  const dy = p.y - startY;
 
-    if (!moved && Math.hypot(dx, dy) >= MOVE_THRESHOLD) {
-      moved = true;
-      setUiHidden(true);
-    }
-  };
+  if (!moved && Math.hypot(dx, dy) >= MOVE_THRESHOLD) {
+    moved = true;
+    setUiHidden(true);
+  }
+};
+  
+const onUp = () => {
+  if (document.body.classList.contains("inset-mode")) return;
+  if (!isRoomsModeActive()) return;
+  if (!isViewerVisible() || !is3dActive()) return;
 
-  const onUp = () => {
-    if (document.body.classList.contains("inset-mode")) return;
-    if (!isViewerVisible() || !is3dActive()) return;
-
-    if (!moved) setUiHidden(false);
-    isDown = false;
-  };
+  if (!moved) setUiHidden(false);
+  isDown = false;
+};
 
   canvasEl.addEventListener("pointerdown", onDown, { passive: true });
   canvasEl.addEventListener("pointermove", onMove, { passive: true });
