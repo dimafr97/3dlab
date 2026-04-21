@@ -16,6 +16,9 @@ let activeView = "3d"; // "3d" | "scheme" | "video"
 function isInsetModeActive() {
   return document.body.classList.contains("inset-mode");
 }
+function isRoomsModeActive() {
+  return document.body.classList.contains("rooms-mode");
+}
 
 // ✅ защита от гонок: если быстро переключили модель/раздел — старый промис игнорируем
 let archLoadSeq = 0;
@@ -168,12 +171,12 @@ const {
   tabVideoBtn } = dom;
 
 backBtn.addEventListener("click", () => {
-  if (isInsetModeActive()) return; // ✅ во Врезках не трогаем арх-режим
+  if (isInsetModeActive() || isRoomsModeActive()) return;
   showGallery();
 });
 
 nextBtn.addEventListener("click", () => {
-  if (isInsetModeActive()) return; // ✅ во Врезках не трогаем арх-режим
+  if (isInsetModeActive() || isRoomsModeActive()) return;
 
   if (!currentModelId) {
     openModelById(MODELS[0].id);
@@ -185,7 +188,7 @@ nextBtn.addEventListener("click", () => {
 });
 
 prevBtn.addEventListener("click", () => {
-  if (isInsetModeActive()) return; // ✅ во Врезках не трогаем арх-режим
+  if (isInsetModeActive() || isRoomsModeActive()) return;
 
   if (!currentModelId) {
     openModelById(MODELS[0].id);
@@ -199,50 +202,54 @@ prevBtn.addEventListener("click", () => {
 bottomBackBtn?.addEventListener("click", () => backBtn.click());
 bottomPrevBtn?.addEventListener("click", () => prevBtn.click());
 bottomNextBtn?.addEventListener("click", () => nextBtn.click());
-  tab3dBtn.addEventListener("click", () => {
-    const meta = getCurrentModelMeta();
-    if (!meta || !getModelCapabilities(meta).has3d) return;
-    setViewMode("3d");
-  });
+tab3dBtn.addEventListener("click", () => {
+  if (isInsetModeActive() || isRoomsModeActive()) return;
+  const meta = getCurrentModelMeta();
+  if (!meta || !getModelCapabilities(meta).has3d) return;
+  setViewMode("3d");
+});
 
-  tabSchemeBtn.addEventListener("click", () => {
-    const meta = getCurrentModelMeta();
-    if (!meta || !meta.schemes || meta.schemes.length === 0) return;
-    setViewMode("scheme");
-  });
+tabSchemeBtn.addEventListener("click", () => {
+  if (isInsetModeActive() || isRoomsModeActive()) return;
+  const meta = getCurrentModelMeta();
+  if (!meta || !meta.schemes || meta.schemes.length === 0) return;
+  setViewMode("scheme");
+});
 
-    tabPhotoBtn?.addEventListener("click", () => {
-    const meta = getCurrentModelMeta();
-    if (!meta || !meta.photos || meta.photos.length === 0) return;
-    setViewMode("photo");
-  });
+tabPhotoBtn?.addEventListener("click", () => {
+  if (isInsetModeActive() || isRoomsModeActive()) return;
+  const meta = getCurrentModelMeta();
+  if (!meta || !meta.photos || meta.photos.length === 0) return;
+  setViewMode("photo");
+});
 
-  tabVideoBtn.addEventListener("click", () => {
-    const meta = getCurrentModelMeta();
-    if (!meta || !meta.video || meta.video.length === 0) return;
-    setViewMode("video");
-  });
+tabVideoBtn.addEventListener("click", () => {
+  if (isInsetModeActive() || isRoomsModeActive()) return;
+  const meta = getCurrentModelMeta();
+  if (!meta || !meta.video || meta.video.length === 0) return;
+  setViewMode("video");
+});
 }
 
 function setupGlobalTouchBlock() {
   const { viewerWrapperEl } = dom;
 
-  document.addEventListener(
-    "touchmove",
-    (e) => {
-      if (!viewerWrapperEl || !viewerWrapperEl.classList.contains("visible")) return;
-      if (document.body.classList.contains("inset-mode")) return;
+document.addEventListener(
+  "touchmove",
+  (e) => {
+    if (!viewerWrapperEl || !viewerWrapperEl.classList.contains("visible")) return;
+    if (document.body.classList.contains("inset-mode")) return;
+    if (document.body.classList.contains("rooms-mode")) return;
 
-      // В режиме Видео и когда не playing — даём скролл списка
-      if (activeView === "video" && !document.body.classList.contains("video-playing")) {
-        const inVideoOverlay = e.target && e.target.closest && e.target.closest("#videoOverlay");
-        if (inVideoOverlay) return;
-      }
+    if (activeView === "video" && !document.body.classList.contains("video-playing")) {
+      const inVideoOverlay = e.target && e.target.closest && e.target.closest("#videoOverlay");
+      if (inVideoOverlay) return;
+    }
 
-      e.preventDefault();
-    },
-    { passive: false }
-  );
+    e.preventDefault();
+  },
+  { passive: false }
+);
 }
 
 function getModelIndex(id) {
@@ -278,7 +285,7 @@ function chooseStartView(meta) {
 }
 
 function openModelById(modelId) {
-  if (isInsetModeActive()) return; // ✅ во Врезках не открываем арх-модели
+  if (isInsetModeActive() || isRoomsModeActive()) return;
   const meta = getModelMeta(modelId);
   if (!meta) return;
 
@@ -306,8 +313,7 @@ if (!has3d) {
 }
 
 function startModelLoading(meta) {
-  if (isInsetModeActive()) return; // ✅ если уже в "Врезках" — не грузим арх
-
+  if (isInsetModeActive() || isRoomsModeActive()) return;
 const mySeq = ++archLoadSeq; // ✅ номер этой загрузки
 threeClearModel();
 showLoading("Загрузка…", 0);
