@@ -13,7 +13,7 @@ import { ROOMS } from "./roomsModels.js";
 const SECTION_FLAGS = {
   arch: true,
   insets: true,
-  rooms: true
+  rooms: false
 };
 // ✅ Главное меню (как галерея, но карточки-разделы)
 const MAIN_MENU = [
