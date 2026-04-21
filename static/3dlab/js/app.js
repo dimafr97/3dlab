@@ -234,10 +234,16 @@ const breadcrumbBackBtn = document.getElementById("breadcrumbBackBtn");
 const breadcrumbSectionLabel = document.getElementById("breadcrumbSectionLabel");
   const brandBlock = document.getElementById("brandBlock");
   const headerCenterTitle = document.getElementById("headerCenterTitle");
+  const cabinetBtn = document.getElementById("cabinetBtn");
 
 
 
   window.debugLog = { textContent: "" };
+  const isTelegramRuntime = !!window.Telegram?.WebApp;
+
+if (cabinetBtn) {
+  cabinetBtn.style.display = isTelegramRuntime ? "none" : "";
+}
 
   // ---------- WATERMARK VISIBILITY ----------
   const watermarkEl = document.getElementById("watermark");
