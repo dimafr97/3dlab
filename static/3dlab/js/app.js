@@ -116,18 +116,44 @@ function checkAccess() {
 
   // 2. Telegram fallback
   const tg = window.Telegram?.WebApp;
-  const ci = window.TG_CHAT_INSTANCE || tg?.initDataUnsafe?.chat_instance || null;
+  const unsafe = tg?.initDataUnsafe || null;
+  const ci = window.TG_CHAT_INSTANCE || unsafe?.chat_instance || null;
 
-  if (tg && tg.initDataUnsafe && ci && ALLOWED_CHAT_INSTANCES.includes(ci)) {
+  if (tg && unsafe && ci && ALLOWED_CHAT_INSTANCES.includes(ci)) {
     return true;
   }
 
-  // 3. Ничего не подошло — lock screen
+  // DEBUG: показываем, что реально пришло от Telegram
+  const debugHtml = `
+    <div style="
+      margin-top:16px;
+      padding:12px;
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:12px;
+      background:rgba(255,255,255,0.03);
+      text-align:left;
+      font-size:12px;
+      line-height:1.45;
+      max-width:520px;
+      word-break:break-word;
+      opacity:0.92;
+    ">
+      <div><b>tg exists:</b> ${!!tg}</div>
+      <div><b>unsafe exists:</b> ${!!unsafe}</div>
+      <div><b>TG_CHAT_INSTANCE:</b> ${String(window.TG_CHAT_INSTANCE)}</div>
+      <div><b>unsafe.chat_instance:</b> ${String(unsafe?.chat_instance)}</div>
+      <div><b>allowed:</b> ${ALLOWED_CHAT_INSTANCES.join(", ")}</div>
+      <div><b>TG user id:</b> ${String(window.TG_USER?.id || "")}</div>
+    </div>
+  `;
+
   showLockScreen(
     `Доступ только для участников группы.<br><br>` +
     `Войдите через <a href="https://apparchi.ru" style="color:#aaa">apparchi.ru</a> ` +
-    `или откройте модуль из закрытой Telegram-группы, где у вас есть доступ.`
+    `или откройте модуль из закрытой Telegram-группы, где у вас есть доступ.` +
+    debugHtml
   );
+
   return false;
 }
 
