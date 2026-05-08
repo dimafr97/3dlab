@@ -241,6 +241,8 @@ const insetOpacitySlider = document.getElementById("insetOpacitySlider");
 
   const breadcrumbBar = document.getElementById("breadcrumbBar");
 const breadcrumbBackBtn = document.getElementById("breadcrumbBackBtn");
+  const breadcrumbHomeBtn =
+  document.getElementById("breadcrumbHomeBtn");
 const breadcrumbSectionLabel = document.getElementById("breadcrumbSectionLabel");
   const brandBlock = document.getElementById("brandBlock");
   const headerCenterTitle = document.getElementById("headerCenterTitle");
@@ -491,6 +493,10 @@ renderCurrentNode();
 
 breadcrumbBackBtn?.addEventListener("click", () => {
   goBackOneLevel();
+});
+  
+  breadcrumbHomeBtn?.addEventListener("click", () => {
+  goToMainMenu();
 });
 
 // кликабельный заголовок → в главное меню
