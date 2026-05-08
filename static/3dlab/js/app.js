@@ -372,8 +372,11 @@ function setBreadcrumbVisible(visible) {
 }
 
 function setBreadcrumbSection(title) {
+  // В новой многоуровневой навигации показываем название только слева,
+  // рядом с кнопкой назад. Центральный absolute-title не используем,
+  // потому что на мобильных он пересекается с breadcrumb.
   if (headerCenterTitle) {
-    headerCenterTitle.textContent = title || "";
+    headerCenterTitle.textContent = "";
   }
 
   if (breadcrumbSectionLabel) {
