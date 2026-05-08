@@ -10,6 +10,10 @@ import { initViewer } from "./viewer.js";
 import { initRoomsViewer } from "./roomsViewer.js";
 import { MODELS } from "./models.js";
 import { ROOMS } from "./roomsModels.js";
+import { CONTENT_TREE } from "./content/contentTree.js";
+import { NODE_TYPES } from "./content/contentTypes.js";
+import { getCardById } from "./content/cardResolver.js";
+import { VIEWER_PROFILES } from "./content/viewerProfiles.js";
 const SECTION_FLAGS = {
   arch: true,
   insets: true,
@@ -356,9 +360,11 @@ const roomsViewer = initRoomsViewer({
 
   // 🔥 4. Инициализация галереи
 // =======================
-// ✅ Навигация по экранам
+// ✅ Новая навигация по contentTree
 // =======================
-let currentScreen = "main"; // "main" | "arch" | "rooms" | "insets"
+
+let currentNode = CONTENT_TREE;
+let navStack = [];
 
 function setBreadcrumbVisible(visible) {
   if (!breadcrumbBar) return;
@@ -366,8 +372,13 @@ function setBreadcrumbVisible(visible) {
 }
 
 function setBreadcrumbSection(title) {
-  if (!headerCenterTitle) return;
-  headerCenterTitle.textContent = title || "";
+  if (headerCenterTitle) {
+    headerCenterTitle.textContent = title || "";
+  }
+
+  if (breadcrumbSectionLabel) {
+    breadcrumbSectionLabel.textContent = title || "";
+  }
 }
 
 function setBrandVisible(visible) {
@@ -375,78 +386,114 @@ function setBrandVisible(visible) {
   brandBlock.style.display = visible ? "block" : "none";
 }
 
-// маленький хелпер: показать список карточек в #gallery
-function showMainMenu() {
-  currentScreen = "main";
-
-  // Сбрасываем все viewer-режимы
+function resetAllViewersToGallery() {
   insetViewer.showGallery();
   roomsViewer.showGallery();
   viewer.showGallery();
+}
 
-  setBreadcrumbVisible(false);
-  setBreadcrumbSection("");
-  setBrandVisible(true);
+function nodeToGalleryItem(node) {
+  return {
+    id: node.id,
+    name: node.title,
+    desc: node.desc || "",
+    preview: node.preview || "",
+    thumbLetter: node.title ? node.title.charAt(0) : "?"
+  };
+}
 
-  renderGallery(galleryEl, MAIN_MENU, {
-    onSelect: (id) => {
-      if (id === "section_arch") showArchGallery();
-      if (id === "section_rooms") showRoomsGallery();
-      if (id === "section_insets") showInsetsGallery();
-    }
+function renderCurrentNode() {
+  resetAllViewersToGallery();
+
+  const isRoot = currentNode === CONTENT_TREE;
+
+  setBrandVisible(isRoot);
+  setBreadcrumbVisible(!isRoot);
+  setBreadcrumbSection(isRoot ? "" : currentNode.title);
+
+  const children = Array.isArray(currentNode.children)
+    ? currentNode.children
+    : [];
+
+  renderGallery(galleryEl, children.map(nodeToGalleryItem), {
+    onSelect: handleNodeSelect
   });
 }
 
-// экран "архитектурных деталей"
-function showArchGallery() {
-  currentScreen = "arch";
-  renderGallery(galleryEl, MODELS, { onSelect: viewer.openModelById });
-  viewer.showGallery();
-  setBrandVisible(false);
-  setBreadcrumbVisible(true);
-  setBreadcrumbSection("Архитектурные детали");
-}
+function handleNodeSelect(nodeId) {
+  const children = Array.isArray(currentNode.children)
+    ? currentNode.children
+    : [];
 
-// экран "комнаток"
-function showRoomsGallery() {
-  currentScreen = "rooms";
+  const node = children.find((child) => child.id === nodeId);
+  if (!node) return;
 
-  renderGallery(galleryEl, ROOMS, { onSelect: roomsViewer.openRoomById });
-  roomsViewer.showGallery();
-
-  setBrandVisible(false);
-  setBreadcrumbVisible(true);
-  setBreadcrumbSection("Комнатки");
-}
-
-// экран "врезок"
-function showInsetsGallery() {
-  currentScreen = "insets";
-
-  setBrandVisible(false);
-  setBreadcrumbVisible(true);
-  setBreadcrumbSection("Врезки");
-
-  const molbertMeta = MODELS.find((m) => m.id === "molbert");
-  if (molbertMeta && molbertMeta.preview) {
-    TEMP_INSETS[0].preview = molbertMeta.preview;
+  if (node.type === NODE_TYPES.CATEGORY) {
+    navStack.push(currentNode);
+    currentNode = node;
+    renderCurrentNode();
+    return;
   }
 
-  renderGallery(galleryEl, INSETS, { onSelect: insetViewer.openById });
-  insetViewer.showGallery();
+  if (node.type === NODE_TYPES.CARD) {
+    openTreeCard(node);
+  }
 }
 
-// старт — показываем главное меню
-showMainMenu();
+function openTreeCard(node) {
+  const card = getCardById(node.ref);
+
+  if (!card) {
+    console.error("Card not found:", node.ref);
+    return;
+  }
+
+  if (card.viewerProfile === VIEWER_PROFILES.ARCH) {
+    viewer.openModelById(node.ref);
+    return;
+  }
+
+  if (card.viewerProfile === VIEWER_PROFILES.ROOMS) {
+    roomsViewer.openRoomById(node.ref);
+    return;
+  }
+
+  if (card.viewerProfile === VIEWER_PROFILES.INSET) {
+    insetViewer.openById(node.ref);
+    return;
+  }
+
+  console.warn("Unsupported viewerProfile:", card.viewerProfile, card);
+}
+
+function goBackOneLevel() {
+  if (navStack.length === 0) {
+    currentNode = CONTENT_TREE;
+    renderCurrentNode();
+    return;
+  }
+
+  currentNode = navStack.pop();
+  renderCurrentNode();
+}
+
+function goToMainMenu() {
+  navStack = [];
+  currentNode = CONTENT_TREE;
+  renderCurrentNode();
+}
+
+// старт — показываем новое главное меню
+renderCurrentNode();
 
 breadcrumbBackBtn?.addEventListener("click", () => {
-  showMainMenu();
+  goBackOneLevel();
 });
 
-// (опционально) кликабельный заголовок → в главное меню
+// кликабельный заголовок → в главное меню
 const headerTitle = document.querySelector(".app-title");
 headerTitle?.addEventListener("click", () => {
-  showMainMenu();
+  goToMainMenu();
 });
 
 
