@@ -491,11 +491,31 @@ function goToMainMenu() {
 // старт — показываем новое главное меню
 renderCurrentNode();
 
-breadcrumbBackBtn?.addEventListener("click", () => {
+function bindTap(el, handler) {
+  if (!el) return;
+
+  let lastTap = 0;
+
+  const run = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const now = Date.now();
+    if (now - lastTap < 300) return;
+    lastTap = now;
+
+    handler();
+  };
+
+  el.addEventListener("click", run);
+  el.addEventListener("touchend", run, { passive: false });
+}
+
+bindTap(breadcrumbBackBtn, () => {
   goBackOneLevel();
 });
-  
-  breadcrumbHomeBtn?.addEventListener("click", () => {
+
+bindTap(breadcrumbHomeBtn, () => {
   goToMainMenu();
 });
 
