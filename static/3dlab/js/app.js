@@ -383,15 +383,7 @@ function setBreadcrumbSection(title) {
 
 function setBrandVisible(visible) {
   if (!brandBlock) return;
-
-  brandBlock.style.display = visible ? "flex" : "none";
-
-  // скрываем legacy title
-  const legacyTitle = document.querySelector(".app-title");
-
-  if (legacyTitle) {
-    legacyTitle.style.display = "none";
-  }
+  brandBlock.style.display = visible ? "block" : "none";
 }
 
 function resetAllViewersToGallery() {
@@ -498,7 +490,11 @@ breadcrumbBackBtn?.addEventListener("click", () => {
   goBackOneLevel();
 });
 
-
+// кликабельный заголовок → в главное меню
+const headerTitle = document.querySelector(".app-title");
+headerTitle?.addEventListener("click", () => {
+  goToMainMenu();
+});
 
 
   console.log("App initialized: access granted.");
