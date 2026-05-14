@@ -463,10 +463,17 @@ function updateViewerNavPanel(node) {
     el.style.display = visible ? "" : "none";
   };
 
+  const bottomNav = document.getElementById("viewerBottomNav");
+
   setVisible(prevBtn, canNavigate);
   setVisible(nextBtn, canNavigate);
+
   setVisible(bottomPrevBtn, canNavigate);
   setVisible(bottomNextBtn, canNavigate);
+
+  if (bottomNav) {
+    bottomNav.style.display = canNavigate ? "flex" : "none";
+  }
 }
 
 function renderCurrentNode() {
