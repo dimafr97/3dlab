@@ -379,7 +379,7 @@ let navStack = [];
 
 // Контекст галереи конечных карточек, из которой открыт viewer
 let viewerGalleryContext = {
-  galleryNode: null,
+  galleryNodeId: null,
   cards: [],
   currentNodeId: null
 };
@@ -425,6 +425,21 @@ function nodeToGalleryItem(node) {
     preview: node.preview || card?.preview || "",
     thumbLetter: node.title ? node.title.charAt(0) : "?"
   };
+}
+  function findNodeById(node, id) {
+  if (!node) return null;
+  if (node.id === id) return node;
+
+  const children = Array.isArray(node.children)
+    ? node.children
+    : [];
+
+  for (const child of children) {
+    const found = findNodeById(child, id);
+    if (found) return found;
+  }
+
+  return null;
 }
 
   function getCurrentCardNodes() {
@@ -522,7 +537,7 @@ function openTreeCard(node) {
   const card = node.ref ? getCardById(node.ref) : null;
 
 viewerGalleryContext = {
-  galleryNode: currentNode,
+  galleryNodeId: currentNode.id,
   cards: getCurrentCardNodes().filter((item) => !isBaseCardNode(item)),
   currentNodeId: node.id
 };
@@ -601,8 +616,13 @@ if (breadcrumbBackBtn) {
 }
 
 function returnToViewerGallery() {
-  if (viewerGalleryContext.galleryNode) {
-    currentNode = viewerGalleryContext.galleryNode;
+  const targetNode = findNodeById(
+    CONTENT_TREE,
+    viewerGalleryContext.galleryNodeId
+  );
+
+  if (targetNode) {
+    currentNode = targetNode;
   }
 
   resetAllViewersToGallery();
