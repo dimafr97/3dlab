@@ -385,6 +385,10 @@ function setupUiHandlers() {
     e.preventDefault();
     e.stopPropagation();
     e.stopImmediatePropagation();
+    if (typeof dom.onOpenPrevTreeCard === "function") {
+  dom.onOpenPrevTreeCard();
+  return;
+}
 
     if (!currentId) return;
     const idx = getIndex(currentId);
@@ -400,6 +404,10 @@ function setupUiHandlers() {
     e.preventDefault();
     e.stopPropagation();
     e.stopImmediatePropagation();
+    if (typeof dom.onOpenNextTreeCard === "function") {
+  dom.onOpenNextTreeCard();
+  return;
+}
 
     if (!currentId) return;
     const idx = getIndex(currentId);
@@ -416,6 +424,10 @@ function setupUiHandlers() {
     e.preventDefault();
     e.stopPropagation();
     e.stopImmediatePropagation();
+    if (typeof dom.onBackToTreeGallery === "function") {
+  dom.onBackToTreeGallery();
+  return;
+}
 
     showGallery();
   }, true);
