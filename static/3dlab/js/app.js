@@ -19,7 +19,7 @@ const SECTION_FLAGS = {
   insets: true,
   rooms: false
 };
-const DEMO_HIDE_EMPTY_BRANCHES = true;
+const DEMO_HIDE_EMPTY_BRANCHES = false;
 // ✅ Главное меню (как галерея, но карточки-разделы)
 const MAIN_MENU = [
   SECTION_FLAGS.arch && {
