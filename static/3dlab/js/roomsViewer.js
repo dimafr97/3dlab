@@ -189,13 +189,23 @@ function setupUiHandlers() {
     return true;
   };
 
-  backBtn?.addEventListener("click", (e) => {
-    if (!stopRoomsEvent(e)) return;
-    showGallery();
-  }, true);
+backBtn?.addEventListener("click", (e) => {
+  if (!stopRoomsEvent(e)) return;
+
+  if (typeof dom.onBackToTreeGallery === "function") {
+    dom.onBackToTreeGallery();
+    return;
+  }
+
+  showGallery();
+}, true);
 
   prevBtn?.addEventListener("click", (e) => {
     if (!stopRoomsEvent(e)) return;
+    if (typeof dom.onOpenPrevTreeCard === "function") {
+  dom.onOpenPrevTreeCard();
+  return;
+}
 
     if (!currentRoomId) {
       openRoomById(ROOMS[0].id);
@@ -209,6 +219,10 @@ function setupUiHandlers() {
 
   nextBtn?.addEventListener("click", (e) => {
     if (!stopRoomsEvent(e)) return;
+    if (typeof dom.onOpenNextTreeCard === "function") {
+  dom.onOpenNextTreeCard();
+  return;
+}
 
     if (!currentRoomId) {
       openRoomById(ROOMS[0].id);
@@ -222,11 +236,19 @@ function setupUiHandlers() {
 
   bottomBackBtn?.addEventListener("click", (e) => {
     if (!stopRoomsEvent(e)) return;
+    if (typeof dom.onBackToTreeGallery === "function") {
+  dom.onBackToTreeGallery();
+  return;
+}
     showGallery();
   }, true);
 
   bottomPrevBtn?.addEventListener("click", (e) => {
     if (!stopRoomsEvent(e)) return;
+    if (typeof dom.onOpenNextTreeCard === "function") {
+  dom.onOpenNextTreeCard();
+  return;
+}
 
     if (!currentRoomId) {
       openRoomById(ROOMS[0].id);
@@ -240,6 +262,10 @@ function setupUiHandlers() {
 
   bottomNextBtn?.addEventListener("click", (e) => {
     if (!stopRoomsEvent(e)) return;
+    if (typeof dom.onOpenNextTreeCard === "function") {
+  dom.onOpenNextTreeCard();
+  return;
+}
 
     if (!currentRoomId) {
       openRoomById(ROOMS[0].id);
