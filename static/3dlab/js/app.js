@@ -303,7 +303,10 @@ videoEmptyEl,     // ADDED
     loadingEl,
     loadingTextEl,
     progressBarEl,
-    statusEl
+    statusEl,
+    onBackToTreeGallery: returnToViewerGallery,
+onOpenPrevTreeCard: () => openSiblingCard(-1),
+onOpenNextTreeCard: () => openSiblingCard(1)
   });
   const insetViewer = initInsetsViewer({
   galleryEl,
@@ -324,6 +327,9 @@ tabVideoBtn,
   loadingTextEl,
   progressBarEl,
   statusEl,
+    onBackToTreeGallery: returnToViewerGallery,
+onOpenPrevTreeCard: () => openSiblingCard(-1),
+onOpenNextTreeCard: () => openSiblingCard(1),
   insetOpacityRow,
   insetOpacitySlider
 });
@@ -356,7 +362,10 @@ const roomsViewer = initRoomsViewer({
   loadingEl,
   loadingTextEl,
   progressBarEl,
-  statusEl
+  statusEl,
+  onBackToTreeGallery: returnToViewerGallery,
+onOpenPrevTreeCard: () => openSiblingCard(-1),
+onOpenNextTreeCard: () => openSiblingCard(1)
 });
 
 
@@ -367,6 +376,13 @@ const roomsViewer = initRoomsViewer({
 
 let currentNode = CONTENT_TREE;
 let navStack = [];
+
+// Контекст галереи конечных карточек, из которой открыт viewer
+let viewerGalleryContext = {
+  parentNode: null,
+  cards: [],
+  currentNodeId: null
+};
 
 function setBreadcrumbVisible(visible) {
   if (!breadcrumbBar) return;
@@ -398,13 +414,59 @@ function resetAllViewersToGallery() {
 }
 
 function nodeToGalleryItem(node) {
+  const card = node.type === NODE_TYPES.CARD && node.ref
+    ? getCardById(node.ref)
+    : null;
+
   return {
     id: node.id,
     name: node.title,
-    desc: node.desc || "",
-    preview: node.preview || "",
+    desc: node.desc || card?.desc || card?.legacyMeta?.desc || "",
+    preview: node.preview || card?.preview || "",
     thumbLetter: node.title ? node.title.charAt(0) : "?"
   };
+}
+
+  function getCurrentCardNodes() {
+  const children = Array.isArray(currentNode.children)
+    ? currentNode.children
+    : [];
+
+  return children.filter((node) => node.type === NODE_TYPES.CARD);
+}
+
+function isBaseCardNode(node) {
+  if (!node) return false;
+
+  const id = String(node.id || "").toLowerCase();
+  const title = String(node.title || "").toLowerCase();
+  const ref = String(node.ref || "").toLowerCase();
+
+  return (
+    id.includes("base") ||
+    title.includes("база") ||
+    title.includes("базовая") ||
+    ref.endsWith("_0") ||
+    ref === "arch_0" ||
+    ref === "room_0" ||
+    ref === "inset_0"
+  );
+}
+
+function updateViewerNavPanel(node) {
+  const isBase = isBaseCardNode(node);
+  const cards = viewerGalleryContext.cards || [];
+  const canNavigate = !isBase && cards.length > 1;
+
+  const setVisible = (el, visible) => {
+    if (!el) return;
+    el.style.display = visible ? "" : "none";
+  };
+
+  setVisible(prevBtn, canNavigate);
+  setVisible(nextBtn, canNavigate);
+  setVisible(bottomPrevBtn, canNavigate);
+  setVisible(bottomNextBtn, canNavigate);
 }
 
 function renderCurrentNode() {
@@ -446,10 +508,19 @@ function handleNodeSelect(nodeId) {
 }
 
 function openTreeCard(node) {
-  const card = getCardById(node.ref);
+  const card = node.ref ? getCardById(node.ref) : null;
 
+  viewerGalleryContext = {
+    parentNode: currentNode,
+    cards: getCurrentCardNodes().filter((item) => !isBaseCardNode(item)),
+    currentNodeId: node.id
+  };
+
+  updateViewerNavPanel(node);
+
+  // Заглушка для будущих карточек без viewer / без ref
   if (!card) {
-    console.error("Card not found:", node.ref);
+    showPlaceholderScreen(node);
     return;
   }
 
@@ -468,7 +539,68 @@ function openTreeCard(node) {
     return;
   }
 
-  console.warn("Unsupported viewerProfile:", card.viewerProfile, card);
+  showPlaceholderScreen(node);
+}
+
+  function showPlaceholderScreen(node) {
+  resetAllViewersToGallery();
+
+  setBrandVisible(false);
+  setBreadcrumbVisible(true);
+  setBreadcrumbSection(node.title || "Раздел готовится");
+
+  galleryEl.classList.remove("hidden");
+  viewerWrapperEl.classList.remove("visible");
+
+  galleryEl.innerHTML = `
+    <div style="
+      grid-column: 1 / -1;
+      min-height: 45vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 32px 18px;
+    ">
+      <div style="
+        max-width: 420px;
+        padding: 22px 18px;
+        border-radius: 18px;
+        background: rgba(255,255,255,0.045);
+        border: 1px solid rgba(255,255,255,0.08);
+      ">
+        <div style="font-size: 18px; font-weight: 700; margin-bottom: 8px;">
+          ${node.title || "Контент готовится"}
+        </div>
+        <div style="font-size: 14px; line-height: 1.45; color: rgba(255,255,255,0.68);">
+          Контент для этого раздела будет добавлен позже.
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function returnToViewerGallery() {
+  if (viewerGalleryContext.parentNode) {
+    currentNode = viewerGalleryContext.parentNode;
+  }
+
+  resetAllViewersToGallery();
+  renderCurrentNode();
+}
+
+function openSiblingCard(direction) {
+  const cards = viewerGalleryContext.cards || [];
+  if (!cards.length || !viewerGalleryContext.currentNodeId) return;
+
+  const currentIndex = cards.findIndex((node) => node.id === viewerGalleryContext.currentNodeId);
+  if (currentIndex < 0) return;
+
+  const nextIndex = (currentIndex + direction + cards.length) % cards.length;
+  const nextNode = cards[nextIndex];
+
+  viewerGalleryContext.currentNodeId = nextNode.id;
+  openTreeCard(nextNode);
 }
 
 function goBackOneLevel() {
