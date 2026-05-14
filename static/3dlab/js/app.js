@@ -427,6 +427,21 @@ function nodeToGalleryItem(node) {
     thumbLetter: node.title ? node.title.charAt(0) : "?"
   };
 }
+
+  function hasVisibleContent(node) {
+  if (!node) return false;
+
+  if (node.type === NODE_TYPES.CARD) {
+    return Boolean(node.ref && getCardById(node.ref));
+  }
+
+  const children = Array.isArray(node.children)
+    ? node.children
+    : [];
+
+  return children.some(hasVisibleContent);
+}
+  
   function findNodeById(node, id) {
   if (!node) return null;
   if (node.id === id) return node;
@@ -510,19 +525,7 @@ let children = Array.isArray(currentNode.children)
   : [];
 
 if (DEMO_HIDE_EMPTY_BRANCHES) {
-  children = children.filter((node) => {
-    // конечные карточки всегда показываем
-    if (node.type === NODE_TYPES.CARD) {
-      return true;
-    }
-
-    // категории без детей скрываем
-    if (!node.children || node.children.length === 0) {
-      return false;
-    }
-
-    return true;
-  });
+  children = children.filter(hasVisibleContent);
 }
 
   renderGallery(galleryEl, children.map(nodeToGalleryItem), {
