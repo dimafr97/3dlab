@@ -478,6 +478,10 @@ function updateViewerNavPanel(node) {
 
 function renderCurrentNode() {
   resetAllViewersToGallery();
+  // Возвращаем обычное breadcrumb-поведение
+if (breadcrumbBackBtn) {
+  breadcrumbBackBtn.onclick = null;
+}
 
   const isRoot = currentNode === CONTENT_TREE;
 
@@ -524,6 +528,15 @@ viewerGalleryContext = {
 };
 
   updateViewerNavPanel(node);
+  // Во viewer breadcrumb-back больше не должен
+// работать как navStack-back
+if (breadcrumbBackBtn) {
+  breadcrumbBackBtn.onclick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    returnToViewerGallery();
+  };
+}
 
   // Заглушка для будущих карточек без viewer / без ref
   if (!card) {
