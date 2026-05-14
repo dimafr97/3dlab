@@ -19,6 +19,7 @@ const SECTION_FLAGS = {
   insets: true,
   rooms: false
 };
+const DEMO_HIDE_EMPTY_BRANCHES = true;
 // ✅ Главное меню (как галерея, но карточки-разделы)
 const MAIN_MENU = [
   SECTION_FLAGS.arch && {
@@ -504,9 +505,25 @@ if (breadcrumbBackBtn) {
   setBreadcrumbVisible(!isRoot);
   setBreadcrumbSection(isRoot ? "" : currentNode.title);
 
-  const children = Array.isArray(currentNode.children)
-    ? currentNode.children
-    : [];
+let children = Array.isArray(currentNode.children)
+  ? currentNode.children
+  : [];
+
+if (DEMO_HIDE_EMPTY_BRANCHES) {
+  children = children.filter((node) => {
+    // конечные карточки всегда показываем
+    if (node.type === NODE_TYPES.CARD) {
+      return true;
+    }
+
+    // категории без детей скрываем
+    if (!node.children || node.children.length === 0) {
+      return false;
+    }
+
+    return true;
+  });
+}
 
   renderGallery(galleryEl, children.map(nodeToGalleryItem), {
     onSelect: handleNodeSelect
