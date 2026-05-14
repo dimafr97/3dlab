@@ -143,11 +143,13 @@ body {
       display: flex;
       flex-direction: column;
       gap: 8px;
+      justify-content: flex-start;
       cursor: pointer;
       box-shadow: 0 14px 35px rgba(0, 0, 0, 0.5);
       border: 1px solid rgba(255, 255, 255, 0.04);
       transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
-      height: auto;
+      height: 100%;
+min-height: 100%;
     }
 
     .model-card:hover {
@@ -158,7 +160,7 @@ body {
 
     .model-thumb {
       width: 100%;
-      aspect-ratio: 4 / 3;
+      aspect-ratio: 1 / 1;
       border-radius: 10px;
       background: radial-gradient(circle at 30% 0%, #2c2c38 0%, #14141f 35%, #050506 100%);
       display: flex;
@@ -175,12 +177,27 @@ body {
       font-size: 15px;
       font-weight: 700;
       color: #f3f3f3;
+      min-height: 52px;
+
+display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
+
+overflow: hidden;
+line-height: 1.25;
     }
 
     .model-desc {
       font-size: 13px;
       color: #a4a4aa;
       line-height: 1.3;
+      min-height: 52px;
+
+display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
+
+overflow: hidden;
     }
 
     /* ---------- VIEWER AREA ---------- */
@@ -882,7 +899,7 @@ body.video-playing .video-card.active video { /* ADDED */
 .model-thumb img {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* или cover, если захочешь кроп */
+  object-fit: cover; /* или cover, если захочешь кроп */
   border-radius: 10px;
   display: block;
 }
