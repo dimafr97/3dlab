@@ -21,10 +21,11 @@ function hasList(value) {
   return Array.isArray(value) && value.length > 0;
 }
 
-function createEmptyCard({ id, title, preview, viewerProfile, legacyType, legacyMeta }) {
+function createEmptyCard({ id, title, desc, preview, viewerProfile, legacyType, legacyMeta }) {
   return {
     id,
     title,
+    desc: desc || "",
     preview: preview || "",
     viewerProfile,
     legacyType,
@@ -84,8 +85,9 @@ function addVideoBlock(card, videos) {
 export function adaptArchModel(model) {
   const card = createEmptyCard({
     id: model.id,
-    title: model.name,
-    preview: model.preview,
+title: model.name,
+desc: model.desc,
+preview: model.preview,
     viewerProfile: VIEWER_PROFILES.ARCH,
     legacyType: "arch",
     legacyMeta: model
@@ -102,8 +104,9 @@ export function adaptArchModel(model) {
 export function adaptRoomModel(room) {
   const card = createEmptyCard({
     id: room.id,
-    title: room.name,
-    preview: room.preview,
+title: room.name,
+desc: room.desc,
+preview: room.preview,
     viewerProfile: VIEWER_PROFILES.ROOMS,
     legacyType: "rooms",
     legacyMeta: room
@@ -120,8 +123,9 @@ export function adaptRoomModel(room) {
 export function adaptInsetModel(inset) {
   const card = createEmptyCard({
     id: inset.id,
-    title: inset.name,
-    preview: inset.preview,
+title: inset.name,
+desc: inset.desc,
+preview: inset.preview,
     viewerProfile: VIEWER_PROFILES.INSET,
     legacyType: "inset",
     legacyMeta: inset
