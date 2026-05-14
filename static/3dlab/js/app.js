@@ -684,6 +684,11 @@ function bindTap(el, handler) {
 }
 
 bindTap(breadcrumbBackBtn, () => {
+  if (viewerWrapperEl.classList.contains("visible")) {
+    returnToViewerGallery();
+    return;
+  }
+
   goBackOneLevel();
 });
 
