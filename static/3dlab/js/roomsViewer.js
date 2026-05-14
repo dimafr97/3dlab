@@ -245,8 +245,8 @@ backBtn?.addEventListener("click", (e) => {
 
   bottomPrevBtn?.addEventListener("click", (e) => {
     if (!stopRoomsEvent(e)) return;
-    if (typeof dom.onOpenNextTreeCard === "function") {
-  dom.onOpenNextTreeCard();
+if (typeof dom.onOpenPrevTreeCard === "function") {
+  dom.onOpenPrevTreeCard();
   return;
 }
 
