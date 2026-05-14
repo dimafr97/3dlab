@@ -1022,7 +1022,7 @@ body.inset-mode #insetOpacityRow {
      Пока не удаляем, чтобы не сломать JS на этом шаге. -->
 <div class="viewer-toolbar-row viewer-nav-row">
   <button class="btn nav-btn" id="prevBtn">Предыдущая</button>
-  <button class="btn nav-btn" id="backBtn">Галерея</button>
+  <button class="btn nav-btn" id="backBtn" style="display:none">Галерея</button>
   <button class="btn nav-btn" id="nextBtn">Следующая</button>
 </div>
         <div class="viewer-toolbar-row" id="insetOpacityRow" style="display:none; gap:10px; align-items:center;">
@@ -1050,10 +1050,12 @@ body.inset-mode #insetOpacityRow {
 </div>
       </div>
 
-      <div class="viewer-bottom-nav" id="viewerBottomNav">
-  <button class="viewer-bottom-nav-btn arrow" id="bottomPrevBtn" type="button" aria-label="Предыдущая">‹</button>
-  <button class="viewer-bottom-nav-btn" id="bottomBackBtn" type="button">Галерея</button>
-  <button class="viewer-bottom-nav-btn arrow" id="bottomNextBtn" type="button" aria-label="Следующая">›</button>
+<div class="viewer-bottom-nav" id="viewerBottomNav">
+
+<button class="viewer-bottom-nav-btn arrow" id="bottomPrevBtn" type="button" aria-label="Предыдущая">‹</button>
+<button class="viewer-bottom-nav-btn" id="bottomBackBtn" type="button" style="display:none">Галерея</button>
+<button class="viewer-bottom-nav-btn arrow" id="bottomNextBtn" type="button" aria-label="Следующая">›</button>
+
 </div>
 
       <!-- LOADING OVERLAY -->
