@@ -172,16 +172,28 @@ const {
 
 backBtn.addEventListener("click", () => {
   if (isInsetModeActive() || isRoomsModeActive()) return;
+
+  if (typeof dom.onBackToTreeGallery === "function") {
+    dom.onBackToTreeGallery();
+    return;
+  }
+
   showGallery();
 });
 
 nextBtn.addEventListener("click", () => {
   if (isInsetModeActive() || isRoomsModeActive()) return;
 
+  if (typeof dom.onOpenNextTreeCard === "function") {
+    dom.onOpenNextTreeCard();
+    return;
+  }
+
   if (!currentModelId) {
     openModelById(MODELS[0].id);
     return;
   }
+
   let idx = getModelIndex(currentModelId);
   idx = (idx + 1) % MODELS.length;
   openModelById(MODELS[idx].id);
@@ -190,10 +202,16 @@ nextBtn.addEventListener("click", () => {
 prevBtn.addEventListener("click", () => {
   if (isInsetModeActive() || isRoomsModeActive()) return;
 
+  if (typeof dom.onOpenPrevTreeCard === "function") {
+    dom.onOpenPrevTreeCard();
+    return;
+  }
+
   if (!currentModelId) {
     openModelById(MODELS[0].id);
     return;
   }
+
   let idx = getModelIndex(currentModelId);
   idx = (idx - 1 + MODELS.length) % MODELS.length;
   openModelById(MODELS[idx].id);
