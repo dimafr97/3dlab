@@ -379,7 +379,7 @@ let navStack = [];
 
 // Контекст галереи конечных карточек, из которой открыт viewer
 let viewerGalleryContext = {
-  parentNode: null,
+  galleryNode: null,
   cards: [],
   currentNodeId: null
 };
@@ -510,11 +510,11 @@ function handleNodeSelect(nodeId) {
 function openTreeCard(node) {
   const card = node.ref ? getCardById(node.ref) : null;
 
-  viewerGalleryContext = {
-    parentNode: currentNode,
-    cards: getCurrentCardNodes().filter((item) => !isBaseCardNode(item)),
-    currentNodeId: node.id
-  };
+viewerGalleryContext = {
+  galleryNode: currentNode,
+  cards: getCurrentCardNodes().filter((item) => !isBaseCardNode(item)),
+  currentNodeId: node.id
+};
 
   updateViewerNavPanel(node);
 
@@ -581,8 +581,8 @@ function openTreeCard(node) {
 }
 
 function returnToViewerGallery() {
-  if (viewerGalleryContext.parentNode) {
-    currentNode = viewerGalleryContext.parentNode;
+  if (viewerGalleryContext.galleryNode) {
+    currentNode = viewerGalleryContext.galleryNode;
   }
 
   resetAllViewersToGallery();
