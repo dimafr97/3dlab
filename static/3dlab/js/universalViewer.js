@@ -155,6 +155,7 @@ export function switchBlock(blockId) {
 
   renderPanels();
   console.log("[UniversalViewer] switchBlock:", getState());
+  syncLegacyTabs();
 }
 
 export function switchSubblock(subblockId) {
@@ -169,6 +170,26 @@ export function switchSubblock(subblockId) {
 
   renderPanels();
   console.log("[UniversalViewer] switchSubblock:", getState());
+}
+
+function syncLegacyTabs() {
+  if (!dom) return;
+
+  const activeBlock = getActiveBlock();
+  if (!activeBlock) return;
+
+  const map = {
+    "3d": dom.tab3dBtn,
+    "schemes": dom.tabSchemeBtn,
+    "drawing": dom.tabPhotoBtn,
+    "video": dom.tabVideoBtn
+  };
+
+  const btn = map[activeBlock.id];
+
+  if (btn) {
+    btn.click();
+  }
 }
 
 export function getState() {
