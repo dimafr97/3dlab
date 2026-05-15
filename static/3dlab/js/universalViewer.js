@@ -116,9 +116,15 @@ function renderPanels() {
     });
   }
 
-  if (dom.subblocksRowEl) {
-    dom.subblocksRowEl.style.display = subblocks.length > 1 ? "flex" : "none";
+if (dom.subblocksRowEl) {
+  const shouldShowSubblocks = subblocks.length > 1;
+
+  dom.subblocksRowEl.style.display = shouldShowSubblocks ? "flex" : "none";
+
+  if (!shouldShowSubblocks && dom.subblocksEl) {
+    dom.subblocksEl.innerHTML = "";
   }
+}
 }
 
 export function initUniversalViewer(refs) {
