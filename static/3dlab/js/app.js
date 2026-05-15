@@ -14,6 +14,7 @@ import { CONTENT_TREE } from "./content/contentTree.js";
 import { NODE_TYPES } from "./content/contentTypes.js";
 import { getCardById } from "./content/cardResolver.js";
 import { VIEWER_PROFILES } from "./content/viewerProfiles.js";
+import { initUniversalViewer } from "./universalViewer.js";
 const SECTION_FLAGS = {
   arch: true,
   insets: true,
@@ -369,6 +370,9 @@ onOpenPrevTreeCard: () => openSiblingCard(-1),
 onOpenNextTreeCard: () => openSiblingCard(1)
 });
 
+const universalViewer = initUniversalViewer({});
+window.universalViewer = universalViewer;
+
 
   // 🔥 4. Инициализация галереи
 // =======================
@@ -555,6 +559,10 @@ function handleNodeSelect(nodeId) {
 
 function openTreeCard(node) {
   const card = node.ref ? getCardById(node.ref) : null;
+  if (card) {
+  universalViewer.openCard(card);
+  console.log("[UNIVERSAL VIEWER STATE]", universalViewer.getState());
+}
 
 viewerGalleryContext = {
   galleryNodeId: currentNode.id,
