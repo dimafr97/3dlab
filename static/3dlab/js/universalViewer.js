@@ -178,16 +178,27 @@ function syncLegacyTabs() {
   if (!dom) return;
 
   const activeBlock = getActiveBlock();
-  if (!activeBlock) return;
+  const activeSubblock = getActiveSubblock();
 
-const subblockMap = {
-  "3d": dom.tab3dBtn,
-  "photos": dom.tabPhotoBtn,
-  "schemes": dom.tabSchemeBtn,
-  "videos": dom.tabVideoBtn
-};
+  if (!activeBlock || !activeSubblock) return;
 
-  const btn = map[activeBlock.id];
+  const subblockMap = {
+    "3d": dom.tab3dBtn,
+    "photos": dom.tabPhotoBtn,
+    "schemes": dom.tabSchemeBtn,
+    "videos": dom.tabVideoBtn
+  };
+
+  const blockMap = {
+    "3d": dom.tab3dBtn,
+    "schemes": dom.tabSchemeBtn,
+    "drawing": dom.tabPhotoBtn,
+    "video": dom.tabVideoBtn
+  };
+
+  const btn =
+    subblockMap[activeSubblock.id] ||
+    blockMap[activeBlock.id];
 
   if (btn) {
     btn.click();
