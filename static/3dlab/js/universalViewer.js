@@ -214,6 +214,21 @@ if (btn) {
 syncUniversalContent();
 }
 
+function normalizeAssetUrl(url) {
+  if (!url) return url;
+
+  const s = String(url);
+
+  const isAbsolute =
+    /^https?:\/\//i.test(s) ||
+    s.startsWith("/") ||
+    s.startsWith("data:");
+
+  return isAbsolute
+    ? s
+    : `https://api.apparchi.ru/?path=${encodeURIComponent(s)}`;
+}
+
 function syncUniversalContent() {
   const activeSubblock = getActiveSubblock();
   if (!activeSubblock) return;
@@ -223,7 +238,7 @@ function syncUniversalContent() {
   }
 
   if (Array.isArray(activeSubblock.images)) {
-    setSchemeImages(activeSubblock.images);
+    setSchemeImages(activeSubblock.images.map(normalizeAssetUrl));
   }
 }
 
