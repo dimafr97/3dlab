@@ -17,6 +17,7 @@ test_universal_card: {
     desc: "Тестовая карточка для проверки блоков и подблоков",
     preview: "",
     viewerProfile: "arch",
+  legacyOpenRef: "kapitel2",
     legacyType: "test",
     legacyMeta: null,
 
