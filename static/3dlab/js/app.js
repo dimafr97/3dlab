@@ -370,7 +370,12 @@ onOpenPrevTreeCard: () => openSiblingCard(-1),
 onOpenNextTreeCard: () => openSiblingCard(1)
 });
 
-const universalViewer = initUniversalViewer({});
+const universalViewer = initUniversalViewer({
+  blocksRowEl: document.getElementById("universalBlocksRow"),
+  blocksEl: document.getElementById("universalBlocks"),
+  subblocksRowEl: document.getElementById("universalSubblocksRow"),
+  subblocksEl: document.getElementById("universalSubblocks")
+});
 window.universalViewer = universalViewer;
 
 
