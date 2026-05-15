@@ -39,8 +39,6 @@ let tabsRowEl = null;
 let tabsWrapEl = null;
 let universalBlocksRowEl = null;
 let universalSubblocksRowEl = null;
-let universalBlocksRowEl = null;
-let universalSubblocksRowEl = null;
 
 let active = false;
 let onPlayCb = null;
@@ -625,12 +623,6 @@ tabsWrapEl =
   tabPhotoBtn?.closest(".viewer-tabs") ||
   tabVideoBtn?.closest(".viewer-tabs") ||
   null;
-
-universalBlocksRowEl =
-  refs?.universalBlocksRowEl || null;
-
-universalSubblocksRowEl =
-  refs?.universalSubblocksRowEl || null;
 
   onPlayCb = callbacks.onPlay || null;
   onPauseCb = callbacks.onPause || null;
