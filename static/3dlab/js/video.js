@@ -56,6 +56,7 @@ let playerLoading = null;
 // Blob fallback (iOS / Telegram)
 let currentBlobUrl = null;
 let blobLoading = false;
+let switchingVideo = false;
 
 // Panel DOM (вместо табов)
 let navPanel = null;
@@ -455,6 +456,8 @@ function render() {
    ========================= */
 
 function openVideoByIndex(idx) {
+     if (switchingVideo) return;
+  switchingVideo = true;
   if (!playerVideo) ensurePlayerDom();
   if (!videoList || !videoList.length) return;
 
@@ -508,7 +511,18 @@ playerVideo.muted = true;
       playerVideo.muted = false;
     } catch (e) {}
   };
-  playerVideo.addEventListener("playing", unmuteOnce);
+  playerVideo.addEventListener("playing", () => {
+    unmuteOnce();
+    switchingVideo = false;
+  }, { once: true });
+
+  playerVideo.addEventListener("error", () => {
+    switchingVideo = false;
+  }, { once: true });
+
+  setTimeout(() => {
+    switchingVideo = false;
+  }, 4000);
 }
 
 function closePlayerToCards() {
