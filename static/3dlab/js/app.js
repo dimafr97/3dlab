@@ -571,7 +571,6 @@ function openTreeCard(node) {
   const card = node.ref ? getCardById(node.ref) : null;
   if (card) {
   universalViewer.openCard(card);
-  console.log("[UNIVERSAL VIEWER STATE]", universalViewer.getState());
 }
 
 viewerGalleryContext = {
