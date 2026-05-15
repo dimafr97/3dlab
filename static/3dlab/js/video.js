@@ -297,7 +297,7 @@ function ensureNavPanel() {
 
   btnBack = document.createElement("button");
   btnBack.type = "button";
-  btnBack.className = "video-nav-btn back";
+  btnBack.className = "video-nav-btn icon";
 btnBack.innerHTML = `
   <svg viewBox="0 0 24 24"
        aria-hidden="true"
