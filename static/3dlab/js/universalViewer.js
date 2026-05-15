@@ -145,7 +145,6 @@ export function openCard(card) {
   chooseStartState(card);
   renderPanels();
 
-  console.log("[UniversalViewer] openCard:", getState());
 }
 
 export function switchBlock(blockId) {
@@ -161,7 +160,6 @@ export function switchBlock(blockId) {
   activeSubblockId = subblocks[0]?.id || null;
 
   renderPanels();
-  console.log("[UniversalViewer] switchBlock:", getState());
   syncLegacyTabs();
 }
 
@@ -177,8 +175,6 @@ export function switchSubblock(subblockId) {
 
 renderPanels();
 syncLegacyTabs();
-
-console.log("[UniversalViewer] switchSubblock:", getState());
 }
 
 function syncLegacyTabs() {
