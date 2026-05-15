@@ -435,12 +435,16 @@ body {
     font-size: 17px;
   }
 }
-      .video-nav-panel {
+.video-nav-panel {
   display: none;
   width: 100%;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+
+  box-sizing: border-box;
+  padding-left: max(12px, env(safe-area-inset-left));
+  padding-right: max(12px, env(safe-area-inset-right));
 }
 
 .video-nav-left,
