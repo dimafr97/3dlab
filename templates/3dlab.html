@@ -759,7 +759,8 @@ body {
 }
 
 /* ===== VIDEO PLAY MODE ===== */
-body.video-playing .app-header {
+body.video-playing .app-header,
+body.video-player-open .app-header {
   display: none;
 }
 
@@ -858,7 +859,8 @@ body.video-playing .viewer-bottom-nav {
 }
 
 /* ===== VIDEO PLAY MODE (fullscreen only for active card) ===== */ /* CHANGED */
-body.video-playing #videoOverlay {
+body.video-playing #videoOverlay,
+body.video-player-open #videoOverlay {
   padding: 0;
 }
 
