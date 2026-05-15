@@ -101,6 +101,14 @@ export const CONTENT_TREE = {
           desc: "Теория по всем экзаменационным архитектурным деталям",
 
           children: [
+{
+  id: "test_universal_card_node",
+  type: NODE_TYPES.CARD,
+  title: "Тест universal viewer",
+  desc: "Проверка новой панели блоков и подблоков",
+  ref: "test_universal_card",
+  preview: ""
+},            
             {
               id: "drawing_arch_base_node",
               type: NODE_TYPES.CARD,
