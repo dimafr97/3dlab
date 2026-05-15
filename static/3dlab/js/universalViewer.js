@@ -1,10 +1,11 @@
 // js/universalViewer.js
-//
-// Universal Viewer Core
-// Один viewer для всех карточек:
-// card -> blocks -> subblocks -> renderer by viewerProfile
 
-import { BLOCK_ORDER, SUBBLOCK_ORDER } from "./content/contentTypes.js";
+import {
+  BLOCK_ORDER,
+  BLOCK_LABELS,
+  SUBBLOCK_ORDER,
+  SUBBLOCK_LABELS
+} from "./content/contentTypes.js";
 
 let dom = null;
 let currentCard = null;
@@ -19,6 +20,7 @@ function getAvailableBlocks(card) {
     .filter((blockId) => card.blocks[blockId])
     .map((blockId) => ({
       id: blockId,
+      label: BLOCK_LABELS[blockId] || blockId,
       ...card.blocks[blockId]
     }))
     .filter((block) => {
@@ -33,6 +35,7 @@ function getAvailableSubblocks(block) {
     .filter((subblockId) => block.subblocks[subblockId])
     .map((subblockId) => ({
       id: subblockId,
+      label: SUBBLOCK_LABELS[subblockId] || subblockId,
       ...block.subblocks[subblockId]
     }));
 }
@@ -58,6 +61,65 @@ function chooseStartState(card) {
   activeSubblockId = subblocks[0]?.id || null;
 }
 
+function renderButton({ id, label, active, onClick }) {
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "btn tab-btn";
+  btn.textContent = label;
+
+  if (active) btn.classList.add("active");
+
+  btn.addEventListener("click", onClick);
+
+  return btn;
+}
+
+function renderPanels() {
+  if (!dom) return;
+
+  const blocks = getAvailableBlocks(currentCard);
+  const activeBlock = getActiveBlock();
+  const subblocks = getAvailableSubblocks(activeBlock);
+
+  if (dom.blocksEl) {
+    dom.blocksEl.innerHTML = "";
+
+    blocks.forEach((block) => {
+      dom.blocksEl.appendChild(
+        renderButton({
+          id: block.id,
+          label: block.label,
+          active: block.id === activeBlockId,
+          onClick: () => switchBlock(block.id)
+        })
+      );
+    });
+  }
+
+  if (dom.blocksRowEl) {
+    dom.blocksRowEl.style.display = blocks.length ? "flex" : "none";
+  }
+
+  if (dom.subblocksEl) {
+    dom.subblocksEl.innerHTML = "";
+
+    subblocks.forEach((subblock) => {
+      dom.subblocksEl.appendChild(
+        renderButton({
+          id: subblock.id,
+          label: subblock.label,
+          active: subblock.id === activeSubblockId,
+          onClick: () => switchSubblock(subblock.id)
+        })
+      );
+    });
+  }
+
+  if (dom.subblocksRowEl) {
+    dom.subblocksRowEl.style.display = subblocks.length > 1 ? "flex" : "none";
+  }
+}
+
 export function initUniversalViewer(refs) {
   dom = { ...refs };
 
@@ -74,14 +136,9 @@ export function openCard(card) {
 
   currentCard = card;
   chooseStartState(card);
+  renderPanels();
 
-  console.log("[UniversalViewer] openCard:", {
-    card: currentCard,
-    activeBlockId,
-    activeSubblockId,
-    activeBlock: getActiveBlock(),
-    activeSubblock: getActiveSubblock()
-  });
+  console.log("[UniversalViewer] openCard:", getState());
 }
 
 export function switchBlock(blockId) {
@@ -96,6 +153,7 @@ export function switchBlock(blockId) {
   const subblocks = getAvailableSubblocks(nextBlock);
   activeSubblockId = subblocks[0]?.id || null;
 
+  renderPanels();
   console.log("[UniversalViewer] switchBlock:", getState());
 }
 
@@ -109,6 +167,7 @@ export function switchSubblock(subblockId) {
 
   activeSubblockId = subblockId;
 
+  renderPanels();
   console.log("[UniversalViewer] switchSubblock:", getState());
 }
 
