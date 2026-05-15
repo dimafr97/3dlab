@@ -70,7 +70,6 @@ export function renderGallery(containerEl, items, { onSelect }) {
   }
 
   containerEl.innerHTML = "";
-  containerEl.classList.toggle("gallery-single-mobile", items.length <= 2);
 
   items.forEach((m) => {
     const card = document.createElement("div");
