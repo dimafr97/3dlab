@@ -597,10 +597,10 @@ if (breadcrumbBackBtn) {
     return;
   }
 
-  if (card.viewerProfile === VIEWER_PROFILES.ARCH) {
-    viewer.openModelById(node.ref);
-    return;
-  }
+if (card.viewerProfile === VIEWER_PROFILES.ARCH) {
+  viewer.openModelById(card.legacyOpenRef || node.ref);
+  return;
+}
 
   if (card.viewerProfile === VIEWER_PROFILES.ROOMS) {
     roomsViewer.openRoomById(node.ref);
