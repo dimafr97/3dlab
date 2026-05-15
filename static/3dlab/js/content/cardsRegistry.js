@@ -11,8 +11,8 @@
 import { BLOCKS, SUBBLOCKS } from "./contentTypes.js";
 
 export const CARDS = {
-kapitel2: {
-  id: "kapitel2",
+test_universal_card: {
+  id: "test_universal_card",
     title: "Тест universal viewer",
     desc: "Тестовая карточка для проверки блоков и подблоков",
     preview: "",
