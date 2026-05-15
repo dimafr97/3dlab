@@ -343,16 +343,22 @@ btnBack.innerHTML = `
   toolbarEl.appendChild(navPanel);
 
   // Handlers
-  btnBack.addEventListener("click", () => {
+  btnBack.addEventListener("pointerdown", (e) => {
+  e.preventDefault();
+  e.stopPropagation();
     closePlayerToCards();
   });
 
-  btnPrev.addEventListener("click", () => {
+  btnPrev.addEventListener("pointerdown", (e) => {
+  e.preventDefault();
+  e.stopPropagation();
     if (!isPlayerOpen) return;
     openVideoByIndex(modIndex(currentIndex - 1));
   });
 
-  btnNext.addEventListener("click", () => {
+  btnNext.addEventListener("pointerdown", (e) => {
+  e.preventDefault();
+  e.stopPropagation();
     if (!isPlayerOpen) return;
     openVideoByIndex(modIndex(currentIndex + 1));
   });
