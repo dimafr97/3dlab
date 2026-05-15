@@ -162,9 +162,10 @@ function ensurePlayerDom() {
 
   playerWrap = document.createElement("div");
   playerWrap.id = "videoPlayerWrap";
-  playerWrap.style.cssText = `
+playerWrap.style.cssText = `
     position: absolute;
     inset: 0;
+    z-index: 20;
     display: none;
     align-items: center;
     justify-content: center;
