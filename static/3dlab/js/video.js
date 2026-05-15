@@ -103,6 +103,9 @@ function setLoading(on) {
 function showListMode() {
   isPlayerOpen = false;
 
+  document.body.classList.remove("video-player-open");
+  document.body.classList.remove("video-playing");
+
   if (playerWrap) playerWrap.style.display = "none";
   if (listEl) listEl.style.display = "";
   showTabs();
@@ -112,10 +115,11 @@ function showListMode() {
 function showPlayerMode() {
   isPlayerOpen = true;
 
+  document.body.classList.add("video-player-open");
+
   if (listEl) listEl.style.display = "none";
   if (playerWrap) playerWrap.style.display = "flex";
 
-  // табы скрыты всегда в режиме плеера
   hideTabs();
 }
 
@@ -220,8 +224,12 @@ playerVideo.addEventListener("play", () => {
 
 playerVideo.addEventListener("pause", () => {
   setLoading(false);
-  showTabs();
+
+  // В режиме открытого плеера обычные табы не возвращаем.
+  // Показываем только видео-панель.
+  hideTabs();
   showNavPanel();
+
   if (onPauseCb) onPauseCb();
   document.body.classList.remove("video-playing");
 });
