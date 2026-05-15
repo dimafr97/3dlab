@@ -268,6 +268,10 @@ body {
   isolation: isolate;
 }
 
+.legacy-tabs-row {
+  display: none !important;
+}
+
 .viewer-tabs::before {
   content: "";
   position: absolute;
@@ -1021,7 +1025,7 @@ body.inset-mode #insetOpacityRow {
   <div class="model-label" id="modelLabel"></div>
 </div>
 
-<div class="viewer-toolbar-row viewer-tabs-row" style="display:none;">
+<div class="viewer-toolbar-row viewer-tabs-row legacy-tabs-row">
   <div class="viewer-tabs">
     <button class="btn tab-btn active" id="tab3d">3D</button>
     <button class="btn tab-btn" id="tabScheme">Схема</button>
