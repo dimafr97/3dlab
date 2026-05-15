@@ -6,7 +6,8 @@ import {
   SUBBLOCK_ORDER,
   SUBBLOCK_LABELS
 } from "./content/contentTypes.js";
-
+import { setVideoList } from "./video.js";
+import { setSchemeImages } from "./scheme.js";
 let dom = null;
 let currentCard = null;
 
@@ -200,8 +201,23 @@ function syncLegacyTabs() {
     subblockMap[activeSubblock.id] ||
     blockMap[activeBlock.id];
 
-  if (btn) {
-    btn.click();
+if (btn) {
+  btn.click();
+}
+
+syncUniversalContent();
+}
+
+function syncUniversalContent() {
+  const activeSubblock = getActiveSubblock();
+  if (!activeSubblock) return;
+
+  if (Array.isArray(activeSubblock.videos)) {
+    setVideoList(activeSubblock.videos);
+  }
+
+  if (Array.isArray(activeSubblock.images)) {
+    setSchemeImages(activeSubblock.images);
   }
 }
 
