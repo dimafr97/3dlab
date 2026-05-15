@@ -298,12 +298,17 @@ function ensureNavPanel() {
   btnBack = document.createElement("button");
   btnBack.type = "button";
   btnBack.className = "video-nav-btn back";
-  btnBack.innerHTML = `
-    <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M15 18l-6-6 6-6"></path>
-    </svg>
-    <span class="video-nav-btn-label">К карточкам</span>
-  `;
+btnBack.innerHTML = `
+  <svg viewBox="0 0 24 24"
+       aria-hidden="true"
+       fill="none"
+       stroke="currentColor"
+       stroke-width="2.4"
+       stroke-linecap="round">
+    <path d="M6 6L18 18"></path>
+    <path d="M18 6L6 18"></path>
+  </svg>
+`;
 
   btnPrev = document.createElement("button");
   btnPrev.type = "button";
