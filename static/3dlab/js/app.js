@@ -374,7 +374,12 @@ const universalViewer = initUniversalViewer({
   blocksRowEl: document.getElementById("universalBlocksRow"),
   blocksEl: document.getElementById("universalBlocks"),
   subblocksRowEl: document.getElementById("universalSubblocksRow"),
-  subblocksEl: document.getElementById("universalSubblocks")
+  subblocksEl: document.getElementById("universalSubblocks"),
+
+  tab3dBtn: document.getElementById("tab3d"),
+  tabSchemeBtn: document.getElementById("tabScheme"),
+  tabPhotoBtn: document.getElementById("tabPhoto"),
+  tabVideoBtn: document.getElementById("tabVideo")
 });
 window.universalViewer = universalViewer;
 
