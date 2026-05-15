@@ -37,6 +37,8 @@ let tabPhotoBtn = null;
 let tabVideoBtn = null;
 let tabsRowEl = null;
 let tabsWrapEl = null;
+let universalBlocksRowEl = null;
+let universalSubblocksRowEl = null;
 
 let active = false;
 let onPlayCb = null;
@@ -125,10 +127,26 @@ function showPlayerMode() {
 
 function hideTabs() {
   if (tabsRowEl) tabsRowEl.style.display = "none";
+
+  if (universalBlocksRowEl) {
+    universalBlocksRowEl.style.display = "none";
+  }
+
+  if (universalSubblocksRowEl) {
+    universalSubblocksRowEl.style.display = "none";
+  }
 }
 
 function showTabs() {
   if (tabsRowEl) tabsRowEl.style.display = "";
+
+  if (universalBlocksRowEl) {
+    universalBlocksRowEl.style.display = "";
+  }
+
+  if (universalSubblocksRowEl) {
+    universalSubblocksRowEl.style.display = "";
+  }
 }
 
 function showNavPanel() {
@@ -602,6 +620,12 @@ tabsWrapEl =
   tabPhotoBtn?.closest(".viewer-tabs") ||
   tabVideoBtn?.closest(".viewer-tabs") ||
   null;
+
+universalBlocksRowEl =
+  refs?.universalBlocksRowEl || null;
+
+universalSubblocksRowEl =
+  refs?.universalSubblocksRowEl || null;
 
   onPlayCb = callbacks.onPlay || null;
   onPauseCb = callbacks.onPause || null;
