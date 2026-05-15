@@ -106,7 +106,7 @@ export const CONTENT_TREE = {
   type: NODE_TYPES.CARD,
   title: "Тест universal viewer",
   desc: "Проверка новой панели блоков и подблоков",
-  ref: "test_universal_card",
+  ref: "kapitel2",
   preview: ""
 },            
             {
