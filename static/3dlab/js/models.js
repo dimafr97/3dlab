@@ -402,7 +402,44 @@ async function createMaterialFromTextures(textures) {
 // LOAD MODEL (GLTF + BIN CACHE)
 // ================================
 export function loadModel(modelId, { onProgress, onStatus } = {}) {
-  const meta = getModelMeta(modelId);
+  const isDirectModelObject =
+    modelId &&
+    typeof modelId === "object" &&
+    modelId.sourcePath;
+
+  const normalizeAssetUrl = (url) => {
+    if (!url || typeof url !== "string") return url;
+
+    const isAbsolute =
+      /^https?:\/\//i.test(url) ||
+      url.startsWith("/") ||
+      url.startsWith("data:");
+
+    return isAbsolute ? url : `${BASE}${url}`;
+  };
+
+  const normalizeTextures = (textures) => {
+    if (!textures) return null;
+
+    return Object.fromEntries(
+      Object.entries(textures).map(([key, value]) => [
+        key,
+        normalizeAssetUrl(value)
+      ])
+    );
+  };
+
+  const meta = isDirectModelObject
+    ? {
+        id: modelId.id || modelId.sourcePath,
+        name: modelId.name || modelId.id || "Direct model",
+        desc: modelId.desc || "",
+        url: normalizeAssetUrl(modelId.sourcePath),
+        textures: normalizeTextures(modelId.textures),
+        materials: modelId.materials || null
+      }
+    : getModelMeta(modelId);
+
   if (!meta) return Promise.reject("No model: " + modelId);
 
   // instant switching cache
