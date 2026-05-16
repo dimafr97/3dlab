@@ -804,5 +804,76 @@ balyasina1_universal: {
       }
     }
   }
+},
+
+molbert_universal: {
+  id: "molbert_universal",
+  title: "Мольберт",
+  desc: "СПбГАСУ",
+  preview: "content/arch/molbert/preview/preview.png",
+  viewerProfile: "arch",
+
+  blocks: {
+    [BLOCKS.MODEL_3D]: {
+      subblocks: {
+        [SUBBLOCKS.MODEL_3D]: {
+          type: CONTENT_TYPES.MODEL,
+          items: [
+            {
+              id: "molbert",
+              sourcePath: "content/arch/molbert/model/molbert.gltf",
+
+              materials: {
+                "1": {
+                  base: "content/arch/molbert/textures/molbert2_1_BaseColor.jpg",
+                  normal: "content/arch/molbert/textures/molbert2_1_Normal.jpg",
+                  rough: "content/arch/molbert/textures/molbert2_1_Roughness.jpg"
+                },
+                "2": {
+                  base: "content/arch/molbert/textures/molbert2_2_BaseColor.jpg",
+                  normal: "content/arch/molbert/textures/molbert2_2_Normal.jpg",
+                  rough: "content/arch/molbert/textures/molbert2_2_Roughness.jpg"
+                },
+                "3": {
+                  base: "content/arch/molbert/textures/molbert2_3_BaseColor.jpg",
+                  normal: "content/arch/molbert/textures/molbert2_3_Normal.jpg",
+                  rough: "content/arch/molbert/textures/molbert2_3_Roughness.jpg"
+                },
+                "4": {
+                  base: "content/arch/molbert/textures/molbert2_4_BaseColor.jpg",
+                  normal: "content/arch/molbert/textures/molbert2_4_Normal.jpg",
+                  rough: "content/arch/molbert/textures/molbert2_4_Roughness.jpg",
+                  metal: "content/arch/molbert/textures/molbert2_4_Metallic.jpg"
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+
+    [BLOCKS.SCHEMES]: {
+      subblocks: {
+        [SUBBLOCKS.VIDEOS]: {
+          type: CONTENT_TYPES.VIDEOS,
+          items: [
+            "https://s3.twcstorage.ru/540d791f-86c02015-75b1-462f-b960-b855e300451a/content/arch/molbert/videos/scheme/v3.mp4"
+          ]
+        }
+      }
+    },
+
+    [BLOCKS.DRAWING]: {
+      subblocks: {
+        [SUBBLOCKS.VIDEOS]: {
+          type: CONTENT_TYPES.VIDEOS,
+          items: [
+            "https://s3.twcstorage.ru/540d791f-86c02015-75b1-462f-b960-b855e300451a/content/arch/molbert/videos/drawing/v1.mp4",
+            "https://s3.twcstorage.ru/540d791f-86c02015-75b1-462f-b960-b855e300451a/content/arch/molbert/videos/drawing/v2.mp4"
+          ]
+        }
+      }
+    }
+  }
 }
 };
