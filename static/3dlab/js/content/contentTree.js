@@ -110,6 +110,13 @@ export const CONTENT_TREE = {
               preview: "textures/preview/preview3.webp"
             },
 
+{
+  id: "drawing_arch_base_universal_node",
+  type: NODE_TYPES.CARD,
+  title: "База по архитектурным деталям СПБГАСУ",
+  ref: "arch_0_universal"
+},            
+
             {
               id: "drawing_arch_simple",
               type: NODE_TYPES.CATEGORY,
