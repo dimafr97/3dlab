@@ -9,7 +9,6 @@ export const CARDS = {
     desc: "Тестовая карточка для проверки ARCH",
     preview: "",
     viewerProfile: "arch",
-    legacyType: "test",
 
     blocks: {
       [BLOCKS.MODEL_3D]: {
@@ -69,7 +68,6 @@ export const CARDS = {
     desc: "Тестовая universal-врезка",
     preview: "",
     viewerProfile: "inset",
-    legacyType: "test",
 
     blocks: {
       [BLOCKS.MODEL_3D]: {
@@ -130,7 +128,6 @@ export const CARDS = {
     desc: "Тестовая universal-карточка интерьера",
     preview: "",
     viewerProfile: "rooms",
-    legacyType: "test",
 
     blocks: {
       [BLOCKS.MODEL_3D]: {
