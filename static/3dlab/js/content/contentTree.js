@@ -180,13 +180,25 @@ export const CONTENT_TREE = {
                   ref: "chair1",
                   preview: "textures/chair1/preview.png"
                 },
+{
+  id: "drawing_arch_simple_chair1_universal_node",
+  type: NODE_TYPES.CARD,
+  title: "Табурет квадратный",
+  ref: "chair1_universal"
+},                
                 {
                   id: "drawing_arch_simple_chair2_node",
                   type: NODE_TYPES.CARD,
                   title: "Табурет круглый",
                   ref: "chair2",
                   preview: "textures/chair2/preview.png"
-                }
+                },
+{
+  id: "drawing_arch_simple_chair2_universal_node",
+  type: NODE_TYPES.CARD,
+  title: "Табурет круглый",
+  ref: "chair2_universal"
+}                
               ]
             },
 
