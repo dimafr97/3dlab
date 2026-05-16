@@ -242,6 +242,12 @@ export const CONTENT_TREE = {
                   ref: "balyasina2",
                   preview: "textures/balyasina2/preview.png"
                 },
+{
+  id: "drawing_arch_complex_balyasina2_universal_node",
+  type: NODE_TYPES.CARD,
+  title: "Балясина шаровидная",
+  ref: "balyasina2_universal"
+},                
                 {
                   id: "drawing_arch_complex_balyasina1_node",
                   type: NODE_TYPES.CARD,
