@@ -628,7 +628,12 @@ if (breadcrumbBackBtn) {
     return;
   }
 
-if (card.blocks) {
+const isPureUniversalCard =
+  card.blocks &&
+  !card.legacyOpenRef &&
+  !card.legacyMeta;
+
+if (isPureUniversalCard) {
   return;
 }
   
