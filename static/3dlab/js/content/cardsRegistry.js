@@ -552,5 +552,58 @@ chair2_universal: {
       }
     }
   }
+},
+
+ionic_universal: {
+  id: "ionic_universal",
+  title: "Ионическая капитель",
+  desc: "СПбГАСУ",
+  preview: "content/arch/ionic/preview/preview.png",
+  viewerProfile: "arch",
+
+  blocks: {
+    [BLOCKS.MODEL_3D]: {
+      subblocks: {
+        [SUBBLOCKS.MODEL_3D]: {
+          type: CONTENT_TYPES.MODEL,
+          items: [
+            {
+              id: "ionic",
+              sourcePath: "content/arch/ionic/model/ionic.gltf",
+              textures: {
+                base: "content/arch/ionic/textures/BaseColor.jpg",
+                normal: "content/arch/ionic/textures/Normal.jpg",
+                rough: "content/arch/ionic/textures/Roughness.jpg",
+                metalness: 0,
+                roughness: 1,
+                envIntensity: 0.75
+              }
+            }
+          ]
+        }
+      }
+    },
+
+    [BLOCKS.SCHEMES]: {
+      subblocks: {
+        [SUBBLOCKS.SCHEMES]: {
+          type: CONTENT_TYPES.IMAGES,
+          items: [
+            "content/arch/ionic/schemes/s1.jpg",
+            "content/arch/ionic/schemes/s2.jpg",
+            "content/arch/ionic/schemes/s3.jpg",
+            "content/arch/ionic/schemes/s4.jpg"
+          ]
+        },
+
+        [SUBBLOCKS.VIDEOS]: {
+          type: CONTENT_TYPES.VIDEOS,
+          items: [
+            "https://s3.twcstorage.ru/540d791f-86c02015-75b1-462f-b960-b855e300451a/content/arch/ionic/videos/scheme/v1.mp4"
+          ]
+        }
+      }
+    }
+  }
 }
 };
