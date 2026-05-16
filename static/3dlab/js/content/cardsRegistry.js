@@ -120,9 +120,9 @@ test_universal_room_card: {
   auxSectionMaterialNames: ["4"],
 
   materialColors: {
-    "2": "#d929c1",
-    "3": "#1c58e5",
-    "4": "#ddf406"
+    "2": "#000000",
+    "3": "#000000",
+    "4": "#000000"
   },
 
   cad: {
