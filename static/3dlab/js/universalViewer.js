@@ -8,6 +8,7 @@ import {
 } from "./content/contentTypes.js";
 import { setVideoList } from "./video.js";
 import { setSchemeImages } from "./scheme.js";
+import { renderUniversalContent } from "./universalRenderer.js";
 let dom = null;
 let currentCard = null;
 
@@ -226,32 +227,11 @@ function normalizeAssetUrl(url) {
 }
 
 function syncUniversalContent() {
-  const activeSubblock = getActiveSubblock();
-  if (!activeSubblock) return;
-
-  const type = activeSubblock.type;
-  const items = Array.isArray(activeSubblock.items)
-    ? activeSubblock.items
-    : [];
-
-  if (type === "videos") {
-    setVideoList(items);
-    return;
-  }
-
-  if (type === "images") {
-    setSchemeImages(items.map(normalizeAssetUrl));
-    return;
-  }
-
-  // Временная поддержка старого формата, пока legacyAdapters не переведены
-  if (Array.isArray(activeSubblock.videos)) {
-    setVideoList(activeSubblock.videos);
-  }
-
-  if (Array.isArray(activeSubblock.images)) {
-    setSchemeImages(activeSubblock.images.map(normalizeAssetUrl));
-  }
+  renderUniversalContent({
+    card: currentCard,
+    block: getActiveBlock(),
+    subblock: getActiveSubblock()
+  });
 }
 
 export function getState() {
