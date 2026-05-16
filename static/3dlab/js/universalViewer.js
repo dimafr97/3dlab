@@ -145,7 +145,7 @@ export function openCard(card) {
   currentCard = card;
   chooseStartState(card);
   renderPanels();
-
+  syncUniversalContent();
 }
 
 export function switchBlock(blockId) {
