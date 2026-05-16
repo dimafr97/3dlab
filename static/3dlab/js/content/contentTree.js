@@ -267,7 +267,13 @@ export const CONTENT_TREE = {
                   title: "Мольберт",
                   ref: "molbert",
                   preview: "textures/molbert/preview.png"
-                }
+                },
+{
+  id: "drawing_arch_complex_molbert_universal_node",
+  type: NODE_TYPES.CARD,
+  title: "Мольберт",
+  ref: "molbert_universal"
+}                
               ]
             },
 
