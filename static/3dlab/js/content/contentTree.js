@@ -147,6 +147,14 @@ export const CONTENT_TREE = {
                   ref: "kapitel2",
                   preview: "textures/kapitel2/preview.png"
                 },
+{
+  id: "drawing_arch_simple_kapitel2_universal_node",
+  type: NODE_TYPES.CARD,
+  title: "Малая капитель UNIVERSAL",
+  desc: "Новая universal-архитектура",
+  ref: "kapitel2_universal",
+  preview: "content/arch/kapitel2/preview/preview.png"
+},
                 {
                   id: "drawing_arch_simple_vase2_node",
                   type: NODE_TYPES.CARD,
