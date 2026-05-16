@@ -121,11 +121,12 @@ export function initRoomsViewer(refs) {
 
   showGallery();
 
-  return {
-    openRoomById,
-    showGallery,
-    handleResize
-  };
+return {
+  openRoomById,
+  showGallery,
+  handleResize,
+  setViewMode
+};
 }
 
 function handleResize() {
