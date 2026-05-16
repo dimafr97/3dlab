@@ -153,6 +153,14 @@ export const CONTENT_TREE = {
                   ref: "kapitel1",
                   preview: "textures/kapitel1/preview.png"
                 },
+{
+  id: "drawing_arch_simple_kapitel2_universal_node",
+  type: NODE_TYPES.CARD,
+  title: "Большая капитель",
+  desc: "СПбГАСУ",
+  ref: "kapitel1_universal",
+  preview: "content/arch/kapitel1/preview/preview.png"
+},
                 {
                   id: "drawing_arch_simple_chair1_node",
                   type: NODE_TYPES.CARD,
