@@ -67,6 +67,29 @@ test_universal_card: {
   legacyType: "test",
   legacyMeta: null,
 
+  profileSettings: {
+  sourceId: "inset_3_source",
+  sourcePath: "models/3.gltf",
+
+  opacityMaterialName: "1",
+
+  primarySectionMaterialNames: ["2", "3"],
+  auxSectionMaterialNames: ["4"],
+
+  materialColors: {
+    "2": "#000000",
+    "3": "#000000",
+    "4": "#000000"
+  },
+
+  cad: {
+    fromNodes: true,
+    lines: [
+      ["a", "b"]
+    ]
+  }
+},
+
   blocks: {
     [BLOCKS.MODEL_3D]: {
       subblocks: {
@@ -109,29 +132,6 @@ test_universal_room_card: {
   legacyOpenRef: "room_1",
   legacyType: "test",
   legacyMeta: null,
-
-  profileSettings: {
-  sourceId: "inset_3_source",
-  sourcePath: "models/3.gltf",
-
-  opacityMaterialName: "999",
-
-  primarySectionMaterialNames: ["2", "3"],
-  auxSectionMaterialNames: ["4"],
-
-  materialColors: {
-    "2": "#000000",
-    "3": "#000000",
-    "4": "#000000"
-  },
-
-  cad: {
-    fromNodes: true,
-    lines: [
-      ["a", "b"]
-    ]
-  }
-},
 
   blocks: {
     [BLOCKS.MODEL_3D]: {
