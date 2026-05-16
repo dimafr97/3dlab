@@ -77,7 +77,9 @@ test_universal_card: {
 
         [SUBBLOCKS.VIDEOS]: {
           type: CONTENT_TYPES.VIDEOS,
-          items: []
+          items: [
+  "https://s3.twcstorage.ru/540d791f-86c02015-75b1-462f-b960-b855e300451a/textures/doric/v1.mp4"
+]
         }
       }
     },
@@ -86,9 +88,11 @@ test_universal_card: {
       subblocks: {
         [SUBBLOCKS.SCHEMES]: {
           type: CONTENT_TYPES.IMAGES,
-          items: [
-            "textures/3/s1.jpg"
-          ]
+items: [
+  "textures/3/SS1.jpg",
+  "textures/3/SS2.jpg",
+  "textures/3/SS3.jpg"
+]
         }
       }
     }
