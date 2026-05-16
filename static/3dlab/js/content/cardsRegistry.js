@@ -163,5 +163,82 @@ export const CARDS = {
         }
       }
     }
+  },
+
+kapitel2_universal: {
+  id: "kapitel2_universal",
+  title: "Малая капитель",
+  desc: "Теория по построению малой капители",
+  preview:
+    "content/arch/kapitel2/preview/preview.png",
+
+  viewerProfile: "arch",
+
+  blocks: {
+    [BLOCKS.MODEL_3D]: {
+      subblocks: {
+        [SUBBLOCKS.MODEL_3D]: {
+          type: CONTENT_TYPES.MODEL,
+
+          items: [
+            {
+              id: "kapitel2",
+
+              sourcePath:
+                "content/arch/kapitel2/model/kapitel2.gltf",
+
+              textures: {
+                base:
+                  "content/arch/kapitel2/textures/BaseColor.jpg",
+
+                normal:
+                  "content/arch/kapitel2/textures/Normal.jpg",
+
+                rough:
+                  "content/arch/kapitel2/textures/Roughness.jpg",
+
+                metalness: 0,
+                roughness: 1,
+                envIntensity: 0.75
+              }
+            }
+          ]
+        }
+      }
+    },
+
+    [BLOCKS.SCHEMES]: {
+      subblocks: {
+        [SUBBLOCKS.SCHEMES]: {
+          type: CONTENT_TYPES.IMAGES,
+
+          items: [
+            "content/arch/kapitel2/schemes/s1.jpg",
+            "content/arch/kapitel2/schemes/s2.jpg"
+          ]
+        },
+
+        [SUBBLOCKS.VIDEOS]: {
+          type: CONTENT_TYPES.VIDEOS,
+
+          items: [
+            "https://s3.twcstorage.ru/540d791f-86c02015-75b1-462f-b960-b855e300451a/content/arch/kapitel2/videos/scheme/v1.mp4"
+          ]
+        }
+      }
+    },
+
+    [BLOCKS.DRAWING]: {
+      subblocks: {
+        [SUBBLOCKS.VIDEOS]: {
+          type: CONTENT_TYPES.VIDEOS,
+
+          items: [
+            "https://s3.twcstorage.ru/540d791f-86c02015-75b1-462f-b960-b855e300451a/content/arch/kapitel2/videos/drawing/v2.mp4"
+          ]
+        }
+      }
+    }
   }
+}
 };
