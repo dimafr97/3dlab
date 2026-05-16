@@ -36,6 +36,14 @@ export const CONTENT_TREE = {
 
           children: [
             {
+  id: "test_universal_room_card_node",
+  type: NODE_TYPES.CARD,
+  title: "Тест universal rooms",
+  desc: "Проверка новой universal-карточки интерьера",
+  ref: "test_universal_room_card",
+  preview: ""
+},
+            {
               id: "drawing_interiors_base_node",
               type: NODE_TYPES.CARD,
               title: "База по рисунку СПБГАСУ",
