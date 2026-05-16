@@ -15,6 +15,7 @@ import { NODE_TYPES } from "./content/contentTypes.js";
 import { getCardById } from "./content/cardResolver.js";
 import { VIEWER_PROFILES } from "./content/viewerProfiles.js";
 import { initUniversalViewer } from "./universalViewer.js";
+import { configureUniversalRenderer } from "./universalRenderer.js";
 const SECTION_FLAGS = {
   arch: true,
   insets: true,
@@ -370,6 +371,12 @@ onOpenPrevTreeCard: () => openSiblingCard(-1),
 onOpenNextTreeCard: () => openSiblingCard(1)
 });
 
+configureUniversalRenderer({
+  openArchModel: (modelId) => viewer.openModelById(modelId),
+  openInsetModel: (modelId) => insetViewer.openById(modelId),
+  openRoomModel: (modelId) => roomsViewer.openRoomById(modelId)
+});
+
 const universalViewer = initUniversalViewer({
   blocksRowEl: document.getElementById("universalBlocksRow"),
   blocksEl: document.getElementById("universalBlocks"),
@@ -596,6 +603,10 @@ if (breadcrumbBackBtn) {
     return;
   }
 
+if (card.legacyType === "test") {
+  return;
+}
+  
 if (card.viewerProfile === VIEWER_PROFILES.ARCH) {
   viewer.openModelById(card.legacyOpenRef || node.ref);
   return;
