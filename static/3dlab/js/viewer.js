@@ -11,6 +11,7 @@ import { initVideo, setVideoList, activateVideo, deactivateVideo } from "./video
 
 let dom = null;
 let currentModelId = null;
+let currentMeta = null;
 let activeView = "3d"; // "3d" | "scheme" | "video"
 // ✅ если открыты "Врезки" — архитектурный viewer должен молчать
 function isInsetModeActive() {
@@ -114,6 +115,7 @@ requestAnimationFrame(() => {
 return {
   openModelById,
   openUniversalArch,
+  openContentCard,
   showGallery,
   handleResize,
   setViewMode
@@ -277,6 +279,7 @@ function getModelIndex(id) {
 }
 
 function getCurrentModelMeta() {
+  if (currentMeta) return currentMeta;
   if (!currentModelId) return null;
   return getModelMeta(currentModelId);
 }
@@ -335,10 +338,50 @@ function openUniversalArch(modelItem, card) {
   startModelLoading(meta);
 }
 
+function openContentCard(card) {
+  if (!card || isInsetModeActive() || isRoomsModeActive()) return;
+
+  const meta = {
+    id: card.id,
+    name: card.title,
+    desc: card.desc,
+    preview: card.preview,
+
+    schemes:
+      card?.blocks?.schemes?.subblocks?.schemes?.items || [],
+
+    photos:
+      card?.blocks?.drawing?.subblocks?.photos?.items || [],
+
+    video:
+      card?.blocks?.video?.subblocks?.videos?.items || []
+  };
+
+  currentModelId = meta.id;
+  currentMeta = meta;
+
+  if (dom.modelLabelEl) dom.modelLabelEl.textContent = meta.name;
+
+  hideGallery();
+  showViewer();
+  setUiHidden(false);
+
+  configureViewTabsForModel(meta);
+
+  threeClearModel();
+  setCanvasInteractionEnabled(false);
+
+  hideLoading();
+  setStatus("");
+
+  setViewMode(chooseStartView(meta));
+}
+
 function openModelById(modelId) {
   if (isInsetModeActive() || isRoomsModeActive()) return;
   const meta = getModelMeta(modelId);
   if (!meta) return;
+  currentMeta = meta;
 
   currentModelId = modelId;
 
@@ -508,6 +551,7 @@ function showGallery() {
   threeClearModel();
 
   currentModelId = null;
+  currentMeta = null;
   activeView = "3d";
   setCanvasInteractionEnabled(true);
   setUiHidden(false);
