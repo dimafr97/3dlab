@@ -764,8 +764,11 @@ export function openUniversalInset(modelItem, card) {
     sourcePath: modelItem.sourcePath,
     textures: modelItem.textures || null,
 
-    schemes: [],
-    video: [],
+schemes:
+  card?.blocks?.schemes?.subblocks?.schemes?.items || [],
+
+video:
+  card?.blocks?.["3d"]?.subblocks?.videos?.items || [],
 
     ...rendererSettings
   };
