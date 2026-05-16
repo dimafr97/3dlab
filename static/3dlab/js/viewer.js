@@ -111,11 +111,12 @@ requestAnimationFrame(() => {
 
   showGallery();
 
-  return {
-    openModelById,
-    showGallery,
-    handleResize
-  };
+return {
+  openModelById,
+  showGallery,
+  handleResize,
+  setViewMode
+};
 }
 
 function handleResize() {
