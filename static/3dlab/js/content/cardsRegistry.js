@@ -315,5 +315,68 @@ kapitel1_universal: {
       }
     }
   }
+},
+
+vase1_universal: {
+  id: "vase1_universal",
+  title: "Малая ваза",
+  desc: "СПбГАСУ",
+  preview: "content/arch/vase1/preview/preview.png",
+
+  viewerProfile: "arch",
+
+  blocks: {
+    [BLOCKS.MODEL_3D]: {
+      subblocks: {
+        [SUBBLOCKS.MODEL_3D]: {
+          type: CONTENT_TYPES.MODEL,
+          items: [
+            {
+              id: "vase1",
+              sourcePath: "content/arch/vase1/model/vase1.gltf",
+              textures: {
+                base: "content/arch/vase1/textures/BaseColor.jpg",
+                normal: "content/arch/vase1/textures/Normal.jpg",
+                rough: "content/arch/vase1/textures/Roughness.jpg",
+                metalness: 0,
+                roughness: 1,
+                envIntensity: 0.75
+              }
+            }
+          ]
+        }
+      }
+    },
+
+    [BLOCKS.SCHEMES]: {
+      subblocks: {
+        [SUBBLOCKS.SCHEMES]: {
+          type: CONTENT_TYPES.IMAGES,
+          items: [
+            "content/arch/vase1/schemes/s1.jpg",
+            "content/arch/vase1/schemes/s2.jpg"
+          ]
+        },
+
+        [SUBBLOCKS.VIDEOS]: {
+          type: CONTENT_TYPES.VIDEOS,
+          items: [
+            "https://s3.twcstorage.ru/540d791f-86c02015-75b1-462f-b960-b855e300451a/content/arch/vase1/videos/scheme/v1.mp4"
+          ]
+        }
+      }
+    },
+
+    [BLOCKS.DRAWING]: {
+      subblocks: {
+        [SUBBLOCKS.VIDEOS]: {
+          type: CONTENT_TYPES.VIDEOS,
+          items: [
+            "https://s3.twcstorage.ru/540d791f-86c02015-75b1-462f-b960-b855e300451a/content/arch/vase1/videos/drawing/v2.mp4"
+          ]
+        }
+      }
+    }
+  }
 }
 };
