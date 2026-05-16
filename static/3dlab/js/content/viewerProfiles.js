@@ -15,6 +15,7 @@
 export const VIEWER_PROFILES = {
   ARCH: "arch",
   ROOMS: "rooms",
+  BASE: "base",
   INSET: "inset",
   COMPOSITION: "composition",
   FIGURE: "figure"
