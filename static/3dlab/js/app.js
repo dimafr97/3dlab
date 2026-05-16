@@ -380,13 +380,13 @@ configureUniversalRenderer({
 
   viewer.openModelById(modelItem);
 },
-  openInsetModel: (modelId, card) => {
-  if (card?.profileSettings) {
-    insetViewer.openUniversalInset(card);
+openInsetModel: (modelItem, card) => {
+  if (modelItem && typeof modelItem === "object") {
+    insetViewer.openUniversalInset(modelItem, card);
     return;
   }
 
-  insetViewer.openById(modelId);
+  insetViewer.openById(modelItem);
 },
   openRoomModel: (modelId) => roomsViewer.openRoomById(modelId),
 
