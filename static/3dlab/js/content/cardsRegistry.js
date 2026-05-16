@@ -657,5 +657,79 @@ doric_universal: {
       }
     }
   }
+},
+
+balyasina2_universal: {
+  id: "balyasina2_universal",
+  title: "Балясина шаровидная",
+  desc: "СПбГАСУ",
+  preview: "content/arch/balyasina2/preview/preview.png",
+  viewerProfile: "arch",
+
+  blocks: {
+    [BLOCKS.MODEL_3D]: {
+      subblocks: {
+        [SUBBLOCKS.MODEL_3D]: {
+          type: CONTENT_TYPES.MODEL,
+          items: [
+            {
+              id: "balyasina2",
+              sourcePath:
+                "content/arch/balyasina2/model/balyasina2.gltf",
+
+              textures: {
+                base:
+                  "content/arch/balyasina2/textures/BaseColor.jpg",
+
+                normal:
+                  "content/arch/balyasina2/textures/Normal.jpg",
+
+                rough:
+                  "content/arch/balyasina2/textures/Roughness.jpg",
+
+                metalness: 0,
+                roughness: 1,
+                envIntensity: 0.75
+              }
+            }
+          ]
+        }
+      }
+    },
+
+    [BLOCKS.SCHEMES]: {
+      subblocks: {
+        [SUBBLOCKS.SCHEMES]: {
+          type: CONTENT_TYPES.IMAGES,
+
+          items: [
+            "content/arch/balyasina2/schemes/s1.jpg",
+            "content/arch/balyasina2/schemes/s2.jpg",
+            "content/arch/balyasina2/schemes/s3.jpg"
+          ]
+        },
+
+        [SUBBLOCKS.VIDEOS]: {
+          type: CONTENT_TYPES.VIDEOS,
+
+          items: [
+            "https://s3.twcstorage.ru/540d791f-86c02015-75b1-462f-b960-b855e300451a/content/arch/balyasina2/videos/scheme/v1.mp4"
+          ]
+        }
+      }
+    },
+
+    [BLOCKS.DRAWING]: {
+      subblocks: {
+        [SUBBLOCKS.VIDEOS]: {
+          type: CONTENT_TYPES.VIDEOS,
+
+          items: [
+            "https://s3.twcstorage.ru/540d791f-86c02015-75b1-462f-b960-b855e300451a/content/arch/balyasina2/videos/drawing/v2.mp4"
+          ]
+        }
+      }
+    }
+  }
 }
 };
