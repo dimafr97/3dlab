@@ -240,5 +240,80 @@ kapitel2_universal: {
       }
     }
   }
+},
+kapitel1_universal: {
+  id: "kapitel1_universal",
+  title: "Большая капитель",
+  preview:
+    "content/arch/kapitel1/preview/preview.png",
+
+  viewerProfile: "arch",
+
+  blocks: {
+    [BLOCKS.MODEL_3D]: {
+      subblocks: {
+        [SUBBLOCKS.MODEL_3D]: {
+          type: CONTENT_TYPES.MODEL,
+
+          items: [
+            {
+              id: "kapitel1",
+
+              sourcePath:
+                "content/arch/kapitel1/model/kapitel1.gltf",
+
+              textures: {
+                base:
+                  "content/arch/kapitel1/textures/BaseColor.jpg",
+
+                normal:
+                  "content/arch/kapitel1/textures/Normal.jpg",
+
+                rough:
+                  "content/arch/kapitel1/textures/Roughness.jpg",
+
+                metalness: 0,
+                roughness: 1,
+                envIntensity: 0.75
+              }
+            }
+          ]
+        }
+      }
+    },
+
+    [BLOCKS.SCHEMES]: {
+      subblocks: {
+        [SUBBLOCKS.SCHEMES]: {
+          type: CONTENT_TYPES.IMAGES,
+
+          items: [
+            "content/arch/kapitel1/schemes/s1.jpg",
+            "content/arch/kapitel1/schemes/s2.jpg"
+          ]
+        },
+
+        [SUBBLOCKS.VIDEOS]: {
+          type: CONTENT_TYPES.VIDEOS,
+
+          items: [
+            "https://s3.twcstorage.ru/540d791f-86c02015-75b1-462f-b960-b855e300451a/content/arch/kapitel1/videos/scheme/v1.mp4"
+          ]
+        }
+      }
+    },
+
+    [BLOCKS.DRAWING]: {
+      subblocks: {
+        [SUBBLOCKS.VIDEOS]: {
+          type: CONTENT_TYPES.VIDEOS,
+
+          items: [
+            "https://s3.twcstorage.ru/540d791f-86c02015-75b1-462f-b960-b855e300451a/content/arch/kapitel1/videos/drawing/v2.mp4"
+          ]
+        }
+      }
+    }
+  }
 }
 };
