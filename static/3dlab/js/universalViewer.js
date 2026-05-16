@@ -229,6 +229,22 @@ function syncUniversalContent() {
   const activeSubblock = getActiveSubblock();
   if (!activeSubblock) return;
 
+  const type = activeSubblock.type;
+  const items = Array.isArray(activeSubblock.items)
+    ? activeSubblock.items
+    : [];
+
+  if (type === "videos") {
+    setVideoList(items);
+    return;
+  }
+
+  if (type === "images") {
+    setSchemeImages(items.map(normalizeAssetUrl));
+    return;
+  }
+
+  // Временная поддержка старого формата, пока legacyAdapters не переведены
   if (Array.isArray(activeSubblock.videos)) {
     setVideoList(activeSubblock.videos);
   }
