@@ -216,6 +216,12 @@ export const CONTENT_TREE = {
                   ref: "ionic",
                   preview: "textures/ionic/preview.png"
                 },
+{
+  id: "drawing_arch_complex_ionic_universal_node",
+  type: NODE_TYPES.CARD,
+  title: "Ионическая капитель",
+  ref: "ionic_universal"
+},                
                 {
                   id: "drawing_arch_complex_doric_node",
                   type: NODE_TYPES.CARD,
