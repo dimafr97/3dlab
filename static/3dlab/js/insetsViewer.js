@@ -127,12 +127,13 @@ if (window.visualViewport) {
     syncVideoOverlayOffset();
   });
 
-  return {
-    openById,
-    showGallery,
-    enterInsetMode,
-    exitInsetMode,
-  };
+return {
+  openById,
+  showGallery,
+  enterInsetMode,
+  exitInsetMode,
+  setViewMode
+};
 }
 
 function enterInsetMode() {
