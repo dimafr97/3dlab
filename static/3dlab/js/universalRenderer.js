@@ -78,8 +78,8 @@ case VIEWER_PROFILES.INSET: {
 }
 
 case VIEWER_PROFILES.ROOMS: {
-  const modelId = items[0] || card.legacyOpenRef || card.id;
-  rendererApi?.openRoomModel?.(modelId, card);
+  const modelItem = items[0];
+  rendererApi?.openRoomModel?.(modelItem, card);
   break;
 }
 
