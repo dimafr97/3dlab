@@ -36,10 +36,25 @@ export function renderUniversalContent({ card, block, subblock }) {
   const type = subblock.type;
   const items = Array.isArray(subblock.items) ? subblock.items : [];
 
-  if (type === CONTENT_TYPES.VIDEOS) {
-    setVideoList(items);
-    return;
+if (type === CONTENT_TYPES.VIDEOS) {
+  setVideoList(items);
+
+  switch (card.viewerProfile) {
+    case VIEWER_PROFILES.ARCH:
+      rendererApi?.setArchViewMode?.("video");
+      break;
+
+    case VIEWER_PROFILES.INSET:
+      rendererApi?.setInsetViewMode?.("video");
+      break;
+
+    case VIEWER_PROFILES.ROOMS:
+      rendererApi?.setRoomViewMode?.("video");
+      break;
   }
+
+  return;
+}
 
   if (type === CONTENT_TYPES.IMAGES) {
     setSchemeImages(items.map(normalizeAssetUrl));
