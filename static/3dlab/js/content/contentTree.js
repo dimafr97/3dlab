@@ -154,7 +154,7 @@ export const CONTENT_TREE = {
                   preview: "textures/kapitel1/preview.png"
                 },
 {
-  id: "drawing_arch_simple_kapitel2_universal_node",
+  id: "drawing_arch_simple_kapitel1_universal_node",
   type: NODE_TYPES.CARD,
   title: "Большая капитель",
   desc: "СПбГАСУ",
