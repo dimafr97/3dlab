@@ -106,7 +106,7 @@ test_universal_room_card: {
   preview: "",
   viewerProfile: "rooms",
 
-  legacyOpenRef: "room_0",
+  legacyOpenRef: "room_1",
   legacyType: "test",
   legacyMeta: null,
 
@@ -115,7 +115,23 @@ test_universal_room_card: {
       subblocks: {
         [SUBBLOCKS.MODEL_3D]: {
           type: CONTENT_TYPES.MODEL,
-          items: ["room_0"]
+          items: ["room_1"]
+        },
+
+        [SUBBLOCKS.SCHEMES]: {
+          type: CONTENT_TYPES.IMAGES,
+          items: [
+            "https://api.apparchi.ru/?path=textures/doric/s1.jpg",
+            "https://api.apparchi.ru/?path=textures/doric/s2.jpg",
+            "https://api.apparchi.ru/?path=textures/doric/s3.jpg"
+          ]
+        },
+
+        [SUBBLOCKS.VIDEOS]: {
+          type: CONTENT_TYPES.VIDEOS,
+          items: [
+            "https://s3.twcstorage.ru/540d791f-86c02015-75b1-462f-b960-b855e300451a/textures/doric/v1.mp4"
+          ]
         }
       }
     }
