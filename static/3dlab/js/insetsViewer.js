@@ -129,6 +129,7 @@ if (window.visualViewport) {
 
 return {
   openById,
+  openUniversalInset,
   showGallery,
   enterInsetMode,
   exitInsetMode,
@@ -749,6 +750,26 @@ currentOpacity = 1;
 sectionMaterials = [];
 }
 
+export function openUniversalInset(card) {
+  if (!card) return;
+
+  const settings = card.profileSettings || {};
+
+  const meta = {
+    id: card.id,
+    name: card.title,
+    desc: card.desc,
+    preview: card.preview,
+
+    schemes: [],
+    video: [],
+
+    ...settings
+  };
+
+  openInsetMeta(meta);
+}
+
 export function openById(id) {
   const meta = getInsetMeta(id);
   if (!meta) {
@@ -756,138 +777,129 @@ export function openById(id) {
     return;
   }
 
+  openInsetMeta(meta);
+}
+
+function openInsetMeta(meta) {
   hardResetInsetRuntime();
 
-  currentId = id;
+  currentId = meta.id;
   currentMeta = meta;
   enterInsetMode();
 
-// ✅ новый токен загрузки (всё, что придёт со старым токеном — игнорим)
-const mySeq = ++insetLoadSeq;
+  const mySeq = ++insetLoadSeq;
 
-if (dom?.schemeOverlayEl) dom.schemeOverlayEl.style.display = "none";
-if (dom?.videoOverlayEl) dom.videoOverlayEl.style.display = "none";
-document.body.classList.remove("video-playing");
-// ✅ показываем viewer
-dom.galleryEl?.classList.add("hidden");
-dom.viewerWrapperEl?.classList.add("visible");
+  if (dom?.schemeOverlayEl) dom.schemeOverlayEl.style.display = "none";
+  if (dom?.videoOverlayEl) dom.videoOverlayEl.style.display = "none";
+  document.body.classList.remove("video-playing");
 
-// ✅ подпись
-if (dom.modelLabelEl) dom.modelLabelEl.textContent = meta.name;
+  dom.galleryEl?.classList.add("hidden");
+  dom.viewerWrapperEl?.classList.add("visible");
 
-// ✅ настраиваем вкладки
-configureViewTabsForInset(meta);
-const startView = chooseStartView(meta);
-const { has3d } = getInsetCapabilities(meta);
+  if (dom.modelLabelEl) dom.modelLabelEl.textContent = meta.name;
+
+  configureViewTabsForInset(meta);
+
+  const startView = chooseStartView(meta);
+  const { has3d } = getInsetCapabilities(meta);
+
   setInsetViewClass(startView);
-setCanvasInteractionEnabled(startView === "3d");
+  setCanvasInteractionEnabled(startView === "3d");
 
-// ✅ если у врезки нет 3D (нулевая карточка) — модель не грузим
-if (!has3d) {
-  controlledMaterials = [];
-  sectionMaterials = [];
+  if (!has3d) {
+    controlledMaterials = [];
+    sectionMaterials = [];
 
-  setInsetBlendState(0, []);
-  setInsetSectionBlendState(0.5, []);
-  setOutlineExcludedMaterials([]);
-  setCadAlpha(0);
-  setSectionEdgesAlpha(0);
-
-  hideLoading();
-  setStatus("");
-  setViewMode(startView);
-  return;
-}
-
-// ✅ загрузка
-showLoading(`Загрузка: ${meta.name}`);
-
-loadModel(meta.sourceId || meta.id, {
-  onProgress: (p) => setProgress(p),
-  onStatus: (s) => setStatus(s)
-})
-
-  .then(({ root }) => {
-      // ✅ если пока грузилось — ты уже переключился на другую врезку/вышел
-  if (mySeq !== insetLoadSeq) return;
-  if (!document.body.classList.contains("inset-mode")) return;
-    // ✅ 1) сначала применяем цвета сечений (если они заданы в meta)
-    applyInsetColors(root, meta);
-    // ✅ Теперь новая модель уже готова — возвращаем тяжёлый pipeline
-setInsetBlendEnabled(true);
-setOutlineEnabled(true);
-
-    // ✅ 2) показываем модель в threeViewer
-threeSetModel(root);
-
-// ✅ CAD: либо из конфигурации (ручные coords), либо из Dummy/Point внутри glTF
-const cadSpec = meta?.cad?.fromNodes
-  ? buildCadSpecFromModel(root, meta.cad)
-  : meta.cad;
-
-setCadOverlay(cadSpec);
-    // применяем текущую прозрачность CAD при первом открытии
-const cadAlpha = Math.min(1, Math.max(0, (1 - currentOpacity) / 0.3));
-setCadAlpha(cadAlpha);
-
-    // ✅ 3) находим материалы, которыми управляет ползунок (например "1")
-    controlledMaterials = collectMaterialsByName(root, meta.opacityMaterialName);
-    setInsetBlendState(0, controlledMaterials);
-    // ✅ собираем материалы сечений (2/3/4) и включаем их статичный микс
-sectionMaterials = [];
-let outlineExcludedSectionMaterials = [];
-
-const { primary, all } = getSectionNameSets(meta);
-
-// Основные сечения — для заливки и section-blend
-for (const n of primary) {
-  sectionMaterials.push(...collectMaterialsByName(root, n));
-}
-sectionMaterials = Array.from(new Set(sectionMaterials));
-
-setInsetSectionBlendState(0.5, sectionMaterials);
-
-// Все сечения — чтобы белый контур не рисовался по ним вообще
-for (const n of all) {
-  outlineExcludedSectionMaterials.push(...collectMaterialsByName(root, n));
-}
-outlineExcludedSectionMaterials = Array.from(new Set(outlineExcludedSectionMaterials));
-
-setOutlineExcludedMaterials(outlineExcludedSectionMaterials);
-
-setSectionEdgesOverlay(
-  root,
-  all,
-  meta.materialColors || {}
-);
-
-const edgeAlpha = Math.min(1, Math.max(0, (1 - currentOpacity) / 0.3));
-setSectionEdgesAlpha(edgeAlpha);
-
-    // ✅ 4) применяем текущую прозрачность
-    applyOpacityToControlled();
-
-    // ✅ статус (можно оставить)
-    if (controlledMaterials.length === 0) {
-      setStatus(`Материал "${meta.opacityMaterialName}" не найден`);
-    } else {
-      setStatus("");
-    }
+    setInsetBlendState(0, []);
+    setInsetSectionBlendState(0.5, []);
+    setOutlineExcludedMaterials([]);
+    setCadAlpha(0);
+    setSectionEdgesAlpha(0);
 
     hideLoading();
+    setStatus("");
     setViewMode(startView);
+    return;
+  }
 
+  showLoading(`Загрузка: ${meta.name}`);
+
+  loadModel(meta.sourceId || meta.id, {
+    onProgress: (p) => setProgress(p),
+    onStatus: (s) => setStatus(s)
   })
+    .then(({ root }) => {
+      if (mySeq !== insetLoadSeq) return;
+      if (!document.body.classList.contains("inset-mode")) return;
 
-.catch((err) => {
-  // ✅ если ошибка от старой загрузки — игнорим
-  if (mySeq !== insetLoadSeq) return;
-  if (!document.body.classList.contains("inset-mode")) return;
+      applyInsetColors(root, meta);
 
-  console.error(err);
-  hideLoading();
-  setStatus("Ошибка загрузки");
-});
+      setInsetBlendEnabled(true);
+      setOutlineEnabled(true);
+
+      threeSetModel(root);
+
+      const cadSpec = meta?.cad?.fromNodes
+        ? buildCadSpecFromModel(root, meta.cad)
+        : meta.cad;
+
+      setCadOverlay(cadSpec);
+
+      const cadAlpha = Math.min(1, Math.max(0, (1 - currentOpacity) / 0.3));
+      setCadAlpha(cadAlpha);
+
+      controlledMaterials = collectMaterialsByName(root, meta.opacityMaterialName);
+      setInsetBlendState(0, controlledMaterials);
+
+      sectionMaterials = [];
+      let outlineExcludedSectionMaterials = [];
+
+      const { primary, all } = getSectionNameSets(meta);
+
+      for (const n of primary) {
+        sectionMaterials.push(...collectMaterialsByName(root, n));
+      }
+
+      sectionMaterials = Array.from(new Set(sectionMaterials));
+
+      setInsetSectionBlendState(0.5, sectionMaterials);
+
+      for (const n of all) {
+        outlineExcludedSectionMaterials.push(...collectMaterialsByName(root, n));
+      }
+
+      outlineExcludedSectionMaterials = Array.from(new Set(outlineExcludedSectionMaterials));
+
+      setOutlineExcludedMaterials(outlineExcludedSectionMaterials);
+
+      setSectionEdgesOverlay(
+        root,
+        all,
+        meta.materialColors || {}
+      );
+
+      const edgeAlpha = Math.min(1, Math.max(0, (1 - currentOpacity) / 0.3));
+      setSectionEdgesAlpha(edgeAlpha);
+
+      applyOpacityToControlled();
+
+      if (controlledMaterials.length === 0) {
+        setStatus(`Материал "${meta.opacityMaterialName}" не найден`);
+      } else {
+        setStatus("");
+      }
+
+      hideLoading();
+      setViewMode(startView);
+    })
+    .catch((err) => {
+      if (mySeq !== insetLoadSeq) return;
+      if (!document.body.classList.contains("inset-mode")) return;
+
+      console.error(err);
+      hideLoading();
+      setStatus("Ошибка загрузки");
+    });
 }
 
 function showLoading(text) {
