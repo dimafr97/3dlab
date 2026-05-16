@@ -56,10 +56,11 @@ case VIEWER_PROFILES.ARCH: {
   break;
 }
 
-    case VIEWER_PROFILES.INSET:
-      // TODO:
-      // open inset renderer
-      break;
+case VIEWER_PROFILES.INSET: {
+  const modelId = items[0] || card.legacyOpenRef || card.id;
+  rendererApi?.openInsetModel?.(modelId, card);
+  break;
+}
 
     case VIEWER_PROFILES.ROOMS:
       // TODO:
