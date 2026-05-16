@@ -147,6 +147,9 @@ function showTabs() {
   if (universalSubblocksRowEl) {
     universalSubblocksRowEl.style.display = "";
   }
+   requestAnimationFrame(() => {
+  window.updateAllSegmentedControls?.();
+});
 }
 
 function showNavPanel() {
