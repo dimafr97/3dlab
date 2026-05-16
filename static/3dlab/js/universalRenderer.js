@@ -60,7 +60,9 @@ if (type === CONTENT_TYPES.VIDEOS) {
 }
 
 if (type === CONTENT_TYPES.IMAGES) {
-  setSchemeImages(items.map(normalizeAssetUrl));
+  setSchemeImages(
+    items.map((url) => normalizeAssetUrl(url))
+  );
 
   switch (card.viewerProfile) {
     case VIEWER_PROFILES.ARCH:
