@@ -60,6 +60,12 @@ export const SUBBLOCK_ORDER = [
   SUBBLOCKS.VIDEOS
 ];
 
+export const CONTENT_TYPES = {
+  MODEL: "model",
+  IMAGES: "images",
+  VIDEOS: "videos"
+};
+
 export const NODE_TYPES = {
   CATEGORY: "category",
   CARD: "card"
