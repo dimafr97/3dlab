@@ -152,6 +152,12 @@ export const CONTENT_TREE = {
                   ref: "vase2",
                   preview: "textures/vase2/preview.png"
                 },
+{
+  id: "drawing_arch_simple_vase2_universal_node",
+  type: NODE_TYPES.CARD,
+  title: "Большая ваза",
+  ref: "vase2_universal"
+},                
                 {
                   id: "drawing_arch_simple_kapitel1_node",
                   type: NODE_TYPES.CARD,
