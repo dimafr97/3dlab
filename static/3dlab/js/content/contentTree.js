@@ -124,6 +124,11 @@ export const CONTENT_TREE = {
                   ref: "vase1",
                   preview: "textures/vase1/preview.png"
                 },
+{
+  id: "drawing_arch_simple_vase1_universal_node",
+  type: NODE_TYPES.CARD,
+  ref: "vase1_universal"
+},             
                 {
                   id: "drawing_arch_simple_kapitel2_node",
                   type: NODE_TYPES.CARD,
