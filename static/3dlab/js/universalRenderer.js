@@ -72,8 +72,8 @@ case VIEWER_PROFILES.ARCH: {
 }
 
 case VIEWER_PROFILES.INSET: {
-  const modelId = items[0] || card.legacyOpenRef || card.id;
-  rendererApi?.openInsetModel?.(modelId, card);
+  const modelItem = items[0];
+  rendererApi?.openInsetModel?.(modelItem, card);
   break;
 }
 
