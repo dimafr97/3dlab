@@ -601,7 +601,11 @@ function handleNodeSelect(nodeId) {
 
 function openTreeCard(node) {
   const card = node.ref ? getCardById(node.ref) : null;
-  if (card) {
+if (card?.viewerProfile === VIEWER_PROFILES.BASE) {
+  viewer.openContentCard(card);
+}
+
+if (card) {
   universalViewer.openCard(card);
 }
 
