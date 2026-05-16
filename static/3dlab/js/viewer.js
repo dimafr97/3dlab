@@ -338,6 +338,21 @@ function openUniversalArch(modelItem, card) {
   startModelLoading(meta);
 }
 
+function normalizeContentAssetUrl(url) {
+  if (!url) return url;
+
+  const s = String(url);
+
+  const isAbsolute =
+    /^https?:\/\//i.test(s) ||
+    s.startsWith("/") ||
+    s.startsWith("data:");
+
+  return isAbsolute
+    ? s
+    : `https://api.apparchi.ru/?path=${encodeURIComponent(s)}`;
+}
+
 function openContentCard(card) {
   if (!card || isInsetModeActive() || isRoomsModeActive()) return;
 
@@ -347,11 +362,13 @@ function openContentCard(card) {
     desc: card.desc,
     preview: card.preview,
 
-    schemes:
-      card?.blocks?.schemes?.subblocks?.schemes?.items || [],
+schemes:
+  (card?.blocks?.schemes?.subblocks?.schemes?.items || [])
+    .map(normalizeContentAssetUrl),
 
-    photos:
-      card?.blocks?.drawing?.subblocks?.photos?.items || [],
+photos:
+  (card?.blocks?.drawing?.subblocks?.photos?.items || [])
+    .map(normalizeContentAssetUrl),
 
     video:
       card?.blocks?.video?.subblocks?.videos?.items || []
