@@ -36,14 +36,6 @@ export const CONTENT_TREE = {
 
           children: [
             {
-  id: "test_universal_room_card_node",
-  type: NODE_TYPES.CARD,
-  title: "Тест universal rooms",
-  desc: "Проверка новой universal-карточки интерьера",
-  ref: "test_universal_room_card",
-  preview: ""
-},
-            {
               id: "drawing_interiors_base_node",
               type: NODE_TYPES.CARD,
               title: "База по рисунку СПБГАСУ",
@@ -108,15 +100,7 @@ export const CONTENT_TREE = {
           title: "Архитектурные детали",
           desc: "Теория по всем экзаменационным архитектурным деталям",
 
-          children: [
-{
-  id: "test_universal_card_node",
-  type: NODE_TYPES.CARD,
-  title: "Тест universal viewer",
-  desc: "Проверка новой панели блоков и подблоков",
-  ref: "test_universal_card",
-  preview: ""
-},            
+          children: [          
             {
               id: "drawing_arch_base_node",
               type: NODE_TYPES.CARD,
@@ -418,14 +402,6 @@ export const CONTENT_TREE = {
               desc: "Теория по построению врезок",
 
               children: [
-                {
-  id: "test_universal_inset_card_node",
-  type: NODE_TYPES.CARD,
-  title: "Тест universal inset",
-  desc: "Проверка новой universal-врезки",
-  ref: "test_universal_inset_card",
-  preview: ""
-},
                 {
                   id: "composition_insets_base_node",
                   type: NODE_TYPES.CARD,
