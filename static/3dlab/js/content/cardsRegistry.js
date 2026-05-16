@@ -54,5 +54,44 @@ test_universal_card: {
       }
     }
   }
+},
+
+  test_universal_inset_card: {
+  id: "test_universal_inset_card",
+  title: "Тест universal inset",
+  desc: "Тестовая universal-врезка",
+  preview: "",
+  viewerProfile: "inset",
+
+  legacyOpenRef: "inset_3",
+  legacyType: "test",
+  legacyMeta: null,
+
+  blocks: {
+    [BLOCKS.MODEL_3D]: {
+      subblocks: {
+        [SUBBLOCKS.MODEL_3D]: {
+          type: CONTENT_TYPES.MODEL,
+          items: ["inset_3"]
+        },
+
+        [SUBBLOCKS.VIDEOS]: {
+          type: CONTENT_TYPES.VIDEOS,
+          items: []
+        }
+      }
+    },
+
+    [BLOCKS.SCHEMES]: {
+      subblocks: {
+        [SUBBLOCKS.SCHEMES]: {
+          type: CONTENT_TYPES.IMAGES,
+          items: [
+            "textures/3/s1.jpg"
+          ]
+        }
+      }
+    }
+  }
 }
 };
