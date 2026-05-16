@@ -255,6 +255,12 @@ export const CONTENT_TREE = {
                   ref: "balyasina1",
                   preview: "textures/balyasina1/preview.png"
                 },
+{
+  id: "drawing_arch_complex_balyasina1_universal_node",
+  type: NODE_TYPES.CARD,
+  title: "Балясина с лепестками",
+  ref: "balyasina1_universal"
+},                
                 {
                   id: "drawing_arch_complex_molbert_node",
                   type: NODE_TYPES.CARD,
