@@ -123,6 +123,7 @@ export function initRoomsViewer(refs) {
 
 return {
   openRoomById,
+  openUniversalRoom,
   showGallery,
   handleResize,
   setViewMode
@@ -361,6 +362,56 @@ function chooseStartView(meta) {
   return "3d";
 }
 
+function openUniversalRoom(modelItem, card) {
+  if (isInsetModeActive()) return;
+  if (!modelItem || !card) return;
+
+  const meta = {
+    id: modelItem.id || card.id,
+    name: card.title,
+    desc: card.desc,
+    preview: card.preview,
+
+    sourcePath: modelItem.sourcePath,
+    textures: modelItem.textures || null,
+
+    schemes:
+      card?.blocks?.schemes?.subblocks?.schemes?.items || [],
+
+    photos:
+      card?.blocks?.photos?.subblocks?.photos?.items || [],
+
+    video:
+      card?.blocks?.["3d"]?.subblocks?.videos?.items || []
+  };
+
+  currentRoomId = meta.id;
+
+  document.body.classList.add("rooms-mode");
+  setRoomsFlatMode(true);
+
+  dom.modelLabelEl.textContent = meta.name;
+
+  hideGallery();
+  showViewer();
+  setUiHidden(false);
+
+  configureViewTabsForRoom(meta);
+
+  const { has3d } = getRoomCapabilities(meta);
+  setCanvasInteractionEnabled(has3d && chooseStartView(meta) === "3d");
+
+  if (!has3d) {
+    roomLoadSeq += 1;
+    threeClearModel();
+    hideLoading();
+    setStatus("");
+    return;
+  }
+
+  startRoomLoading(meta);
+}
+
 function openRoomById(roomId) {
   if (isInsetModeActive()) return;
 
@@ -400,7 +451,15 @@ function startRoomLoading(meta) {
   showLoading("Загрузка…", 0);
   setStatus("Загрузка: " + meta.name);
 
-  loadModel(meta.sourceId || meta.id, {
+  loadModel(
+  meta.sourcePath
+    ? {
+        id: meta.id,
+        sourcePath: meta.sourcePath,
+        textures: meta.textures || null
+      }
+    : (meta.sourceId || meta.id),
+{
     onProgress: (percent) => {
       if (typeof percent === "number") {
         showLoading("Загрузка: " + percent.toFixed(0) + "%", percent);
