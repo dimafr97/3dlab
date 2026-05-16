@@ -110,6 +110,29 @@ test_universal_room_card: {
   legacyType: "test",
   legacyMeta: null,
 
+  profileSettings: {
+  sourceId: "inset_3_source",
+  sourcePath: "models/3.gltf",
+
+  opacityMaterialName: "1",
+
+  primarySectionMaterialNames: ["2", "3"],
+  auxSectionMaterialNames: ["4"],
+
+  materialColors: {
+    "2": "#d929c1",
+    "3": "#1c58e5",
+    "4": "#ddf406"
+  },
+
+  cad: {
+    fromNodes: true,
+    lines: [
+      ["a", "b"]
+    ]
+  }
+},
+
   blocks: {
     [BLOCKS.MODEL_3D]: {
       subblocks: {
