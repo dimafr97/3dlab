@@ -731,5 +731,78 @@ balyasina2_universal: {
       }
     }
   }
+},
+
+balyasina1_universal: {
+  id: "balyasina1_universal",
+  title: "Балясина с лепестками",
+  desc: "СПбГАСУ",
+  preview: "content/arch/balyasina1/preview/preview.png",
+  viewerProfile: "arch",
+
+  blocks: {
+    [BLOCKS.MODEL_3D]: {
+      subblocks: {
+        [SUBBLOCKS.MODEL_3D]: {
+          type: CONTENT_TYPES.MODEL,
+          items: [
+            {
+              id: "balyasina1",
+              sourcePath:
+                "content/arch/balyasina1/model/balyasina1.gltf",
+
+              textures: {
+                base:
+                  "content/arch/balyasina1/textures/BaseColor.jpg",
+
+                normal:
+                  "content/arch/balyasina1/textures/Normal.jpg",
+
+                rough:
+                  "content/arch/balyasina1/textures/Roughness.jpg",
+
+                metalness: 0,
+                roughness: 1,
+                envIntensity: 0.75
+              }
+            }
+          ]
+        }
+      }
+    },
+
+    [BLOCKS.SCHEMES]: {
+      subblocks: {
+        [SUBBLOCKS.SCHEMES]: {
+          type: CONTENT_TYPES.IMAGES,
+
+          items: [
+            "content/arch/balyasina1/schemes/s1.jpg",
+            "content/arch/balyasina1/schemes/s2.jpg"
+          ]
+        },
+
+        [SUBBLOCKS.VIDEOS]: {
+          type: CONTENT_TYPES.VIDEOS,
+
+          items: [
+            "https://s3.twcstorage.ru/540d791f-86c02015-75b1-462f-b960-b855e300451a/content/arch/balyasina1/videos/scheme/v1.mp4"
+          ]
+        }
+      }
+    },
+
+    [BLOCKS.DRAWING]: {
+      subblocks: {
+        [SUBBLOCKS.VIDEOS]: {
+          type: CONTENT_TYPES.VIDEOS,
+
+          items: [
+            "https://s3.twcstorage.ru/540d791f-86c02015-75b1-462f-b960-b855e300451a/content/arch/balyasina1/videos/drawing/v2.mp4"
+          ]
+        }
+      }
+    }
+  }
 }
 };
