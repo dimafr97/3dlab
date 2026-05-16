@@ -388,7 +388,14 @@ openInsetModel: (modelItem, card) => {
 
   insetViewer.openById(modelItem);
 },
-  openRoomModel: (modelId) => roomsViewer.openRoomById(modelId),
+  openRoomModel: (modelItem, card) => {
+  if (modelItem && typeof modelItem === "object") {
+    roomsViewer.openUniversalRoom(modelItem, card);
+    return;
+  }
+
+  roomsViewer.openRoomById(modelItem);
+},
 
   setArchViewMode: (mode) => viewer.setViewMode(mode),
   setInsetViewMode: (mode) => insetViewer.setViewMode(mode),
