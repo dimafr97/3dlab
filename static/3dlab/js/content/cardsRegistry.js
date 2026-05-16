@@ -97,5 +97,28 @@ items: [
       }
     }
   }
+},
+
+test_universal_room_card: {
+  id: "test_universal_room_card",
+  title: "Тест universal rooms",
+  desc: "Тестовая universal-карточка интерьера",
+  preview: "",
+  viewerProfile: "rooms",
+
+  legacyOpenRef: "room_0",
+  legacyType: "test",
+  legacyMeta: null,
+
+  blocks: {
+    [BLOCKS.MODEL_3D]: {
+      subblocks: {
+        [SUBBLOCKS.MODEL_3D]: {
+          type: CONTENT_TYPES.MODEL,
+          items: ["room_0"]
+        }
+      }
+    }
+  }
 }
 };
