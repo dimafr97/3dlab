@@ -750,21 +750,24 @@ currentOpacity = 1;
 sectionMaterials = [];
 }
 
-export function openUniversalInset(card) {
-  if (!card) return;
+export function openUniversalInset(modelItem, card) {
+  if (!card || !modelItem) return;
 
-  const settings = card.profileSettings || {};
+  const rendererSettings = modelItem.rendererSettings || {};
 
   const meta = {
-    id: card.id,
+    id: modelItem.id || card.id,
     name: card.title,
     desc: card.desc,
     preview: card.preview,
 
+    sourcePath: modelItem.sourcePath,
+    textures: modelItem.textures || null,
+
     schemes: [],
     video: [],
 
-    ...settings
+    ...rendererSettings
   };
 
   openInsetMeta(meta);
@@ -824,7 +827,15 @@ function openInsetMeta(meta) {
 
   showLoading(`Загрузка: ${meta.name}`);
 
-  loadModel(meta.sourceId || meta.id, {
+  loadModel(
+  meta.sourcePath
+    ? {
+        id: meta.id,
+        sourcePath: meta.sourcePath,
+        textures: meta.textures || null
+      }
+    : (meta.sourceId || meta.id),
+{
     onProgress: (p) => setProgress(p),
     onStatus: (s) => setStatus(s)
   })
