@@ -373,7 +373,14 @@ onOpenNextTreeCard: () => openSiblingCard(1)
 
 configureUniversalRenderer({
   openArchModel: (modelId) => viewer.openModelById(modelId),
-  openInsetModel: (modelId) => insetViewer.openById(modelId),
+  openInsetModel: (modelId, card) => {
+  if (card?.profileSettings) {
+    insetViewer.openUniversalInset(card);
+    return;
+  }
+
+  insetViewer.openById(modelId);
+},
   openRoomModel: (modelId) => roomsViewer.openRoomById(modelId),
 
   setArchViewMode: (mode) => viewer.setViewMode(mode),
