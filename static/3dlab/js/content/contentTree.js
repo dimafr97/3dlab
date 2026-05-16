@@ -229,6 +229,12 @@ export const CONTENT_TREE = {
                   ref: "doric",
                   preview: "textures/doric/preview.png"
                 },
+{
+  id: "drawing_arch_complex_doric_universal_node",
+  type: NODE_TYPES.CARD,
+  title: "Дорическая капитель",
+  ref: "doric_universal"
+},                
                 {
                   id: "drawing_arch_complex_balyasina2_node",
                   type: NODE_TYPES.CARD,
