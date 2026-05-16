@@ -51,15 +51,34 @@ if (type === CONTENT_TYPES.VIDEOS) {
     case VIEWER_PROFILES.ROOMS:
       rendererApi?.setRoomViewMode?.("video");
       break;
+      case VIEWER_PROFILES.BASE:
+  rendererApi?.setArchViewMode?.("video");
+  break;
   }
 
   return;
 }
 
-  if (type === CONTENT_TYPES.IMAGES) {
-    setSchemeImages(items.map(normalizeAssetUrl));
-    return;
+if (type === CONTENT_TYPES.IMAGES) {
+  setSchemeImages(items.map(normalizeAssetUrl));
+
+  switch (card.viewerProfile) {
+    case VIEWER_PROFILES.ARCH:
+    case VIEWER_PROFILES.BASE:
+      rendererApi?.setArchViewMode?.("scheme");
+      break;
+
+    case VIEWER_PROFILES.INSET:
+      rendererApi?.setInsetViewMode?.("scheme");
+      break;
+
+    case VIEWER_PROFILES.ROOMS:
+      rendererApi?.setRoomViewMode?.("scheme");
+      break;
   }
+
+  return;
+}
 
 if (type === CONTENT_TYPES.MODEL) {
   const profile = card.viewerProfile;
