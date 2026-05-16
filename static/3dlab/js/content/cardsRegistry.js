@@ -605,5 +605,57 @@ ionic_universal: {
       }
     }
   }
+},
+
+doric_universal: {
+  id: "doric_universal",
+  title: "Дорическая капитель",
+  desc: "СПбГАСУ",
+  preview: "content/arch/doric/preview/preview.png",
+  viewerProfile: "arch",
+
+  blocks: {
+    [BLOCKS.MODEL_3D]: {
+      subblocks: {
+        [SUBBLOCKS.MODEL_3D]: {
+          type: CONTENT_TYPES.MODEL,
+          items: [
+            {
+              id: "doric",
+              sourcePath: "content/arch/doric/model/doric.gltf",
+              textures: {
+                base: "content/arch/doric/textures/BaseColor.jpg",
+                normal: "content/arch/doric/textures/Normal.jpg",
+                rough: "content/arch/doric/textures/Roughness.jpg",
+                metalness: 0,
+                roughness: 1,
+                envIntensity: 0.75
+              }
+            }
+          ]
+        }
+      }
+    },
+
+    [BLOCKS.SCHEMES]: {
+      subblocks: {
+        [SUBBLOCKS.SCHEMES]: {
+          type: CONTENT_TYPES.IMAGES,
+          items: [
+            "content/arch/doric/schemes/s1.jpg",
+            "content/arch/doric/schemes/s2.jpg",
+            "content/arch/doric/schemes/s3.jpg"
+          ]
+        },
+
+        [SUBBLOCKS.VIDEOS]: {
+          type: CONTENT_TYPES.VIDEOS,
+          items: [
+            "https://s3.twcstorage.ru/540d791f-86c02015-75b1-462f-b960-b855e300451a/content/arch/doric/videos/scheme/v1.mp4"
+          ]
+        }
+      }
+    }
+  }
 }
 };
