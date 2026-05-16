@@ -403,6 +403,14 @@ export const CONTENT_TREE = {
 
               children: [
                 {
+  id: "test_universal_inset_card_node",
+  type: NODE_TYPES.CARD,
+  title: "Тест universal inset",
+  desc: "Проверка новой universal-врезки",
+  ref: "test_universal_inset_card",
+  preview: ""
+},
+                {
                   id: "composition_insets_base_node",
                   type: NODE_TYPES.CARD,
                   title: "Базовая информация про врезки",
