@@ -628,7 +628,7 @@ if (breadcrumbBackBtn) {
     return;
   }
 
-if (card.legacyType === "test") {
+if (card.blocks) {
   return;
 }
   
