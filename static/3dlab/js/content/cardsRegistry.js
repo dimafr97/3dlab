@@ -875,5 +875,40 @@ molbert_universal: {
       }
     }
   }
+},
+
+arch_0_universal: {
+  id: "arch_0_universal",
+  title: "База по архитектурным деталям СПБГАСУ",
+  desc: "Обзор и видеоразбор построения архитектурных деталей",
+  preview: "content/arch/arch_0/preview/preview3.webp",
+  viewerProfile: "arch",
+
+  blocks: {
+    [BLOCKS.SCHEMES]: {
+      subblocks: {
+        [SUBBLOCKS.SCHEMES]: {
+          type: CONTENT_TYPES.IMAGES,
+          items: [
+            "content/arch/arch_0/schemes/s1.jpg"
+          ]
+        }
+      }
+    },
+
+    [BLOCKS.VIDEO]: {
+      subblocks: {
+        [SUBBLOCKS.VIDEOS]: {
+          type: CONTENT_TYPES.VIDEOS,
+          items: [
+            "https://s3.twcstorage.ru/540d791f-86c02015-75b1-462f-b960-b855e300451a/content/arch/arch_0/videos/v1.mp4",
+            "https://s3.twcstorage.ru/540d791f-86c02015-75b1-462f-b960-b855e300451a/content/arch/arch_0/videos/v2.mp4",
+            "https://s3.twcstorage.ru/540d791f-86c02015-75b1-462f-b960-b855e300451a/content/arch/arch_0/videos/v3.mp4",
+            "https://s3.twcstorage.ru/540d791f-86c02015-75b1-462f-b960-b855e300451a/content/arch/arch_0/videos/v4.mp4"
+          ]
+        }
+      }
+    }
+  }
 }
 };
