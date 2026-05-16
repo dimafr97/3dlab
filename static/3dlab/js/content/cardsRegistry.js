@@ -442,5 +442,115 @@ vase2_universal: {
       }
     }
   }
+},
+
+chair1_universal: {
+  id: "chair1_universal",
+  title: "Табурет квадратный",
+  desc: "СПбГАСУ",
+  preview: "content/arch/chair1/preview/preview.png",
+  viewerProfile: "arch",
+
+  blocks: {
+    [BLOCKS.MODEL_3D]: {
+      subblocks: {
+        [SUBBLOCKS.MODEL_3D]: {
+          type: CONTENT_TYPES.MODEL,
+          items: [
+            {
+              id: "chair1",
+              sourcePath: "content/arch/chair1/model/chair1.gltf",
+              textures: {
+                base: "content/arch/chair1/textures/BaseColor.jpg",
+                normal: "content/arch/chair1/textures/Normal.jpg",
+                rough: "content/arch/chair1/textures/Roughness.jpg",
+                metalness: 0,
+                roughness: 1,
+                envIntensity: 0.75
+              }
+            }
+          ]
+        }
+      }
+    },
+
+    [BLOCKS.SCHEMES]: {
+      subblocks: {
+        [SUBBLOCKS.SCHEMES]: {
+          type: CONTENT_TYPES.IMAGES,
+          items: [
+            "content/arch/chair1/schemes/s1.jpg",
+            "content/arch/chair1/schemes/s2.jpg"
+          ]
+        }
+      }
+    },
+
+    [BLOCKS.DRAWING]: {
+      subblocks: {
+        [SUBBLOCKS.VIDEOS]: {
+          type: CONTENT_TYPES.VIDEOS,
+          items: [
+            "https://s3.twcstorage.ru/540d791f-86c02015-75b1-462f-b960-b855e300451a/content/arch/chair1/videos/drawing/v1.mp4"
+          ]
+        }
+      }
+    }
+  }
+},
+
+chair2_universal: {
+  id: "chair2_universal",
+  title: "Табурет круглый",
+  desc: "СПбГАСУ",
+  preview: "content/arch/chair2/preview/preview.png",
+  viewerProfile: "arch",
+
+  blocks: {
+    [BLOCKS.MODEL_3D]: {
+      subblocks: {
+        [SUBBLOCKS.MODEL_3D]: {
+          type: CONTENT_TYPES.MODEL,
+          items: [
+            {
+              id: "chair2",
+              sourcePath: "content/arch/chair2/model/chair2.gltf",
+              textures: {
+                base: "content/arch/chair2/textures/BaseColor.jpg",
+                normal: "content/arch/chair2/textures/Normal.jpg",
+                rough: "content/arch/chair2/textures/Roughness.jpg",
+                metalness: 0,
+                roughness: 1,
+                envIntensity: 0.75
+              }
+            }
+          ]
+        }
+      }
+    },
+
+    [BLOCKS.SCHEMES]: {
+      subblocks: {
+        [SUBBLOCKS.SCHEMES]: {
+          type: CONTENT_TYPES.IMAGES,
+          items: [
+            "content/arch/chair2/schemes/s1.jpg",
+            "content/arch/chair2/schemes/s2.jpg"
+          ]
+        }
+      }
+    },
+
+    [BLOCKS.DRAWING]: {
+      subblocks: {
+        [SUBBLOCKS.VIDEOS]: {
+          type: CONTENT_TYPES.VIDEOS,
+          items: [
+            "https://s3.twcstorage.ru/540d791f-86c02015-75b1-462f-b960-b855e300451a/content/arch/chair1/videos/drawing/v1.mp4"
+          ]
+        }
+      }
+    }
+  }
 }
 };
