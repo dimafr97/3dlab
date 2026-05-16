@@ -882,7 +882,7 @@ arch_0_universal: {
   title: "База по архитектурным деталям СПБГАСУ",
   desc: "Обзор и видеоразбор построения архитектурных деталей",
   preview: "content/arch/arch_0/preview/preview3.webp",
-  viewerProfile: "arch",
+  viewerProfile: "base",
 
   blocks: {
     [BLOCKS.SCHEMES]: {
