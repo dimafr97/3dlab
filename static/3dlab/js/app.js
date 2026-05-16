@@ -372,7 +372,14 @@ onOpenNextTreeCard: () => openSiblingCard(1)
 });
 
 configureUniversalRenderer({
-  openArchModel: (modelId) => viewer.openModelById(modelId),
+  openArchModel: (modelItem, card) => {
+  if (modelItem && typeof modelItem === "object") {
+    viewer.openUniversalArch(modelItem, card);
+    return;
+  }
+
+  viewer.openModelById(modelItem);
+},
   openInsetModel: (modelId, card) => {
   if (card?.profileSettings) {
     insetViewer.openUniversalInset(card);
