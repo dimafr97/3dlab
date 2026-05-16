@@ -113,6 +113,7 @@ requestAnimationFrame(() => {
 
 return {
   openModelById,
+  openUniversalArch,
   showGallery,
   handleResize,
   setViewMode
@@ -303,6 +304,37 @@ function chooseStartView(meta) {
   return "3d";
 }
 
+function openUniversalArch(modelItem, card) {
+  if (!modelItem || isInsetModeActive() || isRoomsModeActive()) return;
+
+  const meta = {
+    id: modelItem.id || modelItem.sourcePath || card.id,
+    name: card?.title || modelItem.name || "Model",
+    desc: card?.desc || "",
+    preview: card?.preview || "",
+
+    schemes: [],
+    photos: [],
+    video: [],
+
+    modelItem
+  };
+
+  currentModelId = meta.id;
+
+  dom.modelLabelEl.textContent = meta.name;
+
+  hideGallery();
+  showViewer();
+  setUiHidden(false);
+
+  configureViewTabsForModel(meta);
+
+  setCanvasInteractionEnabled(true);
+
+  startModelLoading(meta);
+}
+
 function openModelById(modelId) {
   if (isInsetModeActive() || isRoomsModeActive()) return;
   const meta = getModelMeta(modelId);
@@ -338,7 +370,7 @@ threeClearModel();
 showLoading("Загрузка…", 0);
 setStatus("Загрузка: " + meta.name);
 
-  loadModel(meta.id, {
+  loadModel(meta.modelItem || meta.id, {
     onProgress: (percent) => {
       if (typeof percent === "number") {
         showLoading("Загрузка: " + percent.toFixed(0) + "%", percent);
