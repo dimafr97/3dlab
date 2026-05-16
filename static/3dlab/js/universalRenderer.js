@@ -66,8 +66,8 @@ if (type === CONTENT_TYPES.MODEL) {
 
   switch (profile) {
 case VIEWER_PROFILES.ARCH: {
-  const modelId = items[0] || card.legacyOpenRef || card.id;
-  rendererApi?.openArchModel?.(modelId, card);
+  const modelItem = items[0];
+  rendererApi?.openArchModel?.(modelItem, card);
   break;
 }
 
