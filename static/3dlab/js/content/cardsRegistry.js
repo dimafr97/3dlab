@@ -8,7 +8,7 @@
 // - сейчас не придумываем несуществующие пути;
 // - старый рабочий контент временно подключается через legacyAdapters.js.
 
-import { BLOCKS, SUBBLOCKS } from "./contentTypes.js";
+import { BLOCKS, SUBBLOCKS, CONTENT_TYPES } from "./contentTypes.js";
 
 export const CARDS = {
 test_universal_card: {
@@ -25,7 +25,7 @@ test_universal_card: {
     [BLOCKS.MODEL_3D]: {
       subblocks: {
         [SUBBLOCKS.MODEL_3D]: {
-          type: "model",
+          type: CONTENT_TYPES.MODEL,
           items: ["kapitel2"]
         },
         [SUBBLOCKS.VIDEOS]: {
@@ -40,13 +40,13 @@ test_universal_card: {
     [BLOCKS.SCHEMES]: {
       subblocks: {
         [SUBBLOCKS.SCHEMES]: {
-          type: "images",
+          type: CONTENT_TYPES.IMAGES,
           items: [
             "https://api.apparchi.ru/?path=textures/doric/s1.jpg"
           ]
         },
         [SUBBLOCKS.VIDEOS]: {
-          type: "videos",
+          type: CONTENT_TYPES.VIDEOS,
           items: [
             "https://s3.twcstorage.ru/540d791f-86c02015-75b1-462f-b960-b855e300451a/textures/doric/v1.mp4"
           ]
