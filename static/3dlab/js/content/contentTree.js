@@ -127,6 +127,7 @@ export const CONTENT_TREE = {
 {
   id: "drawing_arch_simple_vase1_universal_node",
   type: NODE_TYPES.CARD,
+  title: "Малая ваза",
   ref: "vase1_universal"
 },             
                 {
