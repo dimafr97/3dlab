@@ -429,6 +429,22 @@ export function loadModel(modelId, { onProgress, onStatus } = {}) {
     );
   };
 
+const normalizeMaterials = (materials) => {
+  if (!materials) return null;
+
+  return Object.fromEntries(
+    Object.entries(materials).map(([materialName, desc]) => [
+      materialName,
+      Object.fromEntries(
+        Object.entries(desc).map(([key, value]) => [
+          key,
+          normalizeAssetUrl(value)
+        ])
+      )
+    ])
+  );
+};
+  
   const meta = isDirectModelObject
     ? {
         id: modelId.id || modelId.sourcePath,
@@ -436,7 +452,7 @@ export function loadModel(modelId, { onProgress, onStatus } = {}) {
         desc: modelId.desc || "",
         url: normalizeAssetUrl(modelId.sourcePath),
         textures: normalizeTextures(modelId.textures),
-        materials: modelId.materials || null
+        materials: normalizeMaterials(modelId.materials)
       }
     : getModelMeta(modelId);
 
