@@ -114,7 +114,7 @@ test_universal_room_card: {
   sourceId: "inset_3_source",
   sourcePath: "models/3.gltf",
 
-  opacityMaterialName: "1",
+  opacityMaterialName: "999",
 
   primarySectionMaterialNames: ["2", "3"],
   auxSectionMaterialNames: ["4"],
