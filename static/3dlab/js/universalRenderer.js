@@ -77,10 +77,11 @@ case VIEWER_PROFILES.INSET: {
   break;
 }
 
-    case VIEWER_PROFILES.ROOMS:
-      // TODO:
-      // open rooms renderer
-      break;
+case VIEWER_PROFILES.ROOMS: {
+  const modelId = items[0] || card.legacyOpenRef || card.id;
+  rendererApi?.openRoomModel?.(modelId, card);
+  break;
+}
 
     case VIEWER_PROFILES.COMPOSITION:
       // TODO:
