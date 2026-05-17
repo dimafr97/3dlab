@@ -910,5 +910,675 @@ arch_0_universal: {
       }
     }
   }
+},
+
+inset_1_universal: {
+  id: "inset_1_universal",
+  title: "Куб и конус",
+  desc: "Врезка прямой плоскости в тело вращения",
+  preview: "content/insets/inset_1/preview/preview.png",
+  viewerProfile: "inset",
+
+  blocks: {
+    [BLOCKS.MODEL_3D]: {
+      subblocks: {
+        [SUBBLOCKS.MODEL_3D]: {
+          type: CONTENT_TYPES.MODEL,
+          items: [
+            {
+              id: "inset_1",
+              sourcePath: "content/insets/inset_1/model/1.1.gltf",
+              rendererSettings: {
+                opacityMaterialName: "1",
+                primarySectionMaterialNames: ["2", "3"],
+                auxSectionMaterialNames: ["4"],
+                materialColors: {
+                  "2": "#d929c1",
+                  "3": "#1c58e5",
+                  "4": "#ddf406"
+                },
+                cad: {
+                  fromNodes: true,
+                  lines: [
+                    ["a", "b"],
+                    ["c", "d"]
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+
+    [BLOCKS.SCHEMES]: {
+      subblocks: {
+        [SUBBLOCKS.SCHEMES]: {
+          type: CONTENT_TYPES.IMAGES,
+          items: [
+            "content/insets/inset_1/schemes/S1.jpg",
+            "content/insets/inset_1/schemes/S2.jpg",
+            "content/insets/inset_1/schemes/S3.jpg",
+            "content/insets/inset_1/schemes/S4.jpg",
+            "content/insets/inset_1/schemes/S5.jpg"
+          ]
+        }
+      }
+    }
+  }
+},
+
+inset_2_universal: {
+  id: "inset_2_universal",
+  title: "Горизонтальная треугольная призма и конус",
+  desc: "Врезка наклонной плоскости в тело вращения",
+  preview: "content/insets/inset_2/preview/preview.png",
+  viewerProfile: "inset",
+
+  blocks: {
+    [BLOCKS.MODEL_3D]: {
+      subblocks: {
+        [SUBBLOCKS.MODEL_3D]: {
+          type: CONTENT_TYPES.MODEL,
+          items: [
+            {
+              id: "inset_2",
+              sourcePath: "content/insets/inset_2/model/2.3.gltf",
+              rendererSettings: {
+                opacityMaterialName: "1",
+                primarySectionMaterialNames: ["2", "3"],
+                auxSectionMaterialNames: ["4"],
+                materialColors: {
+                  "2": "#d929c1",
+                  "3": "#1c58e5",
+                  "4": "#ddf406"
+                },
+                cad: {
+                  fromNodes: true,
+                  lines: [
+                    ["a", "b"],
+                    ["c", "d"]
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+
+    [BLOCKS.SCHEMES]: {
+      subblocks: {
+        [SUBBLOCKS.SCHEMES]: {
+          type: CONTENT_TYPES.IMAGES,
+          items: [
+            "content/insets/inset_2/schemes/S1.jpg",
+            "content/insets/inset_2/schemes/S2.jpg",
+            "content/insets/inset_2/schemes/S3.jpg",
+            "content/insets/inset_2/schemes/S4.jpg",
+            "content/insets/inset_2/schemes/S5.jpg"
+          ]
+        }
+      }
+    }
+  }
+},
+
+inset_3_universal: {
+  id: "inset_3_universal",
+  title: "Пирамида и горизонтальная треугольная призма",
+  desc: "Врезка двух наклонных плоскостей",
+  preview: "content/insets/inset_3/preview/preview.png",
+  viewerProfile: "inset",
+
+  blocks: {
+    [BLOCKS.MODEL_3D]: {
+      subblocks: {
+        [SUBBLOCKS.MODEL_3D]: {
+          type: CONTENT_TYPES.MODEL,
+          items: [
+            {
+              id: "inset_3",
+              sourcePath: "content/insets/inset_3/model/3.gltf",
+              rendererSettings: {
+                opacityMaterialName: "1",
+                primarySectionMaterialNames: ["2", "3"],
+                auxSectionMaterialNames: ["4"],
+                materialColors: {
+                  "2": "#d929c1",
+                  "3": "#1c58e5",
+                  "4": "#ddf406"
+                },
+                cad: {
+                  fromNodes: true,
+                  lines: [
+                    ["a", "b"]
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+
+    [BLOCKS.SCHEMES]: {
+      subblocks: {
+        [SUBBLOCKS.SCHEMES]: {
+          type: CONTENT_TYPES.IMAGES,
+          items: [
+            "content/insets/inset_3/schemes/SS1.jpg",
+            "content/insets/inset_3/schemes/SS2.jpg",
+            "content/insets/inset_3/schemes/SS3.jpg",
+            "content/insets/inset_3/schemes/SS4.jpg",
+            "content/insets/inset_3/schemes/SS5.jpg"
+          ]
+        }
+      }
+    }
+  }
+},
+
+inset_4_universal: {
+  id: "inset_4_universal",
+  title: "Треугольная призма и шестигранник",
+  desc: "Врезка двух наклонных плоскостей",
+  preview: "content/insets/inset_4/preview/preview.png",
+  viewerProfile: "inset",
+
+  blocks: {
+    [BLOCKS.MODEL_3D]: {
+      subblocks: {
+        [SUBBLOCKS.MODEL_3D]: {
+          type: CONTENT_TYPES.MODEL,
+          items: [
+            {
+              id: "inset_4",
+              sourcePath: "content/insets/inset_4/model/4.gltf",
+              rendererSettings: {
+                opacityMaterialName: "1",
+                primarySectionMaterialNames: ["3"],
+                auxSectionMaterialNames: ["2"],
+                materialColors: {
+                  "2": "#d929c1",
+                  "3": "#1c58e5"
+                },
+                cad: {
+                  fromNodes: true,
+                  lines: [
+                    ["a", "b"]
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+},
+
+inset_5_universal: {
+  id: "inset_5_universal",
+  title: "Горизонтальный цилиндр и пирамида",
+  desc: "Врезка наклонной плоскости в тело вращения",
+  preview: "content/insets/inset_5/preview/preview.png",
+  viewerProfile: "inset",
+
+  blocks: {
+    [BLOCKS.MODEL_3D]: {
+      subblocks: {
+        [SUBBLOCKS.MODEL_3D]: {
+          type: CONTENT_TYPES.MODEL,
+          items: [
+            {
+              id: "inset_5",
+              sourcePath: "content/insets/inset_5/model/5.1.gltf",
+              rendererSettings: {
+                opacityMaterialName: "1",
+                primarySectionMaterialNames: ["3"],
+                auxSectionMaterialNames: ["2", "4"],
+                materialColors: {
+                  "2": "#d929c1",
+                  "3": "#1c58e5",
+                  "4": "#ddf406"
+                },
+                cad: {
+                  fromNodes: true,
+                  lines: [
+                    ["a", "b"],
+                    ["c", "d"]
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+
+    [BLOCKS.SCHEMES]: {
+      subblocks: {
+        [SUBBLOCKS.SCHEMES]: {
+          type: CONTENT_TYPES.IMAGES,
+          items: [
+            "content/insets/inset_5/schemes/S1.jpg",
+            "content/insets/inset_5/schemes/S2.jpg",
+            "content/insets/inset_5/schemes/S3.jpg",
+            "content/insets/inset_5/schemes/S4.jpg",
+            "content/insets/inset_5/schemes/S5.jpg"
+          ]
+        }
+      }
+    }
+  }
+},
+
+inset_6_universal: {
+  id: "inset_6_universal",
+  title: "Два горизонтальных шестигранника",
+  desc: "Врезка наклонных плоскостей",
+  preview: "content/insets/inset_6/preview/preview.png",
+  viewerProfile: "inset",
+
+  blocks: {
+    [BLOCKS.MODEL_3D]: {
+      subblocks: {
+        [SUBBLOCKS.MODEL_3D]: {
+          type: CONTENT_TYPES.MODEL,
+          items: [
+            {
+              id: "inset_6",
+              sourcePath: "content/insets/inset_6/model/6.2.gltf",
+              rendererSettings: {
+                opacityMaterialName: "1",
+                primarySectionMaterialNames: ["2", "3"],
+                auxSectionMaterialNames: ["4", "5"],
+                materialColors: {
+                  "2": "#d929c1",
+                  "3": "#1c58e5",
+                  "4": "#ddf406",
+                  "5": "#12d6c3"
+                },
+                cad: {
+                  fromNodes: true,
+                  lines: [
+                    ["a", "b"],
+                    ["c", "d"],
+                    ["i", "j"],
+                    ["k", "l"]
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+},
+
+inset_7_universal: {
+  id: "inset_7_universal",
+  title: "Горизонтальный цилиндр и треугольная призма",
+  desc: "Врезка наклонной плоскости в тело вращения",
+  preview: "content/insets/inset_7/preview/preview.png",
+  viewerProfile: "inset",
+
+  blocks: {
+    [BLOCKS.MODEL_3D]: {
+      subblocks: {
+        [SUBBLOCKS.MODEL_3D]: {
+          type: CONTENT_TYPES.MODEL,
+          items: [
+            {
+              id: "inset_7",
+              sourcePath: "content/insets/inset_7/model/7.1.gltf",
+              rendererSettings: {
+                opacityMaterialName: "1",
+                primarySectionMaterialNames: ["2", "3"],
+                auxSectionMaterialNames: ["4"],
+                materialColors: {
+                  "2": "#d929c1",
+                  "3": "#1c58e5",
+                  "4": "#ddf406"
+                },
+                cad: {
+                  fromNodes: true,
+                  lines: [
+                    ["a", "b"],
+                    ["c", "d"]
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+
+    [BLOCKS.SCHEMES]: {
+      subblocks: {
+        [SUBBLOCKS.SCHEMES]: {
+          type: CONTENT_TYPES.IMAGES,
+          items: [
+            "content/insets/inset_7/schemes/S1.jpg",
+            "content/insets/inset_7/schemes/S2.jpg",
+            "content/insets/inset_7/schemes/S3.jpg",
+            "content/insets/inset_7/schemes/S4.jpg",
+            "content/insets/inset_7/schemes/S5.jpg"
+          ]
+        }
+      }
+    }
+  }
+},
+
+inset_8_universal: {
+  id: "inset_8_universal",
+  title: "Вертикальная треугольная призма и цилиндр",
+  desc: "Врезка наклонной плоскости в тело вращения",
+  preview: "content/insets/inset_8/preview/preview.png",
+  viewerProfile: "inset",
+
+  blocks: {
+    [BLOCKS.MODEL_3D]: {
+      subblocks: {
+        [SUBBLOCKS.MODEL_3D]: {
+          type: CONTENT_TYPES.MODEL,
+          items: [
+            {
+              id: "inset_8",
+              sourcePath: "content/insets/inset_8/model/8.gltf",
+              rendererSettings: {
+                opacityMaterialName: "1",
+                primarySectionMaterialNames: ["3"],
+                auxSectionMaterialNames: ["2", "4"],
+                materialColors: {
+                  "2": "#d929c1",
+                  "3": "#1c58e5",
+                  "4": "#ddf406"
+                },
+                cad: {
+                  fromNodes: true,
+                  lines: [
+                    ["a", "b"],
+                    ["c", "d"]
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+},
+
+inset_9_universal: {
+  id: "inset_9_universal",
+  title: "Вертикальный цилиндр и треугольная призма",
+  desc: "Врезка наклонной плоскости в тело вращения",
+  preview: "content/insets/inset_9/preview/preview.png",
+  viewerProfile: "inset",
+
+  blocks: {
+    [BLOCKS.MODEL_3D]: {
+      subblocks: {
+        [SUBBLOCKS.MODEL_3D]: {
+          type: CONTENT_TYPES.MODEL,
+          items: [
+            {
+              id: "inset_9",
+              sourcePath: "content/insets/inset_9/model/9.gltf",
+              rendererSettings: {
+                opacityMaterialName: "1",
+                primarySectionMaterialNames: ["3"],
+                auxSectionMaterialNames: ["2", "4"],
+                materialColors: {
+                  "2": "#d929c1",
+                  "3": "#1c58e5",
+                  "4": "#ddf406"
+                },
+                cad: {
+                  fromNodes: true,
+                  lines: [
+                    ["a", "b"],
+                    ["c", "d"]
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+
+    [BLOCKS.SCHEMES]: {
+      subblocks: {
+        [SUBBLOCKS.SCHEMES]: {
+          type: CONTENT_TYPES.IMAGES,
+          items: [
+            "content/insets/inset_9/schemes/S1.jpg",
+            "content/insets/inset_9/schemes/S2.jpg",
+            "content/insets/inset_9/schemes/S3.jpg",
+            "content/insets/inset_9/schemes/S4.jpg",
+            "content/insets/inset_9/schemes/S5.jpg"
+          ]
+        }
+      }
+    }
+  }
+},
+
+inset_10_universal: {
+  id: "inset_10_universal",
+  title: "Горизонтальный цилиндр и шестигранник",
+  desc: "Врезка наклонной плоскости в тело вращения",
+  preview: "content/insets/inset_10/preview/preview.png",
+  viewerProfile: "inset",
+
+  blocks: {
+    [BLOCKS.MODEL_3D]: {
+      subblocks: {
+        [SUBBLOCKS.MODEL_3D]: {
+          type: CONTENT_TYPES.MODEL,
+          items: [
+            {
+              id: "inset_10",
+              sourcePath: "content/insets/inset_10/model/10.gltf",
+              rendererSettings: {
+                opacityMaterialName: "1",
+                primarySectionMaterialNames: ["2", "3"],
+                auxSectionMaterialNames: ["4", "5"],
+                materialColors: {
+                  "2": "#d929c1",
+                  "3": "#1c58e5",
+                  "4": "#ddf406",
+                  "5": "#12d6c3"
+                },
+                cad: {
+                  fromNodes: true,
+                  lines: [
+                    ["a", "b"],
+                    ["c", "d"],
+                    ["e", "f"],
+                    ["g", "h"]
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+},
+
+inset_11_universal: {
+  id: "inset_11_universal",
+  title: "Вертикальный цилиндр и пирамида",
+  desc: "Врезка наклонной плоскости в тело вращения",
+  preview: "content/insets/inset_11/preview/preview.png",
+  viewerProfile: "inset",
+
+  blocks: {
+    [BLOCKS.MODEL_3D]: {
+      subblocks: {
+        [SUBBLOCKS.MODEL_3D]: {
+          type: CONTENT_TYPES.MODEL,
+          items: [
+            {
+              id: "inset_11",
+              sourcePath: "content/insets/inset_11/model/11.gltf",
+              rendererSettings: {
+                opacityMaterialName: "1",
+                primarySectionMaterialNames: ["2", "3"],
+                auxSectionMaterialNames: ["4", "5", "6"],
+                materialColors: {
+                  "2": "#d929c1",
+                  "3": "#1c58e5",
+                  "4": "#ddf406",
+                  "5": "#12d6c3",
+                  "6": "#FF5500"
+                },
+                cad: {
+                  fromNodes: true,
+                  lines: [
+                    ["a", "b"],
+                    ["c", "d"],
+                    ["e", "f"],
+                    ["g", "h"]
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+},
+
+inset_12_universal: {
+  id: "inset_12_universal",
+  title: "Пирамида и горизонтальный шестигранник",
+  desc: "Врезка наклонных плоскостей",
+  preview: "content/insets/inset_12/preview/preview.png",
+  viewerProfile: "inset",
+
+  blocks: {
+    [BLOCKS.MODEL_3D]: {
+      subblocks: {
+        [SUBBLOCKS.MODEL_3D]: {
+          type: CONTENT_TYPES.MODEL,
+          items: [
+            {
+              id: "inset_12",
+              sourcePath: "content/insets/inset_12/model/12.gltf",
+              rendererSettings: {
+                opacityMaterialName: "1",
+                primarySectionMaterialNames: ["3"],
+                auxSectionMaterialNames: ["2", "4"],
+                materialColors: {
+                  "2": "#d929c1",
+                  "3": "#1c58e5",
+                  "4": "#ddf406"
+                },
+                cad: {
+                  fromNodes: true,
+                  lines: [
+                    ["a", "b"],
+                    ["c", "d"]
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+},
+
+inset_13_universal: {
+  id: "inset_13_universal",
+  title: "Вертикальная пирамида и треугольная призма",
+  desc: "Врезка наклонных плоскостей",
+  preview: "content/insets/inset_13/preview/preview.png",
+  viewerProfile: "inset",
+
+  blocks: {
+    [BLOCKS.MODEL_3D]: {
+      subblocks: {
+        [SUBBLOCKS.MODEL_3D]: {
+          type: CONTENT_TYPES.MODEL,
+          items: [
+            {
+              id: "inset_13",
+              sourcePath: "content/insets/inset_13/model/13.gltf",
+              rendererSettings: {
+                opacityMaterialName: "1",
+                primarySectionMaterialNames: ["2", "3"],
+                materialColors: {
+                  "2": "#d929c1",
+                  "3": "#1c58e5"
+                },
+                cad: {
+                  fromNodes: true,
+                  lines: [
+                    ["a", "b"],
+                    ["c", "d"]
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+},
+
+inset_14_universal: {
+  id: "inset_14_universal",
+  title: "Вертикальная треугольная призма и конус",
+  desc: "Врезка наклонной плоскости в тело вращения",
+  preview: "content/insets/inset_14/preview/preview.png",
+  viewerProfile: "inset",
+
+  blocks: {
+    [BLOCKS.MODEL_3D]: {
+      subblocks: {
+        [SUBBLOCKS.MODEL_3D]: {
+          type: CONTENT_TYPES.MODEL,
+          items: [
+            {
+              id: "inset_14",
+              sourcePath: "content/insets/inset_14/model/14.gltf",
+              rendererSettings: {
+                opacityMaterialName: "1",
+                primarySectionMaterialNames: ["2", "5"],
+                auxSectionMaterialNames: ["3", "4"],
+                materialColors: {
+                  "2": "#1c58e5",
+                  "3": "#ddf406",
+                  "4": "#12d6c3",
+                  "5": "#d929c1"
+                },
+                cad: {
+                  fromNodes: true,
+                  lines: [
+                    ["a", "b"],
+                    ["c", "d"]
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
 }
 };
