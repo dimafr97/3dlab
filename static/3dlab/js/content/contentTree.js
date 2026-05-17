@@ -41,7 +41,8 @@ export const CONTENT_TREE = {
               title: "База по рисунку СПБГАСУ",
               desc: "Обзор кафедры СПБГАСУ и видеобаза про экзамен по рисунку",
               ref: "room_0",
-              preview: "textures/preview/preview3.webp"
+              preview: "textures/preview/preview3.webp",
+              hidden: true
             },
 
             {
