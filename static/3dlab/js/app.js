@@ -470,7 +470,8 @@ function nodeToGalleryItem(node) {
     name: node.title,
     desc: node.desc || card?.desc || card?.legacyMeta?.desc || "",
     preview: node.preview || card?.preview || "",
-    thumbLetter: node.title ? node.title.charAt(0) : "?"
+    thumbLetter: node.title ? node.title.charAt(0) : "?",
+    isBaseCard: !!node.isBaseCard
   };
 }
 
