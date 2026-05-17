@@ -116,7 +116,8 @@ export const CONTENT_TREE = {
   id: "drawing_arch_base_universal_node",
   type: NODE_TYPES.CARD,
   title: "База по архитектурным деталям СПБГАСУ",
-  ref: "arch_0_universal"
+  ref: "arch_0_universal",
+  isBaseCard: true
 },            
 
             {
@@ -497,7 +498,8 @@ export const CONTENT_TREE = {
   id: "composition_insets_base_universal_node",
   type: NODE_TYPES.CARD,
   title: "Базовая информация про врезки",
-  ref: "inset_0_universal"
+  ref: "inset_0_universal",
+  isBaseCard: true
 },
                 
                 {
