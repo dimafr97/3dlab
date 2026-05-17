@@ -502,6 +502,12 @@ export const CONTENT_TREE = {
                       ref: "inset_3",
                       preview: "textures/3/preview.png"
                     },
+{
+  id: "composition_insets_medium_inset_3_universal_node",
+  type: NODE_TYPES.CARD,
+  title: "Пирамида и горизонтальная треугольная призма",
+  ref: "inset_3_universal"
+},                    
                     {
                       id: "composition_insets_medium_inset_13_node",
                       type: NODE_TYPES.CARD,
@@ -509,6 +515,12 @@ export const CONTENT_TREE = {
                       ref: "inset_13",
                       preview: "textures/13/preview.png"
                     },
+{
+  id: "composition_insets_medium_inset_13_universal_node",
+  type: NODE_TYPES.CARD,
+  title: "Вертикальная пирамида и треугольная призма",
+  ref: "inset_13_universal"
+},                    
                     {
                       id: "composition_insets_medium_inset_12_node",
                       type: NODE_TYPES.CARD,
@@ -516,6 +528,12 @@ export const CONTENT_TREE = {
                       ref: "inset_12",
                       preview: "textures/12/preview.png"
                     },
+{
+  id: "composition_insets_medium_inset_12_universal_node",
+  type: NODE_TYPES.CARD,
+  title: "Пирамида и горизонтальный шестигранник",
+  ref: "inset_12_universal"
+},                    
                     {
                       id: "composition_insets_medium_inset_4_node",
                       type: NODE_TYPES.CARD,
@@ -523,6 +541,12 @@ export const CONTENT_TREE = {
                       ref: "inset_4",
                       preview: "textures/4/preview.png"
                     },
+{
+  id: "composition_insets_medium_inset_4_universal_node",
+  type: NODE_TYPES.CARD,
+  title: "Треугольная призма и шестигранник",
+  ref: "inset_4_universal"
+},                    
                     {
                       id: "composition_insets_medium_inset_8_node",
                       type: NODE_TYPES.CARD,
@@ -530,6 +554,12 @@ export const CONTENT_TREE = {
                       ref: "inset_8",
                       preview: "textures/8/preview.png"
                     },
+{
+  id: "composition_insets_medium_inset_8_universal_node",
+  type: NODE_TYPES.CARD,
+  title: "Вертикальная треугольная призма и цилиндр",
+  ref: "inset_8_universal"
+},                    
                     {
                       id: "composition_insets_medium_inset_9_node",
                       type: NODE_TYPES.CARD,
@@ -537,6 +567,12 @@ export const CONTENT_TREE = {
                       ref: "inset_9",
                       preview: "textures/9/preview.png"
                     },
+{
+  id: "composition_insets_medium_inset_9_universal_node",
+  type: NODE_TYPES.CARD,
+  title: "Вертикальный цилиндр и треугольная призма",
+  ref: "inset_9_universal"
+},                    
                     {
                       id: "composition_insets_medium_inset_7_node",
                       type: NODE_TYPES.CARD,
@@ -544,6 +580,12 @@ export const CONTENT_TREE = {
                       ref: "inset_7",
                       preview: "textures/7/preview.png"
                     },
+{
+  id: "composition_insets_medium_inset_7_universal_node",
+  type: NODE_TYPES.CARD,
+  title: "Горизонтальный цилиндр и треугольная призма",
+  ref: "inset_7_universal"
+},                    
                     {
                       id: "composition_insets_medium_inset_5_node",
                       type: NODE_TYPES.CARD,
@@ -551,6 +593,12 @@ export const CONTENT_TREE = {
                       ref: "inset_5",
                       preview: "textures/5/preview.png"
                     },
+{
+  id: "composition_insets_medium_inset_5_universal_node",
+  type: NODE_TYPES.CARD,
+  title: "Горизонтальный цилиндр и пирамида",
+  ref: "inset_5_universal"
+},                    
                     {
                       id: "composition_insets_medium_inset_1_node",
                       type: NODE_TYPES.CARD,
@@ -558,6 +606,12 @@ export const CONTENT_TREE = {
                       ref: "inset_1",
                       preview: "textures/1/preview.png"
                     },
+{
+  id: "composition_insets_medium_inset_1_universal_node",
+  type: NODE_TYPES.CARD,
+  title: "Куб и конус",
+  ref: "inset_1_universal"
+},                    
                     {
                       id: "composition_insets_medium_inset_2_node",
                       type: NODE_TYPES.CARD,
@@ -565,13 +619,25 @@ export const CONTENT_TREE = {
                       ref: "inset_2",
                       preview: "textures/2/preview.png"
                     },
+{
+  id: "composition_insets_medium_inset_2_universal_node",
+  type: NODE_TYPES.CARD,
+  title: "Горизонтальная треугольная призма и конус",
+  ref: "inset_2_universal"
+},                    
                     {
                       id: "composition_insets_medium_inset_14_node",
                       type: NODE_TYPES.CARD,
                       title: "Вертикальная треугольная призма и конус",
                       ref: "inset_14",
                       preview: "textures/14/preview.png"
-                    }
+                    },
+{
+  id: "composition_insets_medium_inset_14_universal_node",
+  type: NODE_TYPES.CARD,
+  title: "Вертикальная треугольная призма и конус",
+  ref: "inset_14_universal"
+}                    
                   ]
                 },
 
@@ -589,6 +655,12 @@ export const CONTENT_TREE = {
                       ref: "inset_11",
                       preview: "textures/11/preview.png"
                     },
+{
+  id: "composition_insets_complex_inset_11_universal_node",
+  type: NODE_TYPES.CARD,
+  title: "Вертикальный цилиндр и пирамида",
+  ref: "inset_11_universal"
+},                    
                     {
                       id: "composition_insets_complex_inset_6_node",
                       type: NODE_TYPES.CARD,
@@ -596,13 +668,25 @@ export const CONTENT_TREE = {
                       ref: "inset_6",
                       preview: "textures/6/preview.png"
                     },
+{
+  id: "composition_insets_complex_inset_6_universal_node",
+  type: NODE_TYPES.CARD,
+  title: "Два горизонтальных шестигранника",
+  ref: "inset_6_universal"
+},                    
                     {
                       id: "composition_insets_complex_inset_10_node",
                       type: NODE_TYPES.CARD,
                       title: "Горизонтальный цилиндр и шестигранник",
                       ref: "inset_10",
                       preview: "textures/10/preview.png"
-                    }
+                    },
+{
+  id: "composition_insets_complex_inset_10_universal_node",
+  type: NODE_TYPES.CARD,
+  title: "Горизонтальный цилиндр и шестигранник",
+  ref: "inset_10_universal"
+}                    
                   ]
                 }
               ]
