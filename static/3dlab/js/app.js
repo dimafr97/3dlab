@@ -504,12 +504,16 @@ function nodeToGalleryItem(node) {
   return null;
 }
 
-  function getCurrentCardNodes() {
+function getCurrentCardNodes() {
   const children = Array.isArray(currentNode.children)
     ? currentNode.children
     : [];
 
-  return children.filter((node) => node.type === NODE_TYPES.CARD);
+  return children.filter(
+    (node) =>
+      node.type === NODE_TYPES.CARD &&
+      !node.hidden
+  );
 }
 
 function isBaseCardNode(node) {
@@ -569,6 +573,8 @@ if (breadcrumbBackBtn) {
 let children = Array.isArray(currentNode.children)
   ? currentNode.children
   : [];
+
+children = children.filter((node) => !node.hidden);
 
 if (DEMO_HIDE_EMPTY_BRANCHES) {
   children = children.filter(hasVisibleContent);
