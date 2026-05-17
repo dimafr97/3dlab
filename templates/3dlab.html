@@ -157,7 +157,20 @@ body {
     }
 
 .model-card-base {
+  position: relative;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(42, 36, 68, 0.92) 0%,
+      rgba(26, 28, 44, 0.96) 100%
+    );
+
   border-color: rgba(145, 115, 255, 0.20);
+
+  box-shadow:
+    0 0 0 1px rgba(120, 90, 255, 0.04),
+    0 8px 30px rgba(50, 30, 90, 0.18);
 }
 
 .model-card-base .model-thumb {
@@ -167,17 +180,20 @@ body {
 
 .model-card-base .model-thumb::after {
   content: "";
+
   position: absolute;
   inset: 0;
+
   pointer-events: none;
 
-  background: linear-gradient(
-    135deg,
-    rgba(110, 70, 255, 0.12) 0%,
-    rgba(70, 40, 160, 0.08) 45%,
-    rgba(0, 0, 0, 0) 100%
-  );
-}      
+  background:
+    linear-gradient(
+      135deg,
+      rgba(110, 70, 255, 0.10) 0%,
+      rgba(70, 40, 160, 0.06) 45%,
+      rgba(0, 0, 0, 0) 100%
+    );
+}
 
     .model-thumb {
       width: 100%;
