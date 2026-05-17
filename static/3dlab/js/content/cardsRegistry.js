@@ -1580,5 +1580,29 @@ inset_14_universal: {
       }
     }
   }
+},
+
+inset_0_universal: {
+  id: "inset_0_universal",
+  title: "База по врезкам СПБГАСУ",
+  desc: "Обзор и видеоразбор врезок",
+  preview: "content/insets/inset_0/preview/preview4.webp",
+
+  viewerProfile: "base",
+
+  blocks: {
+    [BLOCKS.VIDEO]: {
+      subblocks: {
+        [SUBBLOCKS.VIDEOS]: {
+          type: CONTENT_TYPES.VIDEOS,
+
+          items: [
+            "https://s3.twcstorage.ru/540d791f-86c02015-75b1-462f-b960-b855e300451a/content/insets/inset_0/videos/v2.mp4",
+            "https://s3.twcstorage.ru/540d791f-86c02015-75b1-462f-b960-b855e300451a/content/insets/inset_0/videos/v5.mp4"
+          ]
+        }
+      }
+    }
+  }
 }
 };
