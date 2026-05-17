@@ -479,7 +479,13 @@ export const CONTENT_TREE = {
                   ref: "inset_0",
                   preview: "textures/preview/preview4.webp"
                 },
-
+{
+  id: "composition_insets_base_universal_node",
+  type: NODE_TYPES.CARD,
+  title: "Базовая информация про врезки",
+  ref: "inset_0_universal"
+},
+                
                 {
                   id: "composition_insets_simple",
                   type: NODE_TYPES.CATEGORY,
