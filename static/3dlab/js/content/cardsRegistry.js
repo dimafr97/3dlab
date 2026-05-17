@@ -1584,8 +1584,8 @@ inset_14_universal: {
 
 inset_0_universal: {
   id: "inset_0_universal",
-  title: "База по врезкам СПБГАСУ",
-  desc: "Обзор и видеоразбор врезок",
+  title: "Базовая информация про врезки",
+  desc: "Общая теория построения любой врезки",
   preview: "content/insets/inset_0/preview/preview4.webp",
 
   viewerProfile: "base",
