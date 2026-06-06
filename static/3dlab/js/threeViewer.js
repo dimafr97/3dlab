@@ -63,6 +63,8 @@ const state = {
   rotY: 0.00,
   targetRotX: 0.10,
   targetRotY: 0.00,
+
+  target: new THREE.Vector3(0, 0, 0),
 };
 
 export function initThree(canvas) {
@@ -171,10 +173,13 @@ export function setModel(root) {
 
   state.targetRotX = 0.10;
   state.targetRotY = 0.00;
+  state.target.set(0, 0, 0);
 
-  fitCameraToModel(root);
-    if (roomsFlatMode) {
+  if (roomsFlatMode) {
+    setupRoomCameraHelpers(root);
     applyRoomsFlatMaterials(root);
+  } else {
+    fitCameraToModel(root);
   }
 }
 
@@ -255,6 +260,84 @@ function fitCameraToModel(root) {
   state.maxRadius = dist * 6.0;
 }
 
+function findHelperObject(root, name) {
+  if (!root) return null;
+
+  const wanted = String(name).trim().toLowerCase();
+  let found = null;
+
+  root.traverse((obj) => {
+    if (found) return;
+
+    const objName = String(obj.name || "").trim().toLowerCase();
+    if (objName === wanted) {
+      found = obj;
+    }
+  });
+
+  return found;
+}
+
+function isRoomHelperObjectName(name) {
+  const n = String(name || "").trim().toLowerCase();
+
+  return (
+    n === "point" ||
+    n === "cam" ||
+    n === "box" ||
+    n.startsWith("box_")
+  );
+}
+
+function hideRoomHelpers(root) {
+  if (!root) return;
+
+  root.traverse((obj) => {
+    if (isRoomHelperObjectName(obj.name)) {
+      obj.visible = false;
+    }
+  });
+}
+
+function setupRoomCameraHelpers(root) {
+  hideRoomHelpers(root);
+
+  const point = findHelperObject(root, "point");
+  const cam = findHelperObject(root, "cam");
+
+  if (point) {
+    point.updateWorldMatrix(true, false);
+    point.getWorldPosition(state.target);
+  } else {
+    state.target.set(0, 0, 0);
+  }
+
+  if (cam) {
+    cam.updateWorldMatrix(true, false);
+
+    const camWorldPos = new THREE.Vector3();
+    cam.getWorldPosition(camWorldPos);
+
+    const offset = camWorldPos.clone().sub(state.target);
+    const radius = Math.max(offset.length(), 0.1);
+
+    state.radius = radius;
+    state.minRadius = radius * 0.25;
+    state.maxRadius = radius * 4.0;
+
+    state.targetRotX = Math.asin(
+      THREE.MathUtils.clamp(offset.y / radius, -1, 1)
+    );
+
+    state.targetRotY = Math.atan2(offset.x, offset.z);
+
+    state.rotX = state.targetRotX;
+    state.rotY = state.targetRotY;
+  } else {
+    fitCameraToModel(root);
+  }
+}
+
 function updateCameraPosition() {
   const r = state.radius;
 
@@ -262,8 +345,12 @@ function updateCameraPosition() {
   const z = r * Math.cos(state.rotY) * Math.cos(state.rotX);
   const y = r * Math.sin(state.rotX);
 
-  camera.position.set(x, y, z);
-  camera.lookAt(0, 0, 0);
+  const tx = roomsFlatMode ? state.target.x : 0;
+  const ty = roomsFlatMode ? state.target.y : 0;
+  const tz = roomsFlatMode ? state.target.z : 0;
+
+  camera.position.set(tx + x, ty + y, tz + z);
+  camera.lookAt(tx, ty, tz);
 }
 
 export function resize() {
@@ -1117,6 +1204,7 @@ export function setRoomsFlatMode(enabled, root = currentModel) {
     }
 
     if (root) {
+      setupRoomCameraHelpers(root);
       applyRoomsFlatMaterials(root);
     }
   } else {
@@ -1125,6 +1213,7 @@ export function setRoomsFlatMode(enabled, root = currentModel) {
       light.visible = true;
     }
 
+    state.target.set(0, 0, 0);
     clearRoomsMaterialOverrides();
   }
 }
