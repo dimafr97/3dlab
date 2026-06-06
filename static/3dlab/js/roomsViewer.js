@@ -473,8 +473,10 @@ function startRoomLoading(meta) {
       if (mySeq !== roomLoadSeq) return;
       if (isInsetModeActive()) return;
 
+      setRoomsFlatMode(true);
       threeSetModel(root);
       setRoomsFlatMode(true, root);
+
       hideLoading();
       setViewMode("3d");
     })
