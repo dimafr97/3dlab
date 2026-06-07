@@ -1621,7 +1621,7 @@ inset_0_universal: {
           items: [
             {
               id: "auditorium_1_location_2",
-              sourcePath: "content/rooms/auditorium_1/location_2/model/location_2.1.gltf",
+              sourcePath: "content/rooms/auditorium_1/location_2/model/location_2.glb",
               textures: {
                 base: "content/rooms/auditorium_1/location_2/textures/1.jpg",
                 roughness: 1
