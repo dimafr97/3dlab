@@ -15,6 +15,7 @@ let currentModel = null;
 let roomsFlatMode = false;
 let sceneLights = [];
 let roomsMaterialRestore = [];
+let roomCollisionBoxes = [];
 // ===== CAD overlay (точки/линии для врезок) =====
 let cadGroup = null;
 let cadScene = null;
@@ -299,8 +300,60 @@ function hideRoomHelpers(root) {
   });
 }
 
+function collectRoomCollisionBoxes(root) {
+  roomCollisionBoxes = [];
+  if (!root) return;
+
+  root.updateWorldMatrix(true, true);
+
+  root.traverse((obj) => {
+    const name = String(obj.name || "").trim().toLowerCase();
+
+    if (name === "box" || name.startsWith("box_")) {
+      obj.updateWorldMatrix(true, false);
+
+      const box = new THREE.Box3().setFromObject(obj);
+
+      if (!box.isEmpty()) {
+        roomCollisionBoxes.push(box);
+      }
+    }
+  });
+}
+
+function constrainCameraToRoomBoxes(position) {
+  if (!roomsFlatMode) return;
+  if (!roomCollisionBoxes.length) return;
+
+  for (const box of roomCollisionBoxes) {
+    if (box.containsPoint(position)) {
+      return;
+    }
+  }
+
+  let bestPoint = null;
+  let bestDist = Infinity;
+
+  for (const box of roomCollisionBoxes) {
+    const p = new THREE.Vector3();
+    box.clampPoint(position, p);
+
+    const d = p.distanceToSquared(position);
+
+    if (d < bestDist) {
+      bestDist = d;
+      bestPoint = p;
+    }
+  }
+
+  if (bestPoint) {
+    position.copy(bestPoint);
+  }
+}
+
 function setupRoomCameraHelpers(root) {
   hideRoomHelpers(root);
+  collectRoomCollisionBoxes(root);
 
   const point = findHelperObject(root, "point");
   const cam = findHelperObject(root, "cam");
@@ -349,8 +402,13 @@ function updateCameraPosition() {
   const ty = roomsFlatMode ? state.target.y : 0;
   const tz = roomsFlatMode ? state.target.z : 0;
 
-  camera.position.set(tx + x, ty + y, tz + z);
-  camera.lookAt(tx, ty, tz);
+camera.position.set(tx + x, ty + y, tz + z);
+
+if (roomsFlatMode) {
+  constrainCameraToRoomBoxes(camera.position);
+}
+
+camera.lookAt(tx, ty, tz);
 }
 
 export function resize() {
@@ -1227,8 +1285,10 @@ export function setRoomsFlatMode(enabled, root = currentModel) {
       setupRoomCameraHelpers(root);
       applyRoomsFlatMaterials(root);
     }
-  } else {
-    for (const light of sceneLights) {
+} else {
+  roomCollisionBoxes = [];
+
+  for (const light of sceneLights) {
       if (!light) continue;
       light.visible = true;
     }
