@@ -16,6 +16,9 @@ let roomsFlatMode = false;
 let sceneLights = [];
 let roomsMaterialRestore = [];
 let roomCollisionBoxes = [];
+let roomTexturesDir = "";
+let roomTextureCache = new Map();
+let roomDrapObject = null;
 // ===== CAD overlay (точки/линии для врезок) =====
 let cadGroup = null;
 let cadScene = null;
@@ -1243,6 +1246,83 @@ function clearRoomsMaterialOverrides() {
   roomsMaterialRestore = [];
 }
 
+function normalizeRoomTextureUrl(url) {
+  if (!url) return "";
+
+  const s = String(url);
+
+  const isAbsolute =
+    /^https?:\/\//i.test(s) ||
+    s.startsWith("/") ||
+    s.startsWith("data:");
+
+  return isAbsolute
+    ? s
+    : `https://api.apparchi.ru/?path=${encodeURIComponent(s)}`;
+}
+
+function getRoomObjectKey(obj) {
+  let cur = obj;
+
+  while (cur) {
+    const name = String(cur.name || "").trim();
+
+    if (/^\d+$/.test(name)) {
+      return name;
+    }
+
+    cur = cur.parent;
+  }
+
+  return "";
+}
+
+function isRoomDrapObject(obj) {
+  let cur = obj;
+
+  while (cur) {
+    const name = String(cur.name || "").trim().toLowerCase();
+
+    if (name === "drap") {
+      return true;
+    }
+
+    cur = cur.parent;
+  }
+
+  return false;
+}
+
+function getRoomTextureForKey(key) {
+  if (!roomTexturesDir || !key) return null;
+
+  if (roomTextureCache.has(key)) {
+    return roomTextureCache.get(key);
+  }
+
+  const cleanDir = roomTexturesDir.endsWith("/")
+    ? roomTexturesDir
+    : `${roomTexturesDir}/`;
+
+  const url = normalizeRoomTextureUrl(`${cleanDir}${key}.jpg`);
+
+  const tex = new THREE.TextureLoader().load(
+    url,
+    () => {},
+    undefined,
+    (err) => {
+      console.warn(`rooms texture not loaded: ${key}.jpg`, err);
+    }
+  );
+
+  tex.flipY = false;
+  tex.colorSpace = THREE.SRGBColorSpace;
+
+  roomTextureCache.set(key, tex);
+
+  return tex;
+}
+
 function isRoomBlackObject(obj) {
   let cur = obj;
 
@@ -1257,6 +1337,8 @@ function isRoomBlackObject(obj) {
 
 function applyRoomsFlatMaterials(root) {
   clearRoomsMaterialOverrides();
+  roomDrapObject = null;
+
   if (!root) return;
 
   root.traverse((obj) => {
@@ -1267,6 +1349,10 @@ function applyRoomsFlatMaterials(root) {
 
     roomsMaterialRestore.push({ mesh: obj, material: originalMat });
 
+    if (isRoomDrapObject(obj)) {
+      roomDrapObject = obj;
+    }
+
     if (isRoomBlackObject(obj)) {
       obj.material = new THREE.MeshBasicMaterial({
         color: new THREE.Color(0x151515),
@@ -1275,10 +1361,13 @@ function applyRoomsFlatMaterials(root) {
       return;
     }
 
+    const key = getRoomObjectKey(obj);
+    const roomMap = getRoomTextureForKey(key);
+
     const makeFlat = (srcMat) => {
       const flatMat = new THREE.MeshBasicMaterial({
-        map: srcMat.map || null,
-        color: srcMat.color ? srcMat.color.clone() : new THREE.Color(0xffffff),
+        map: roomMap || srcMat.map || null,
+        color: new THREE.Color(0xffffff),
         transparent: !!srcMat.transparent,
         opacity: typeof srcMat.opacity === "number" ? srcMat.opacity : 1,
         alphaTest: typeof srcMat.alphaTest === "number" ? srcMat.alphaTest : 0,
@@ -1286,6 +1375,7 @@ function applyRoomsFlatMaterials(root) {
       });
 
       if (flatMat.map) {
+        flatMat.map.flipY = false;
         flatMat.map.colorSpace = THREE.SRGBColorSpace;
       }
 
@@ -1298,6 +1388,16 @@ function applyRoomsFlatMaterials(root) {
       obj.material = makeFlat(originalMat);
     }
   });
+}
+
+export function setRoomDrapVisible(visible) {
+  if (!roomDrapObject) return;
+  roomDrapObject.visible = !!visible;
+}
+
+export function setRoomTexturesDir(dir = "") {
+  roomTexturesDir = String(dir || "");
+  roomTextureCache.clear();
 }
 
 export function setRoomsFlatMode(enabled, root = currentModel) {
