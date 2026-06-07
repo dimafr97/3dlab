@@ -45,13 +45,21 @@ export const CONTENT_TREE = {
               hidden: true
             },
 
-            {
-              id: "drawing_interiors_auditorium_1",
-              type: NODE_TYPES.CATEGORY,
-              title: "Аудитория 1",
-              desc: "Локации с дверью, стеной и ширмой с коринфской капителью",
-              children: []
-            },
+{
+  id: "drawing_interiors_auditorium_1",
+  type: NODE_TYPES.CATEGORY,
+  title: "Аудитория 1",
+  desc: "Локации с дверью, стеной и ширмой с коринфской капителью",
+  children: [
+    {
+      id: "drawing_interiors_auditorium_1_location_2",
+      type: NODE_TYPES.CARD,
+      title: "Локация 2",
+      desc: "Аудитория 1",
+      ref: "auditorium_1_location_2"
+    }
+  ]
+},
 
             {
               id: "drawing_interiors_auditorium_2",
