@@ -16,7 +16,6 @@ let roomsFlatMode = false;
 let sceneLights = [];
 let roomsMaterialRestore = [];
 let roomCollisionBoxes = [];
-const ROOMS_CONTROL_SCALE = 1.0;
 // ===== CAD overlay (точки/линии для врезок) =====
 let cadGroup = null;
 let cadScene = null;
@@ -1365,10 +1364,10 @@ state.targetRotX += dy * rotSpeed;
 canvas.addEventListener("wheel", (e) => {
   e.preventDefault();
 
-  const delta = e.deltaY * (roomsFlatMode ? 0.00035 : 0.002);
+  const delta = e.deltaY * 0.002;
 
   state.radius = THREE.MathUtils.clamp(
-    state.radius + delta / ROOMS_CONTROL_SCALE,
+    state.radius + delta,
     state.minRadius,
     state.maxRadius
   );
@@ -1412,7 +1411,7 @@ state.targetRotX += dy * rotSpeed;
 
 if (touchMode === "zoom" && e.touches.length === 2) {
   const dist = pinch(e.touches[0], e.touches[1]);
-  const delta = (lastPinch - dist) * (roomsFlatMode ? 0.0035 : 0.01);
+  const delta = (lastPinch - dist) * 0.01;
 
   lastPinch = dist;
 
