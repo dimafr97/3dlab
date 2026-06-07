@@ -56,7 +56,6 @@ let postQuad = null;
 
 const state = {
   radius: 4.5,
-  targetRadius: 4.5,
   minRadius: 2.0,
   maxRadius: 12.0,
 
@@ -140,9 +139,6 @@ cadLineMat.resolution.set(
 renderer.setAnimationLoop(() => {
   state.rotX += (state.targetRotX - state.rotX) * 0.22;
   state.rotY += (state.targetRotY - state.rotY) * 0.22;
-  if (roomsFlatMode) {
-  state.radius += (state.targetRadius - state.radius) * 0.28;
-}
 
   updateCameraPosition();
     // обновляем толщину силуэта под текущий zoom (примерно px)
@@ -326,7 +322,6 @@ function setupRoomCameraHelpers(root) {
     const radius = Math.max(offset.length(), 0.1);
 
     state.radius = radius;
-    state.targetRadius = radius;
 state.minRadius = radius * 0.65;
 state.maxRadius = radius * 2.5;
 
@@ -1280,10 +1275,10 @@ function initControls(canvas) {
     e.preventDefault();
 
 if (roomsFlatMode) {
-  const delta = e.deltaY * 0.0015;
+  const delta = e.deltaY * 0.0012;
 
-  state.targetRadius = THREE.MathUtils.clamp(
-    state.targetRadius + delta,
+  state.radius = THREE.MathUtils.clamp(
+    state.radius + delta,
     state.minRadius,
     state.maxRadius
   );
@@ -1334,28 +1329,18 @@ state.radius = THREE.MathUtils.clamp(
       );
     }
 
-    if (touchMode === "zoom" && e.touches.length === 2) {
-      const dist = pinch(e.touches[0], e.touches[1]);
-const delta = (lastPinch - dist) * (roomsFlatMode ? 0.007 : 0.01);
+if (touchMode === "zoom" && e.touches.length === 2) {
+  const dist = pinch(e.touches[0], e.touches[1]);
+  const delta = (lastPinch - dist) * (roomsFlatMode ? 0.006 : 0.01);
 
-lastPinch = dist;
+  lastPinch = dist;
 
-if (roomsFlatMode) {
-  state.targetRadius = THREE.MathUtils.clamp(
-    state.targetRadius + delta,
+  state.radius = THREE.MathUtils.clamp(
+    state.radius + delta,
     state.minRadius,
     state.maxRadius
   );
-
-  return;
 }
-
-state.radius = THREE.MathUtils.clamp(
-  state.radius + delta,
-  state.minRadius,
-  state.maxRadius
-);
-    }
   }, { passive: false });
 
   window.addEventListener("touchend", () => {
