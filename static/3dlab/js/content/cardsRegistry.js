@@ -1649,7 +1649,7 @@ inset_0_universal: {
           items: [
             {
               id: "auditorium_1_location_1",
-              sourcePath: "content/rooms/auditorium_1/location_1/model/location_1.gltf",
+              sourcePath: "content/rooms/auditorium_1/location_1/model/location_1.glb",
               texturesDir: "content/rooms/auditorium_1/location_1/textures/"
             }
           ]
