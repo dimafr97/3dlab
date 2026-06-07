@@ -1350,8 +1350,10 @@ function initControls(canvas) {
     lastX = e.clientX;
     lastY = e.clientY;
 
-    state.targetRotY += dx * -0.005;
-    state.targetRotX += dy * 0.005;
+const rotSpeed = roomsFlatMode ? 0.0065 : 0.005;
+
+state.targetRotY += dx * -rotSpeed;
+state.targetRotX += dy * rotSpeed;
 
     state.targetRotX = Math.max(
       -Math.PI / 2 + 0.2,
@@ -1359,29 +1361,29 @@ function initControls(canvas) {
     );
   });
 
-  canvas.addEventListener("wheel", (e) => {
-    e.preventDefault();
+canvas.addEventListener("wheel", (e) => {
+  e.preventDefault();
 
-if (roomsFlatMode) {
-  const delta = e.deltaY * 0.0010;
+  if (roomsFlatMode) {
+    const zoomFactor = Math.exp(e.deltaY * 0.0010);
+
+    state.radius = THREE.MathUtils.clamp(
+      state.radius * zoomFactor,
+      state.minRadius,
+      state.maxRadius
+    );
+
+    return;
+  }
+
+  const delta = e.deltaY * 0.002;
 
   state.radius = THREE.MathUtils.clamp(
     state.radius + delta,
     state.minRadius,
     state.maxRadius
   );
-
-  return;
-}
-
-const delta = e.deltaY * 0.002;
-
-state.radius = THREE.MathUtils.clamp(
-  state.radius + delta,
-  state.minRadius,
-  state.maxRadius
-);
-  }, { passive: false });
+}, { passive: false });
 
   canvas.addEventListener("touchstart", (e) => {
     e.preventDefault();
@@ -1408,8 +1410,10 @@ state.radius = THREE.MathUtils.clamp(
       lastX = t.clientX;
       lastY = t.clientY;
 
-      state.targetRotY += dx * -0.008;
-      state.targetRotX += dy * 0.008;
+const rotSpeed = roomsFlatMode ? 0.010 : 0.008;
+
+state.targetRotY += dx * -rotSpeed;
+state.targetRotX += dy * rotSpeed;
 
       state.targetRotX = Math.max(
         -Math.PI / 2 + 0.2,
@@ -1419,7 +1423,21 @@ state.radius = THREE.MathUtils.clamp(
 
 if (touchMode === "zoom" && e.touches.length === 2) {
   const dist = pinch(e.touches[0], e.touches[1]);
-  const delta = (lastPinch - dist) * (roomsFlatMode ? 0.005 : 0.01);
+
+  if (roomsFlatMode) {
+    const zoomFactor = lastPinch / Math.max(dist, 1);
+
+    state.radius = THREE.MathUtils.clamp(
+      state.radius * zoomFactor,
+      state.minRadius,
+      state.maxRadius
+    );
+
+    lastPinch = dist;
+    return;
+  }
+
+  const delta = (lastPinch - dist) * 0.01;
 
   lastPinch = dist;
 
