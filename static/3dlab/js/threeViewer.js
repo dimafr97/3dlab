@@ -1364,7 +1364,7 @@ state.targetRotX += dy * rotSpeed;
 canvas.addEventListener("wheel", (e) => {
   e.preventDefault();
 
-  const delta = e.deltaY * 0.002;
+  const delta = e.deltaY * (roomsFlatMode ? 0.00025 : 0.002);
 
   state.radius = THREE.MathUtils.clamp(
     state.radius + delta,
@@ -1411,7 +1411,7 @@ state.targetRotX += dy * rotSpeed;
 
 if (touchMode === "zoom" && e.touches.length === 2) {
   const dist = pinch(e.touches[0], e.touches[1]);
-  const delta = (lastPinch - dist) * 0.01;
+  const delta = (lastPinch - dist) * (roomsFlatMode ? 0.0015 : 0.01);
 
   lastPinch = dist;
 
