@@ -52,6 +52,13 @@ export const CONTENT_TREE = {
   desc: "Локации с дверью, стеной и ширмой с коринфской капителью",
   children: [
     {
+  id: "drawing_interiors_auditorium_1_location_1",
+  type: NODE_TYPES.CARD,
+  title: "Локация 1",
+  desc: "Аудитория 1",
+  ref: "auditorium_1_location_1"
+},
+    {
       id: "drawing_interiors_auditorium_1_location_2",
       type: NODE_TYPES.CARD,
       title: "Локация 2",
