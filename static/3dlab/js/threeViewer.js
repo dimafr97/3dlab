@@ -322,8 +322,8 @@ function setupRoomCameraHelpers(root) {
     const radius = Math.max(offset.length(), 0.1);
 
     state.radius = radius;
-    state.minRadius = radius * 0.25;
-    state.maxRadius = radius * 4.0;
+state.minRadius = radius * 0.65;
+state.maxRadius = radius * 2.5;
 
     state.targetRotX = Math.asin(
       THREE.MathUtils.clamp(offset.y / radius, -1, 1)
@@ -1157,6 +1157,18 @@ function clearRoomsMaterialOverrides() {
   roomsMaterialRestore = [];
 }
 
+function isRoomBlackObject(obj) {
+  let cur = obj;
+
+  while (cur) {
+    const name = String(cur.name || "").trim().toLowerCase();
+    if (name === "black") return true;
+    cur = cur.parent;
+  }
+
+  return false;
+}
+
 function applyRoomsFlatMaterials(root) {
   clearRoomsMaterialOverrides();
   if (!root) return;
@@ -1166,6 +1178,16 @@ function applyRoomsFlatMaterials(root) {
 
     const originalMat = obj.material;
     if (!originalMat) return;
+
+    roomsMaterialRestore.push({ mesh: obj, material: originalMat });
+
+    if (isRoomBlackObject(obj)) {
+      obj.material = new THREE.MeshBasicMaterial({
+        color: new THREE.Color(0x070707),
+        side: THREE.DoubleSide
+      });
+      return;
+    }
 
     const makeFlat = (srcMat) => {
       const flatMat = new THREE.MeshBasicMaterial({
@@ -1185,10 +1207,8 @@ function applyRoomsFlatMaterials(root) {
     };
 
     if (Array.isArray(originalMat)) {
-      roomsMaterialRestore.push({ mesh: obj, material: originalMat });
       obj.material = originalMat.map(makeFlat);
     } else {
-      roomsMaterialRestore.push({ mesh: obj, material: originalMat });
       obj.material = makeFlat(originalMat);
     }
   });
@@ -1254,7 +1274,7 @@ function initControls(canvas) {
   canvas.addEventListener("wheel", (e) => {
     e.preventDefault();
 
-    const delta = e.deltaY * 0.002;
+    const delta = e.deltaY * (roomsFlatMode ? 0.0008 : 0.002);
 
     state.radius = THREE.MathUtils.clamp(
       state.radius + delta,
@@ -1299,7 +1319,7 @@ function initControls(canvas) {
 
     if (touchMode === "zoom" && e.touches.length === 2) {
       const dist = pinch(e.touches[0], e.touches[1]);
-      const delta = (lastPinch - dist) * 0.01;
+      const delta = (lastPinch - dist) * (roomsFlatMode ? 0.004 : 0.01);
 
       lastPinch = dist;
 
