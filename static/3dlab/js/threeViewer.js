@@ -1266,9 +1266,14 @@ function getRoomObjectKey(obj) {
 
   while (cur) {
     const name = String(cur.name || "").trim();
+    const lower = name.toLowerCase();
 
     if (/^\d+$/.test(name)) {
       return name;
+    }
+
+    if (lower === "drap") {
+      return "drap";
     }
 
     cur = cur.parent;
