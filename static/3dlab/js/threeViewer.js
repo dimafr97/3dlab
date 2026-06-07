@@ -141,7 +141,7 @@ renderer.setAnimationLoop(() => {
   state.rotX += (state.targetRotX - state.rotX) * 0.22;
   state.rotY += (state.targetRotY - state.rotY) * 0.22;
   if (roomsFlatMode) {
-  state.radius += (state.targetRadius - state.radius) * 0.12;
+  state.radius += (state.targetRadius - state.radius) * 0.28;
 }
 
   updateCameraPosition();
@@ -1280,7 +1280,7 @@ function initControls(canvas) {
     e.preventDefault();
 
 if (roomsFlatMode) {
-  const delta = e.deltaY * 0.00035;
+  const delta = e.deltaY * 0.0015;
 
   state.targetRadius = THREE.MathUtils.clamp(
     state.targetRadius + delta,
@@ -1336,7 +1336,7 @@ state.radius = THREE.MathUtils.clamp(
 
     if (touchMode === "zoom" && e.touches.length === 2) {
       const dist = pinch(e.touches[0], e.touches[1]);
-const delta = (lastPinch - dist) * (roomsFlatMode ? 0.0018 : 0.01);
+const delta = (lastPinch - dist) * (roomsFlatMode ? 0.007 : 0.01);
 
 lastPinch = dist;
 
