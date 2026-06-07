@@ -1609,7 +1609,7 @@ inset_0_universal: {
   id: "auditorium_1_location_2",
   title: "Локация 2",
   desc: "Аудитория 1",
-  preview: "",
+  preview: "content/rooms/auditorium_1/location_2/preview/preview.png",
 
   viewerProfile: "rooms",
 
