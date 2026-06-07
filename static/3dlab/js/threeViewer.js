@@ -351,6 +351,28 @@ function constrainCameraToRoomBoxes(position) {
   }
 }
 
+function syncRoomOrbitFromCameraPosition() {
+  if (!roomsFlatMode) return;
+
+  const offset = camera.position.clone().sub(state.target);
+  const radius = Math.max(offset.length(), 0.1);
+
+  state.radius = THREE.MathUtils.clamp(
+    radius,
+    state.minRadius,
+    state.maxRadius
+  );
+
+  state.rotX = Math.asin(
+    THREE.MathUtils.clamp(offset.y / state.radius, -1, 1)
+  );
+
+  state.rotY = Math.atan2(offset.x, offset.z);
+
+  state.targetRotX = state.rotX;
+  state.targetRotY = state.rotY;
+}
+
 function setupRoomCameraHelpers(root) {
   hideRoomHelpers(root);
   collectRoomCollisionBoxes(root);
@@ -405,7 +427,13 @@ function updateCameraPosition() {
 camera.position.set(tx + x, ty + y, tz + z);
 
 if (roomsFlatMode) {
+  const before = camera.position.clone();
+
   constrainCameraToRoomBoxes(camera.position);
+
+  if (!camera.position.equals(before)) {
+    syncRoomOrbitFromCameraPosition();
+  }
 }
 
 camera.lookAt(tx, ty, tz);
