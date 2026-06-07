@@ -56,6 +56,7 @@ let postQuad = null;
 
 const state = {
   radius: 4.5,
+  targetRadius: 4.5,
   minRadius: 2.0,
   maxRadius: 12.0,
 
@@ -139,6 +140,9 @@ cadLineMat.resolution.set(
 renderer.setAnimationLoop(() => {
   state.rotX += (state.targetRotX - state.rotX) * 0.22;
   state.rotY += (state.targetRotY - state.rotY) * 0.22;
+  if (roomsFlatMode) {
+  state.radius += (state.targetRadius - state.radius) * 0.12;
+}
 
   updateCameraPosition();
     // обновляем толщину силуэта под текущий zoom (примерно px)
@@ -322,6 +326,7 @@ function setupRoomCameraHelpers(root) {
     const radius = Math.max(offset.length(), 0.1);
 
     state.radius = radius;
+    state.targetRadius = radius;
 state.minRadius = radius * 0.65;
 state.maxRadius = radius * 2.5;
 
@@ -1183,7 +1188,7 @@ function applyRoomsFlatMaterials(root) {
 
     if (isRoomBlackObject(obj)) {
       obj.material = new THREE.MeshBasicMaterial({
-        color: new THREE.Color(0x070707),
+        color: new THREE.Color(0x242424),
         side: THREE.DoubleSide
       });
       return;
@@ -1274,13 +1279,25 @@ function initControls(canvas) {
   canvas.addEventListener("wheel", (e) => {
     e.preventDefault();
 
-    const delta = e.deltaY * (roomsFlatMode ? 0.0008 : 0.002);
+if (roomsFlatMode) {
+  const delta = e.deltaY * 0.00035;
 
-    state.radius = THREE.MathUtils.clamp(
-      state.radius + delta,
-      state.minRadius,
-      state.maxRadius
-    );
+  state.targetRadius = THREE.MathUtils.clamp(
+    state.targetRadius + delta,
+    state.minRadius,
+    state.maxRadius
+  );
+
+  return;
+}
+
+const delta = e.deltaY * 0.002;
+
+state.radius = THREE.MathUtils.clamp(
+  state.radius + delta,
+  state.minRadius,
+  state.maxRadius
+);
   }, { passive: false });
 
   canvas.addEventListener("touchstart", (e) => {
@@ -1319,15 +1336,25 @@ function initControls(canvas) {
 
     if (touchMode === "zoom" && e.touches.length === 2) {
       const dist = pinch(e.touches[0], e.touches[1]);
-      const delta = (lastPinch - dist) * (roomsFlatMode ? 0.004 : 0.01);
+const delta = (lastPinch - dist) * (roomsFlatMode ? 0.0018 : 0.01);
 
-      lastPinch = dist;
+lastPinch = dist;
 
-      state.radius = THREE.MathUtils.clamp(
-        state.radius + delta,
-        state.minRadius,
-               state.maxRadius
-      );
+if (roomsFlatMode) {
+  state.targetRadius = THREE.MathUtils.clamp(
+    state.targetRadius + delta,
+    state.minRadius,
+    state.maxRadius
+  );
+
+  return;
+}
+
+state.radius = THREE.MathUtils.clamp(
+  state.radius + delta,
+  state.minRadius,
+  state.maxRadius
+);
     }
   }, { passive: false });
 
