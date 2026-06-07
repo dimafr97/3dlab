@@ -322,7 +322,7 @@ function setupRoomCameraHelpers(root) {
     const radius = Math.max(offset.length(), 0.1);
 
     state.radius = radius;
-state.minRadius = radius * 0.65;
+state.minRadius = radius * 0.75;
 state.maxRadius = radius * 2.5;
 
     state.targetRotX = Math.asin(
@@ -1183,7 +1183,7 @@ function applyRoomsFlatMaterials(root) {
 
     if (isRoomBlackObject(obj)) {
       obj.material = new THREE.MeshBasicMaterial({
-        color: new THREE.Color(0x242424),
+        color: new THREE.Color(0x151515),
         side: THREE.DoubleSide
       });
       return;
@@ -1275,7 +1275,7 @@ function initControls(canvas) {
     e.preventDefault();
 
 if (roomsFlatMode) {
-  const delta = e.deltaY * 0.0012;
+  const delta = e.deltaY * 0.0010;
 
   state.radius = THREE.MathUtils.clamp(
     state.radius + delta,
@@ -1331,7 +1331,7 @@ state.radius = THREE.MathUtils.clamp(
 
 if (touchMode === "zoom" && e.touches.length === 2) {
   const dist = pinch(e.touches[0], e.touches[1]);
-  const delta = (lastPinch - dist) * (roomsFlatMode ? 0.006 : 0.01);
+  const delta = (lastPinch - dist) * (roomsFlatMode ? 0.005 : 0.01);
 
   lastPinch = dist;
 
