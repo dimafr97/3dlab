@@ -9,7 +9,8 @@ import {
   setModel as threeSetModel,
   clearModel as threeClearModel,
   resize as threeResize,
-  setRoomsFlatMode
+  setRoomsFlatMode,
+  setRoomTexturesDir
 } from "./threeViewer.js";
 import {
   initScheme,
@@ -374,6 +375,7 @@ function openUniversalRoom(modelItem, card) {
 
     sourcePath: modelItem.sourcePath,
     textures: modelItem.textures || null,
+    texturesDir: modelItem.texturesDir || "",
 
     schemes:
       card?.blocks?.schemes?.subblocks?.schemes?.items || [],
@@ -473,9 +475,10 @@ function startRoomLoading(meta) {
       if (mySeq !== roomLoadSeq) return;
       if (isInsetModeActive()) return;
 
-      setRoomsFlatMode(true);
-      threeSetModel(root);
-      setRoomsFlatMode(true, root);
+setRoomsFlatMode(true);
+setRoomTexturesDir(meta.texturesDir || "");
+threeSetModel(root);
+setRoomsFlatMode(true, root);
 
       hideLoading();
       setViewMode("3d");
@@ -599,6 +602,7 @@ function showGallery() {
   document.body.classList.remove("video-playing");
   document.body.classList.remove("rooms-mode");
   setRoomsFlatMode(false);
+  setRoomTexturesDir("");
 
   threeClearModel();
 
