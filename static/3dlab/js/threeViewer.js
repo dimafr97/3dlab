@@ -400,7 +400,7 @@ function setupRoomCameraHelpers(root) {
     const radius = Math.max(offset.length(), 0.1);
 
     state.radius = radius;
-state.minRadius = radius * 0.75;
+state.minRadius = radius * 0.45;
 state.maxRadius = radius * 2.5;
 
     state.targetRotX = Math.asin(
