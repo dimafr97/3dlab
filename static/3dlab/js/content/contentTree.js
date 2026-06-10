@@ -80,7 +80,15 @@ export const CONTENT_TREE = {
               type: NODE_TYPES.CATEGORY,
               title: "Аудитория 2",
               desc: "Локации с ширмой, стеной и аркой",
-              children: []
+              children: [
+    {
+      id: "drawing_interiors_auditorium_2_location_4",
+      type: NODE_TYPES.CARD,
+      title: "Локация 4",
+      desc: "Аудитория 2",
+      ref: "auditorium_2_location_4"
+    }                 
+              ]
             },
 
             {
