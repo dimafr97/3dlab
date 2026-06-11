@@ -1311,14 +1311,18 @@ function getRoomTextureForKey(key) {
 
   const url = normalizeRoomTextureUrl(`${cleanDir}${key}.jpg`);
 
-  const tex = new THREE.TextureLoader().load(
-    url,
-    () => {},
-    undefined,
-    (err) => {
-      console.warn(`rooms texture not loaded: ${key}.jpg`, err);
-    }
-  );
+console.log("[rooms texture] loading:", key, url);
+
+const tex = new THREE.TextureLoader().load(
+  url,
+  () => {
+    console.log("[rooms texture] loaded:", key, url);
+  },
+  undefined,
+  (err) => {
+    console.warn("[rooms texture] failed:", key, url, err);
+  }
+);
 
   tex.flipY = false;
   tex.colorSpace = THREE.SRGBColorSpace;
