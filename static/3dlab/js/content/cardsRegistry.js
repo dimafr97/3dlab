@@ -1787,7 +1787,7 @@ inset_0_universal: {
   id: "auditorium_3_location_8",
   title: "Локация 8",
   desc: "Аудитория 3",
-  preview: "content/rooms/auditorium_3/location_8/preview/preview.png",
+  preview: "content/rooms/auditorium_3/location_8/preview/preview2.png",
 
   viewerProfile: "rooms",
 
