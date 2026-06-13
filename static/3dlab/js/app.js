@@ -581,6 +581,12 @@ if (DEMO_HIDE_EMPTY_BRANCHES) {
   children = children.filter(hasVisibleContent);
 }
 
+const isLocationsGallery =
+  children.length > 0 &&
+  children.every((node) => node.type === NODE_TYPES.CARD) &&
+  String(currentNode.id || "").includes("auditorium");
+
+galleryEl.classList.toggle("locations-gallery", isLocationsGallery);  
   renderGallery(galleryEl, children.map(nodeToGalleryItem), {
     onSelect: handleNodeSelect
   });
