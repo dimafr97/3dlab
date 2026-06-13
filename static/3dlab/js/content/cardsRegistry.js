@@ -1608,7 +1608,6 @@ inset_0_universal: {
   auditorium_1_location_2: {
   id: "auditorium_1_location_2",
   title: "Локация 2",
-  desc: "Аудитория 1",
   preview: "content/rooms/auditorium_1/location_2/preview/preview.png",
 
   viewerProfile: "rooms",
@@ -1636,7 +1635,6 @@ inset_0_universal: {
   auditorium_1_location_1: {
   id: "auditorium_1_location_1",
   title: "Локация 1",
-  desc: "Аудитория 1",
   preview: "content/rooms/auditorium_1/location_1/preview/preview.png",
 
   viewerProfile: "rooms",
@@ -1661,7 +1659,6 @@ inset_0_universal: {
   auditorium_1_location_3: {
   id: "auditorium_1_location_3",
   title: "Локация 3",
-  desc: "Аудитория 1",
   preview: "content/rooms/auditorium_1/location_3/preview/preview.png",
 
   viewerProfile: "rooms",
@@ -1686,7 +1683,6 @@ inset_0_universal: {
   auditorium_2_location_4: {
   id: "auditorium_2_location_4",
   title: "Локация 4",
-  desc: "Аудитория 2",
   preview: "content/rooms/auditorium_2/location_4/preview/preview.png",
 
   viewerProfile: "rooms",
@@ -1711,7 +1707,6 @@ inset_0_universal: {
   auditorium_2_location_5: {
   id: "auditorium_2_location_5",
   title: "Локация 5",
-  desc: "Аудитория 2",
   preview: "content/rooms/auditorium_2/location_5/preview/preview.png",
 
   viewerProfile: "rooms",
@@ -1736,7 +1731,6 @@ inset_0_universal: {
   auditorium_3_location_7: {
   id: "auditorium_3_location_7",
   title: "Локация 7",
-  desc: "Аудитория 3",
   preview: "content/rooms/auditorium_3/location_7/preview/preview.png",
 
   viewerProfile: "rooms",
@@ -1761,7 +1755,6 @@ inset_0_universal: {
   auditorium_2_location_6: {
   id: "auditorium_2_location_6",
   title: "Локация 6",
-  desc: "Аудитория 2",
   preview: "content/rooms/auditorium_2/location_6/preview/preview.png",
 
   viewerProfile: "rooms",
@@ -1786,7 +1779,6 @@ inset_0_universal: {
   auditorium_3_location_8: {
   id: "auditorium_3_location_8",
   title: "Локация 8",
-  desc: "Аудитория 3",
   preview: "content/rooms/auditorium_3/location_8/preview/preview2.png",
 
   viewerProfile: "rooms",
@@ -1811,7 +1803,6 @@ inset_0_universal: {
   auditorium_3_location_9: {
   id: "auditorium_3_location_9",
   title: "Локация 9",
-  desc: "Аудитория 3",
   preview: "content/rooms/auditorium_3/location_9/preview/preview.png",
 
   viewerProfile: "rooms",
@@ -1826,6 +1817,30 @@ inset_0_universal: {
               id: "auditorium_3_location_9",
               sourcePath: "content/rooms/auditorium_3/location_9/model/location_9.glb",
               texturesDir: "content/rooms/auditorium_3/location_9/textures/"
+            }
+          ]
+        }
+      }
+    }
+  }
+},
+  auditorium_4_location_10: {
+  id: "auditorium_4_location_10",
+  title: "Локация 10",
+  preview: "content/rooms/auditorium_4/location_10/preview/preview.png",
+
+  viewerProfile: "rooms",
+
+  blocks: {
+    [BLOCKS.MODEL_3D]: {
+      subblocks: {
+        [SUBBLOCKS.MODEL_3D]: {
+          type: CONTENT_TYPES.MODEL,
+          items: [
+            {
+              id: "auditorium_4_location_10",
+              sourcePath: "content/rooms/auditorium_4/location_10/model/location_10.glb",
+              texturesDir: "content/rooms/auditorium_4/location_10/textures/"
             }
           ]
         }
