@@ -124,7 +124,14 @@ export const CONTENT_TREE = {
       title: "Локация 8",
       desc: "Аудитория 3",
       ref: "auditorium_3_location_8"
-    }                
+    },
+    {
+      id: "drawing_interiors_auditorium_3_location_9",
+      type: NODE_TYPES.CARD,
+      title: "Локация 9",
+      desc: "Аудитория 3",
+      ref: "auditorium_3_location_9"
+    }                 
               ]
             },
 
