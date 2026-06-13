@@ -131,6 +131,12 @@ body {
   }
 }
 
+@media (max-width: 599px) {
+  .gallery.locations-gallery {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}      
+
     .gallery.hidden {
       opacity: 0;
       pointer-events: none;
