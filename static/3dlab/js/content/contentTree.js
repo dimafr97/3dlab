@@ -55,21 +55,18 @@ export const CONTENT_TREE = {
   id: "drawing_interiors_auditorium_1_location_1",
   type: NODE_TYPES.CARD,
   title: "Локация 1",
-  desc: "Аудитория 1",
   ref: "auditorium_1_location_1"
 },
     {
       id: "drawing_interiors_auditorium_1_location_2",
       type: NODE_TYPES.CARD,
       title: "Локация 2",
-      desc: "Аудитория 1",
       ref: "auditorium_1_location_2"
     },
     {
       id: "drawing_interiors_auditorium_1_location_3",
       type: NODE_TYPES.CARD,
       title: "Локация 3",
-      desc: "Аудитория 1",
       ref: "auditorium_1_location_3"
     }    
   ]
@@ -85,21 +82,18 @@ export const CONTENT_TREE = {
       id: "drawing_interiors_auditorium_2_location_4",
       type: NODE_TYPES.CARD,
       title: "Локация 4",
-      desc: "Аудитория 2",
       ref: "auditorium_2_location_4"
     },
     {
       id: "drawing_interiors_auditorium_2_location_5",
       type: NODE_TYPES.CARD,
       title: "Локация 5",
-      desc: "Аудитория 2",
       ref: "auditorium_2_location_5"
     },
     {
       id: "drawing_interiors_auditorium_2_location_6",
       type: NODE_TYPES.CARD,
       title: "Локация 6",
-      desc: "Аудитория 2",
       ref: "auditorium_2_location_6"
     }                                 
               ]
@@ -115,21 +109,18 @@ export const CONTENT_TREE = {
       id: "drawing_interiors_auditorium_3_location_7",
       type: NODE_TYPES.CARD,
       title: "Локация 7",
-      desc: "Аудитория 3",
       ref: "auditorium_3_location_7"
     },
     {
       id: "drawing_interiors_auditorium_3_location_8",
       type: NODE_TYPES.CARD,
       title: "Локация 8",
-      desc: "Аудитория 3",
       ref: "auditorium_3_location_8"
     },
     {
       id: "drawing_interiors_auditorium_3_location_9",
       type: NODE_TYPES.CARD,
       title: "Локация 9",
-      desc: "Аудитория 3",
       ref: "auditorium_3_location_9"
     }                 
               ]
@@ -140,7 +131,14 @@ export const CONTENT_TREE = {
               type: NODE_TYPES.CATEGORY,
               title: "Аудитория 4",
               desc: "Локации с ширмой и угловой ширмой",
-              children: []
+              children: [
+    {
+      id: "drawing_interiors_auditorium_4_location_10",
+      type: NODE_TYPES.CARD,
+      title: "Локация 10",
+      ref: "auditorium_4_location_10"
+    }                
+              ]
             },
 
             {
