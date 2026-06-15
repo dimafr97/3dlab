@@ -1850,7 +1850,7 @@ inset_0_universal: {
 },
   auditorium_4_location_11: {
   id: "auditorium_4_location_11",
-  title: "Локация 10",
+  title: "Локация 11",
   preview: "content/rooms/auditorium_4/location_11/preview/preview.png",
 
   viewerProfile: "rooms",
