@@ -1847,5 +1847,29 @@ inset_0_universal: {
       }
     }
   }
+},
+  auditorium_4_location_11: {
+  id: "auditorium_4_location_11",
+  title: "Локация 10",
+  preview: "content/rooms/auditorium_4/location_11/preview/preview.png",
+
+  viewerProfile: "rooms",
+
+  blocks: {
+    [BLOCKS.MODEL_3D]: {
+      subblocks: {
+        [SUBBLOCKS.MODEL_3D]: {
+          type: CONTENT_TYPES.MODEL,
+          items: [
+            {
+              id: "auditorium_4_location_11",
+              sourcePath: "content/rooms/auditorium_4/location_11/model/location_11.glb",
+              texturesDir: "content/rooms/auditorium_4/location_11/textures/"
+            }
+          ]
+        }
+      }
+    }
+  }
 }
 };
