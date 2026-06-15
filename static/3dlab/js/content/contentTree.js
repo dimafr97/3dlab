@@ -137,6 +137,12 @@ export const CONTENT_TREE = {
       type: NODE_TYPES.CARD,
       title: "Локация 10",
       ref: "auditorium_4_location_10"
+    },
+    {
+      id: "drawing_interiors_auditorium_4_location_11",
+      type: NODE_TYPES.CARD,
+      title: "Локация 11",
+      ref: "auditorium_4_location_11"
     }                
               ]
             },
