@@ -1919,5 +1919,29 @@ inset_0_universal: {
       }
     }
   }
+},
+  auditorium_5_location_14: {
+  id: "auditorium_5_location_14",
+  title: "Локация 14",
+  preview: "content/rooms/auditorium_5/location_14/preview/preview.png",
+
+  viewerProfile: "rooms",
+
+  blocks: {
+    [BLOCKS.MODEL_3D]: {
+      subblocks: {
+        [SUBBLOCKS.MODEL_3D]: {
+          type: CONTENT_TYPES.MODEL,
+          items: [
+            {
+              id: "auditorium_5_location_14",
+              sourcePath: "content/rooms/auditorium_5/location_14/model/location_14.glb",
+              texturesDir: "content/rooms/auditorium_5/location_14/textures/"
+            }
+          ]
+        }
+      }
+    }
+  }
 }
 };
