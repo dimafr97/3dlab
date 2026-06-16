@@ -158,7 +158,14 @@ export const CONTENT_TREE = {
               type: NODE_TYPES.CATEGORY,
               title: "Аудитория 5",
               desc: "Локации с лестницей и порталом",
-              children: []
+              children: [
+    {
+      id: "drawing_interiors_auditorium_5_location_13",
+      type: NODE_TYPES.CARD,
+      title: "Локация 13",
+      ref: "auditorium_5_location_13"
+    }                
+              ]
             },
 
             {
