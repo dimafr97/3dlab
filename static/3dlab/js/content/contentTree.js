@@ -50,7 +50,7 @@ export const CONTENT_TREE = {
   type: NODE_TYPES.CATEGORY,
   title: "Аудитория 1",
   desc: "Локации с дверью, стеной и ширмой с коринфской капителью",
-  preview: "content/rooms/auditorium_1/preview/cover.webm",
+  preview: "content/rooms/auditorium_1/preview/cover.webp",
   children: [
     {
   id: "drawing_interiors_auditorium_1_location_1",
