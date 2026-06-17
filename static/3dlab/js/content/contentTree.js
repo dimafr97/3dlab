@@ -78,6 +78,7 @@ export const CONTENT_TREE = {
               type: NODE_TYPES.CATEGORY,
               title: "Аудитория 2",
               desc: "Локации с ширмой, стеной и аркой",
+              preview: "content/rooms/auditorium_2/preview/cover.webp",
               children: [
     {
       id: "drawing_interiors_auditorium_2_location_4",
@@ -105,6 +106,7 @@ export const CONTENT_TREE = {
               type: NODE_TYPES.CATEGORY,
               title: "Аудитория 3",
               desc: "Локации с ширмой и Пиранези, стеной с композитной капителью и аркой",
+              preview: "content/rooms/auditorium_3/preview/cover.webp",
               children: [
     {
       id: "drawing_interiors_auditorium_3_location_7",
@@ -132,6 +134,7 @@ export const CONTENT_TREE = {
               type: NODE_TYPES.CATEGORY,
               title: "Аудитория 4",
               desc: "Локации с ширмой и угловой ширмой",
+              preview: "content/rooms/auditorium_4/preview/cover.webp",
               children: [
     {
       id: "drawing_interiors_auditorium_4_location_10",
@@ -159,6 +162,7 @@ export const CONTENT_TREE = {
               type: NODE_TYPES.CATEGORY,
               title: "Аудитория 5",
               desc: "Локации с лестницей и порталом",
+              preview: "content/rooms/auditorium_5/preview/cover.webp",
               children: [
     {
       id: "drawing_interiors_auditorium_5_location_13",
@@ -180,6 +184,7 @@ export const CONTENT_TREE = {
               type: NODE_TYPES.CATEGORY,
               title: "Аудитория 6",
               desc: "Локации с дверью и стеной",
+              preview: "content/rooms/auditorium_6/location_15/preview/preview.png",
               children: [
     {
       id: "drawing_interiors_auditorium_6_location_15",
