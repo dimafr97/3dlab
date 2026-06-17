@@ -180,7 +180,14 @@ export const CONTENT_TREE = {
               type: NODE_TYPES.CATEGORY,
               title: "Аудитория 6",
               desc: "Локации с дверью и стеной",
-              children: []
+              children: [
+    {
+      id: "drawing_interiors_auditorium_6_location_15",
+      type: NODE_TYPES.CARD,
+      title: "Локация 15",
+      ref: "auditorium_6_location_15"
+    }                
+              ]
             }
           ]
         },
