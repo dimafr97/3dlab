@@ -33,6 +33,7 @@ export const CONTENT_TREE = {
           type: NODE_TYPES.CATEGORY,
           title: "Интерьеры СПБГАСУ",
           desc: "Теория по всем экзаменационным ситуациям",
+          preview: "content/rooms/preview/preview.png",
 
           children: [
             {
