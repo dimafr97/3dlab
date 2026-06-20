@@ -185,7 +185,7 @@ export const CONTENT_TREE = {
               type: NODE_TYPES.CATEGORY,
               title: "Аудитория 6",
               desc: "Локации с дверью и стеной",
-              preview: "content/rooms/auditorium_6/location_15/preview/preview.png",
+              preview: "content/rooms/auditorium_6/preview/cover.webp",
               children: [
     {
       id: "drawing_interiors_auditorium_6_location_15",
