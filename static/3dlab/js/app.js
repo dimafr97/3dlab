@@ -21,7 +21,7 @@ const SECTION_FLAGS = {
   insets: true,
   rooms: false
 };
-const DEMO_HIDE_EMPTY_BRANCHES = false;
+const DEMO_HIDE_EMPTY_BRANCHES = true;
 // ✅ Главное меню (как галерея, но карточки-разделы)
 const MAIN_MENU = [
   SECTION_FLAGS.arch && {
@@ -66,7 +66,8 @@ const ALLOWED_CHAT_INSTANCES = [
   "-561659029981423148", // группа 1
   "3659198091171037064", // группа 2
   "1533210958432912681",  // группа 3
-  "-8865587346109190339"  // группа 4
+  "-8865587346109190339",  // группа 4
+  "1689728312800686289"
 ];
 
 window.TG_USER = null;
