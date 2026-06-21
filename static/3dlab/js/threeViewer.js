@@ -5,6 +5,7 @@ import * as THREE from "three";
 import { LineSegments2 } from "three/addons/lines/LineSegments2.js";
 import { LineSegmentsGeometry } from "three/addons/lines/LineSegmentsGeometry.js";
 import { LineMaterial } from "three/addons/lines/LineMaterial.js";
+import { cachedFetch } from "./cache/cachedFetch.js";
 
 let scene = null;
 let camera = null;
@@ -1311,23 +1312,38 @@ function getRoomTextureForKey(key) {
 
   const url = normalizeRoomTextureUrl(`${cleanDir}${key}.jpg`);
 
-console.log("[rooms texture] loading:", key, url);
+  console.log("[rooms texture] loading:", key, url);
 
-const tex = new THREE.TextureLoader().load(
-  url,
-  () => {
-    console.log("[rooms texture] loaded:", key, url);
-  },
-  undefined,
-  (err) => {
-    console.warn("[rooms texture] failed:", key, url, err);
-  }
-);
-
+  const tex = new THREE.Texture();
   tex.flipY = false;
   tex.colorSpace = THREE.SRGBColorSpace;
 
   roomTextureCache.set(key, tex);
+
+  cachedFetch(url)
+    .then((blob) => {
+      const objectUrl = URL.createObjectURL(blob);
+
+      new THREE.TextureLoader().load(
+        objectUrl,
+        (loadedTex) => {
+          tex.image = loadedTex.image;
+          tex.needsUpdate = true;
+
+          URL.revokeObjectURL(objectUrl);
+
+          console.log("[rooms texture] loaded:", key, url);
+        },
+        undefined,
+        (err) => {
+          URL.revokeObjectURL(objectUrl);
+          console.warn("[rooms texture] failed:", key, url, err);
+        }
+      );
+    })
+    .catch((err) => {
+      console.warn("[rooms texture] cachedFetch failed:", key, url, err);
+    });
 
   return tex;
 }
@@ -1406,6 +1422,11 @@ export function setRoomDrapVisible(visible) {
 
 export function setRoomTexturesDir(dir = "") {
   roomTexturesDir = String(dir || "");
+
+  for (const tex of roomTextureCache.values()) {
+    tex?.dispose?.();
+  }
+
   roomTextureCache.clear();
 }
 
